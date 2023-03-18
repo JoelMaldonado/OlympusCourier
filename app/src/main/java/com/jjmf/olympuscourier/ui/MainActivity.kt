@@ -40,6 +40,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             OlympusCourierTheme {
                 NavegacionPrincipal()
+                Text(text = "Hola mundo")
             }
         }
     }
