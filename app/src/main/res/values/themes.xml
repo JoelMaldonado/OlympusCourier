@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.OlympusCourier" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@color/p1</item>
     </style>
 </resources>
