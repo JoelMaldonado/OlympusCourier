@@ -1,54 +1,96 @@
-package com.jjmf.olympuscourier.ui.features.AgregarPersona
+package com.jjmf.olympuscourier.ui.features.ConformidadEntrega
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.outlined.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.rememberCameraPositionState
 import com.jjmf.olympuscourier.ui.components.BigText
 import com.jjmf.olympuscourier.ui.components.CajaTexto
 import com.jjmf.olympuscourier.ui.theme.ColorP1
 import com.jjmf.olympuscourier.ui.theme.ColorS1
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@SuppressLint("MissingPermission")
 @Composable
-fun AgregarPersonaScreen(
-    back: () -> Unit,
-    viewModel: AgregarPersonaViewModel = hiltViewModel()
+fun ConformidadEntregaScreen(
+    back:()->Unit,
+    viewModel: ConformidadEntregaViewModel = hiltViewModel()
 ) {
 
-    val focus = LocalFocusManager.current
-
-    if (viewModel.back) {
-        LaunchedEffect(key1 = Unit) {
+    if (viewModel.back){
+        LaunchedEffect(key1 = true){
             back()
             viewModel.back = false
         }
     }
 
+    val focus = LocalFocusManager.current
+
+    val context = LocalContext.current
+    val coroutine = rememberCoroutineScope()
+    val fuse = LocationServices.getFusedLocationProviderClient(context)
+    val cameraState = rememberCameraPositionState() {
+        val latlng = LatLng(-12.066178, -77.038662)
+        this.position = CameraPosition.fromLatLngZoom(latlng, 8f)
+    }
+    LaunchedEffect(key1 = true) {
+        delay(500)
+        coroutine.launch {
+            fuse.lastLocation.addOnSuccessListener { locacion ->
+                coroutine.launch {
+                    val position = LatLng(locacion.latitude, locacion.longitude)
+                    cameraState.animate(
+                        CameraUpdateFactory.newCameraPosition(
+                            CameraPosition.fromLatLngZoom(position, 16f)
+                        ), 2000
+                    )
+                }
+            }
+        }
+    }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
             .padding(top = 20.dp),
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Column {
-            Text(text = "Es hora de,", fontWeight = FontWeight.SemiBold, color = ColorP1)
-            BigText(text = "Agregar Personas")
+            Text(text = "Registra los,", fontWeight = FontWeight.SemiBold, color = ColorP1)
+            BigText(text = "Datos de Entrega")
         }
-
         CajaTexto(
             valor = viewModel.documento,
             newValor = {
@@ -75,8 +117,8 @@ fun AgregarPersonaScreen(
         CajaTexto(
             valor = viewModel.nombres,
             newValor = { viewModel.nombres = it },
-            titulo = "Nombre",
-            label = "Ingrese su nombre",
+            titulo = "Nombres y Apellidos",
+            label = "Ingrese su nombre y sus apellidos",
             imeAction = ImeAction.Next,
             keyboardActions = KeyboardActions(
                 onNext = {
@@ -85,37 +127,16 @@ fun AgregarPersonaScreen(
             )
         )
         CajaTexto(
-            valor = viewModel.apellidos,
-            newValor = { viewModel.apellidos = it },
-            titulo = "Apellidos",
-            label = "Ingrese sus apellidos",
+            valor = viewModel.direccion,
+            newValor = { viewModel.direccion = it },
+            titulo = "Dirección",
+            label = "Ingrese su dirección",
             imeAction = ImeAction.Next,
             keyboardActions = KeyboardActions(
                 onNext = {
                     focus.moveFocus(FocusDirection.Down)
                 }
             )
-        )
-        CajaTexto(
-            valor = viewModel.fecha,
-            newValor = { viewModel.fecha = it },
-            titulo = "Fecha de Nacimiento",
-            label = "dd/mm/aaaa",
-            imeAction = ImeAction.Next,
-            keyboardActions = KeyboardActions(
-                onNext = {
-                    focus.moveFocus(FocusDirection.Down)
-                }
-            ),
-            trailingIcon = {
-                IconButton(onClick = {}) {
-                    Icon(
-                        imageVector = Icons.Default.CalendarMonth,
-                        contentDescription = null,
-                        tint = ColorP1
-                    )
-                }
-            }
         )
         CajaTexto(
             valor = viewModel.celular,
@@ -130,32 +151,29 @@ fun AgregarPersonaScreen(
             ),
             keyboardType = KeyboardType.Number
         )
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(5.dp)
+        Row(
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Rol", color = ColorP1, fontWeight = FontWeight.SemiBold)
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = !viewModel.rol,
-                    onClick = { viewModel.rol = false },
-                    colors = RadioButtonDefaults.colors(selectedColor = ColorP1)
+            Text(text = "Adjuntar Evidencia", fontWeight = FontWeight.SemiBold, color = ColorP1)
+            IconButton(onClick = {}) {
+                Icon(
+                    imageVector = Icons.Outlined.Image,
+                    contentDescription = null,
+                    tint = ColorP1
                 )
-                Text(text = "Usuario")
-                Spacer(modifier = Modifier.weight(1f))
-                RadioButton(
-                    selected = viewModel.rol,
-                    onClick = { viewModel.rol = true },
-                    colors = RadioButtonDefaults.colors(selectedColor = ColorP1)
-                )
-                Text(text = "Administrador")
-                Spacer(modifier = Modifier.weight(1f))
             }
         }
-        Row(
+        GoogleMap(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .height(200.dp)
+                .shadow(elevation = 5.dp, shape = RoundedCornerShape(20.dp)),
+            uiSettings = MapUiSettings(zoomControlsEnabled = false),
+            properties = MapProperties(isMyLocationEnabled = true),
+            cameraPositionState = cameraState
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(20.dp)
         ) {
@@ -170,14 +188,16 @@ fun AgregarPersonaScreen(
                 Text(text = "Regresar")
             }
             Button(
-                onClick = { viewModel.insert() },
+                onClick = {
+                          viewModel.insert()
+                },
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = ColorP1,
                     contentColor = Color.White
                 )
             ) {
-                Text(text = "Agregar")
+                Text(text = "Guardar")
             }
         }
     }

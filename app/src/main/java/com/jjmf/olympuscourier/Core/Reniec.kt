@@ -23,6 +23,7 @@ class Reniec {
     }
 
     data class DocumentoReniec(
+        @SerializedName("nombre") val nombre:String,
         @SerializedName("nombres") val nombres:String,
         @SerializedName("numeroDocumento") val numeroDocumento:String,
         @SerializedName("apellidoPaterno") val apellidoPaterno:String,

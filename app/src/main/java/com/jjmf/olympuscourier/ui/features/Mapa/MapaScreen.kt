@@ -12,7 +12,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
-import com.jjmf.olympuscourier.ui.features.ListadoPaquetes.list
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -48,14 +47,5 @@ fun MapaScreen() {
         uiSettings = MapUiSettings(zoomControlsEnabled = false),
         properties = MapProperties(isMyLocationEnabled = true),
         cameraPositionState = cameraState
-    ) {
-        list.forEach {
-            val latLong = LatLng(it.latitud, it.longitud)
-            Marker(
-                state = rememberMarkerState(position = latLong),
-                title = it.nombre,
-                snippet = it.direccion
-            )
-        }
-    }
+    )
 }

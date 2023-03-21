@@ -1,6 +1,5 @@
 package com.jjmf.olympuscourier.ui.features.Menu
 
-import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
@@ -24,94 +23,96 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.zxing.integration.android.IntentIntegrator
 import com.jjmf.olympuscourier.R
+import com.jjmf.olympuscourier.ui.components.FondoBlanco
 import com.jjmf.olympuscourier.ui.theme.ColorP1
 import com.jjmf.olympuscourier.ui.theme.ColorP2
 import com.jjmf.olympuscourier.util.show
 
 @Composable
 fun MenuScreen(
-    toMapa:()->Unit,
-    toAgregarPersona:()->Unit,
-    toListadoPaquetes:()->Unit,
+    toMapa: () -> Unit,
+    toAgregarPersona: () -> Unit,
+    toMovimientos: () -> Unit,
 ) {
     val context = LocalContext.current
 
     val scanResult = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) {
-        val result = IntentIntegrator.parseActivityResult(it.resultCode,it.data)
-        if (result != null){
-            if (result.contents != null){
+        val result = IntentIntegrator.parseActivityResult(it.resultCode, it.data)
+        if (result != null) {
+            if (result.contents != null) {
                 context.show(result.contents)
                 toMapa()
             }
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_logo_large),
-            contentDescription = null,
-            modifier = Modifier.width(250.dp)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(text = "Hola Jeanpier,", color = ColorP1, fontWeight = FontWeight.SemiBold)
-        Text(
-            text = "Qué haremos hoy!",
-            fontSize = 35.sp,
-            fontWeight = FontWeight.Bold,
-            color = ColorP1
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(text = "Tus opciones", color = ColorP1, fontWeight = FontWeight.SemiBold)
-        Spacer(modifier = Modifier.height(20.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth()
+    Box(modifier = Modifier.fillMaxSize()) {
+        FondoBlanco()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
+            verticalArrangement = Arrangement.Center
         ) {
-            CardHome(
-                modifier = Modifier.weight(1f),
-                res = R.drawable.ic_add_user,
-                text = "Agregar\nPersonas",
-                click = {
-                    toAgregarPersona()
-                }
+            Image(
+                painter = painterResource(id = R.drawable.ic_logo_large),
+                contentDescription = null,
+                modifier = Modifier.width(250.dp)
             )
-            CardHome(
-                modifier = Modifier.weight(1f),
-                res = R.drawable.ic_producto,
-                text = "Agregar\nProductos",
-                click = {
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = "Hola Jeanpier,", color = ColorP1, fontWeight = FontWeight.SemiBold)
+            Text(
+                text = "Qué haremos hoy!",
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Bold,
+                color = ColorP1
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = "Tus opciones", color = ColorP1, fontWeight = FontWeight.SemiBold)
+            Spacer(modifier = Modifier.height(20.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                CardHome(
+                    modifier = Modifier.weight(1f),
+                    res = R.drawable.ic_add_user,
+                    text = "Agregar\nUsuarios",
+                    click = {
+                        toAgregarPersona()
+                    }
+                )
+                CardHome(
+                    modifier = Modifier.weight(1f),
+                    res = R.drawable.ic_add_producto,
+                    text = "Movimientos\nDiarios",
+                    click = toMovimientos
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                CardHome(
+                    modifier = Modifier.weight(1f),
+                    res = R.drawable.ic_historial,
+                    text = "Reporte\nGeneral",
+                    click = {
 
-                }
-            )
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            CardHome(
-                modifier = Modifier.weight(1f),
-                res = R.drawable.ic_qr,
-                text = "Scanear\nPedidos",
-                click = {
-                    val intentInt = IntentIntegrator(context as Activity)
-                    intentInt.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-                    intentInt.setPrompt("Centra el Codigo QR en el recuadro")
-                    scanResult.launch(intentInt.createScanIntent())
-                }
-            )
-            CardHome(
-                modifier = Modifier.weight(1f),
-                res = R.drawable.ic_producto,
-                text = "Listar\nPaquetes",
-                click = toListadoPaquetes
-            )
+                    }
+                )
+                CardHome(
+                    modifier = Modifier.weight(1f),
+                    res = R.drawable.ic_ajuste,
+                    text = "Establecer\nPreferencias",
+                    click = {
+
+                    }
+                )
+            }
         }
     }
+
 }
 
 
