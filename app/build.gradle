@@ -108,4 +108,15 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore-ktx"
     //Firebase Storage
     implementation "com.google.firebase:firebase-storage-ktx"
+
+    // CameraX
+    implementation "androidx.camera:camera-camera2:1.2.1"
+    implementation "androidx.camera:camera-lifecycle:1.2.1"
+    implementation "androidx.camera:camera-view:1.2.1"
+
+    //Compressor
+    implementation 'id.zelory:compressor:3.0.1'
+
+    //ViewPager
+    implementation "com.google.accompanist:accompanist-pager:0.21.0-beta"
 }

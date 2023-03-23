@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.jjmf.olympuscourier.ui.theme.ColorP1
 
@@ -25,25 +26,29 @@ fun CajaTexto(
     newValor: (String) -> Unit,
     titulo: String,
     label: String,
+    leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     imeAction: ImeAction = ImeAction.Default,
     keyboardType: KeyboardType = KeyboardType.Text,
-    keyboardActions: KeyboardActions = KeyboardActions.Default
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    readOnly : Boolean = false,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    color: Color = ColorP1
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
-        Text(text = titulo, color = ColorP1, fontWeight = FontWeight.SemiBold)
+        Text(text = titulo, color = color, fontWeight = FontWeight.SemiBold)
         OutlinedTextField(
             value = valor,
             onValueChange = newValor,
             modifier = Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 backgroundColor = Color.White,
-                unfocusedBorderColor = ColorP1,
-                focusedBorderColor = ColorP1,
-                cursorColor = ColorP1,
+                unfocusedBorderColor = color,
+                focusedBorderColor = color,
+                cursorColor = color,
                 placeholderColor = Color.Gray.copy(0.5f)
             ),
             shape = RoundedCornerShape(10.dp),
@@ -55,7 +60,12 @@ fun CajaTexto(
                 keyboardType = keyboardType
             ),
             keyboardActions = keyboardActions,
-            trailingIcon = trailingIcon
+            trailingIcon = trailingIcon,
+            leadingIcon = leadingIcon,
+            readOnly = readOnly,
+            singleLine = true,
+            maxLines = 1,
+            visualTransformation = visualTransformation
         )
     }
 }

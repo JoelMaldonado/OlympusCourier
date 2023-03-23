@@ -1,17 +1,14 @@
 package com.jjmf.olympuscourier.ui.features.Menu
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
+import android.content.Context
+import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,35 +18,41 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.zxing.integration.android.IntentIntegrator
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.jjmf.olympuscourier.R
+import com.jjmf.olympuscourier.app.BaseApp.Companion.prefs
 import com.jjmf.olympuscourier.ui.components.FondoBlanco
 import com.jjmf.olympuscourier.ui.theme.ColorP1
 import com.jjmf.olympuscourier.ui.theme.ColorP2
-import com.jjmf.olympuscourier.util.show
+import com.jjmf.olympuscourier.ui.theme.ColorS1
 
 @Composable
 fun MenuScreen(
-    toMapa: () -> Unit,
-    toAgregarPersona: () -> Unit,
+    toUsuarios: () -> Unit,
     toMovimientos: () -> Unit,
+    toReporte: () -> Unit,
+    logout: () -> Unit,
+    toGeneral:()->Unit
 ) {
     val context = LocalContext.current
 
-    val scanResult = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) {
-        val result = IntentIntegrator.parseActivityResult(it.resultCode, it.data)
-        if (result != null) {
-            if (result.contents != null) {
-                context.show(result.contents)
-                toMapa()
-            }
-        }
-    }
-
     Box(modifier = Modifier.fillMaxSize()) {
         FondoBlanco()
+        IconButton(
+            onClick = {
+                alertaCerrarSesion(context, click = logout)
+            },
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(20.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_logout),
+                contentDescription = null,
+                tint = ColorP1,
+                modifier = Modifier.size(30.dp)
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -62,7 +65,11 @@ fun MenuScreen(
                 modifier = Modifier.width(250.dp)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            Text(text = "Hola Jeanpier,", color = ColorP1, fontWeight = FontWeight.SemiBold)
+            Text(
+                text = "Hola ${prefs.getUser()?.nombres},",
+                color = ColorP1,
+                fontWeight = FontWeight.SemiBold
+            )
             Text(
                 text = "Qué haremos hoy!",
                 fontSize = 35.sp,
@@ -77,11 +84,9 @@ fun MenuScreen(
             ) {
                 CardHome(
                     modifier = Modifier.weight(1f),
-                    res = R.drawable.ic_add_user,
-                    text = "Agregar\nUsuarios",
-                    click = {
-                        toAgregarPersona()
-                    }
+                    res = R.drawable.ic_usuarios,
+                    text = "Listado\nUsuarios",
+                    click = toUsuarios
                 )
                 CardHome(
                     modifier = Modifier.weight(1f),
@@ -96,23 +101,42 @@ fun MenuScreen(
                 CardHome(
                     modifier = Modifier.weight(1f),
                     res = R.drawable.ic_historial,
-                    text = "Reporte\nGeneral",
-                    click = {
-
-                    }
+                    text = "Reporte\nDiario",
+                    click = toReporte
                 )
                 CardHome(
                     modifier = Modifier.weight(1f),
-                    res = R.drawable.ic_ajuste,
-                    text = "Establecer\nPreferencias",
-                    click = {
-
-                    }
+                    res = R.drawable.ic_grafico,
+                    text = "Reporte\nGeneral",
+                    click = toGeneral
                 )
             }
         }
     }
+    BackHandler {
+        alertaCerrarSesion(
+            context = context,
+            click = logout
+        )
+    }
+}
 
+fun alertaCerrarSesion(context: Context, click: () -> Unit) {
+    SweetAlertDialog(context, SweetAlertDialog.CUSTOM_IMAGE_TYPE).apply {
+        setCustomImage(R.drawable.ic_logout)
+        titleText = "Cerrar Sesión"
+        contentText = "¿Esta seguro de querer terminar la sesión?"
+        setConfirmButton("Confirmar") {
+            click()
+            dismissWithAnimation()
+        }
+        setCancelButton("Cancelar") {
+            dismissWithAnimation()
+        }
+        confirmButtonBackgroundColor = ColorP1.hashCode()
+        cancelButtonBackgroundColor = ColorS1.hashCode()
+        show()
+    }
 }
 
 
