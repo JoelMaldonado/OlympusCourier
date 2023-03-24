@@ -23,7 +23,7 @@ class ListadoUsuariosViewModel @Inject constructor(
     fun getList(){
         viewModelScope.launch(Dispatchers.IO){
             repository.getListFlow().collect(){list->
-                listado = list.filter { it.id != prefs.getUser()?.id }
+                listado = list.filter { it.id != prefs.getUser()?.id && it.admin == false }
             }
         }
     }

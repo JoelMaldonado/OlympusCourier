@@ -1,7 +1,6 @@
 package com.jjmf.olympuscourier.ui.features.MovimientosDiarios.Components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -11,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jjmf.olympuscourier.Data.Model.Conformidad
@@ -54,13 +54,14 @@ fun CardEliminado(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        Image(
+                        Icon(
                             painter = painterResource(id = R.drawable.ic_delete),
                             contentDescription = null,
-                            modifier = Modifier.size(30.dp)
+                            modifier = Modifier.size(30.dp),
+                            tint = ColorS1
                         )
                         Text(
-                            text = "Codigo: #${conformidad.codigo}",
+                            text = "CODIGO: #${conformidad.codigo}",
                             color = ColorS1,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -75,7 +76,8 @@ fun CardEliminado(
                 Text(
                     text = "S/${conformidad.costo}",
                     color = ColorS1,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    textDecoration = TextDecoration.LineThrough
                 )
             }
         }

@@ -1,7 +1,6 @@
 package com.jjmf.olympuscourier.ui.features.MovimientosDiarios.Components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -54,13 +53,14 @@ fun CardGasto(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_gasto),
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_decrease),
                             contentDescription = null,
-                            modifier = Modifier.size(30.dp)
+                            modifier = Modifier.size(30.dp),
+                            tint = ColorR1
                         )
                         Text(
-                            text = "Codigo: #${conformidad.codigo}",
+                            text = "CODIGO: #${conformidad.codigo}",
                             color = ColorR1,
                             fontWeight = FontWeight.SemiBold
                         )

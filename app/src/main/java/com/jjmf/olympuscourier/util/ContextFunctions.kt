@@ -3,8 +3,12 @@ package com.jjmf.olympuscourier.util
 import android.content.Context
 import android.location.Geocoder
 import android.location.Location
+import android.net.ConnectivityManager
 import android.widget.Toast
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.firebase.Timestamp
+import com.jjmf.olympuscourier.R
+import com.jjmf.olympuscourier.ui.theme.ColorP1
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -12,7 +16,7 @@ fun Context.show(text:String?){
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
-fun String?.sinDatos() = this ?: "Sin datos"
+fun String?.sinDatos() = if (this != null && this.isNotEmpty() )this else "Sin datos"
 fun String?.toMinusculas() : String {
     return try {
         if (this!=null && this.isNotEmpty()) {
@@ -30,6 +34,26 @@ fun String?.toMinusculas() : String {
     }
 }
 
+fun hayInternet(context: Context, event:()->Unit) {
+    if (context.red()) event()
+    else{
+        SweetAlertDialog(context, SweetAlertDialog.CUSTOM_IMAGE_TYPE).apply {
+            setCustomImage(R.drawable.ic_sin_internet)
+            titleText = "Sin Conexion a internet"
+            contentText = "Asegurate de estar conectado a una red Wi-Fi o Red de datos"
+            setConfirmButton("Confirmar"){
+                dismissWithAnimation()
+            }
+            confirmButtonBackgroundColor = ColorP1.hashCode()
+            show()
+        }
+    }
+}
+fun Context.red():Boolean{
+    val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return cm.activeNetworkInfo?.isConnectedOrConnecting ?: false
+}
+
 fun Timestamp?.toFecha(): Fecha {
     val date = this?.toDate() ?: Date(System.currentTimeMillis())
     return Fecha(
@@ -39,6 +63,7 @@ fun Timestamp?.toFecha(): Fecha {
         hora = "HH".toFormat(date),
         min = "mm".toFormat(date),
         dia = "EEEE".toFormat(date),
+        date = date
     )
 }
 fun Fecha?.format(patron:String = "dd/MM/yyyy") : String{
@@ -66,25 +91,47 @@ fun Fecha?.toMes() : String {
     }
 }
 data class Fecha(
-    val diaNum: String = "dd".toFormat(Date(System.currentTimeMillis())),
-    val mes: String = "MM".toFormat(Date(System.currentTimeMillis())),
-    val anio: String = "yyyy".toFormat(Date(System.currentTimeMillis())),
-    val hora: String = "HH".toFormat(Date(System.currentTimeMillis())),
-    val min: String = "mm".toFormat(Date(System.currentTimeMillis())),
-    val dia: String = "EEEE".toFormat(Date(System.currentTimeMillis())),
+    val diaNum: String,
+    val mes: String,
+    val anio: String,
+    val hora: String,
+    val min: String,
+    val dia: String,
+    val date: Date
 )
 fun String.toFormat(date: Date) = SimpleDateFormat(this, Locale.getDefault()).format(date)
-fun obtenerDireccion(context: Context, location: Location): Direccion {
-    val geo = Geocoder(context)
-    val list = geo.getFromLocation(location.latitude, location.longitude, 1)?.get(0)
-    val adress = list?.getAddressLine(0) ?: ""
-    val direc = adress.split(",")
-    val dir = direc.first()
-    val region = direc[1].split(" ")[1]
-    return Direccion(
-        calle = dir,
-        region = region
-    )
+fun obtenerDireccion(context: Context, location: Location): Direccion? {
+    return try {
+        val geo = Geocoder(context)
+        val list = geo.getFromLocation(location.latitude, location.longitude, 1)?.get(0)
+        val adress = list?.getAddressLine(0) ?: ""
+        val direc = adress.split(",")
+        val dir = direc.first()
+        val region = direc[1].split(" ")[1]
+        Direccion(
+            calle = dir,
+            region = region
+        )
+    }catch (e:Exception){
+        null
+    }
+}
+
+
+fun alertaPrecio(context:Context, click:()->Unit) {
+    SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE).apply {
+        titleText = "Importe Mínimo"
+        contentText = "El importe ingresado debe ser mayor a S/1"
+        setConfirmButton("Confirmar"){
+            click()
+            dismissWithAnimation()
+        }
+        confirmButtonBackgroundColor = ColorP1.hashCode()
+        show()
+    }
+}
+fun String.isNumeric(): Boolean {
+    return this.all { char -> char.isDigit() }
 }
 fun getFecha(format :String= "dd/MM/yyyy"):String{
     return SimpleDateFormat(format, Locale.getDefault())

@@ -5,15 +5,12 @@ import android.content.pm.PackageManager
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -30,6 +27,7 @@ import com.jjmf.olympuscourier.R
 import com.jjmf.olympuscourier.app.BaseApp.Companion.prefs
 import com.jjmf.olympuscourier.ui.components.BigText
 import com.jjmf.olympuscourier.ui.components.FondoBlanco
+import com.jjmf.olympuscourier.ui.components.TotalCard
 import com.jjmf.olympuscourier.ui.features.Menu.alertaCerrarSesion
 import com.jjmf.olympuscourier.ui.features.MovimientosDiarios.Components.CardConformidad
 import com.jjmf.olympuscourier.ui.features.MovimientosDiarios.Components.CardGasto
@@ -150,65 +148,12 @@ fun MovimientosDiariosScreen(
             }
         }
         val total = viewModel.listado.sumOf { it.costo ?: 0.0 }
-        CardTotal(
-            modifier = Modifier.align(Alignment.BottomCenter),
-            total = total.toString()
+        TotalCard(
+            icon = R.drawable.ic_dinero,
+            text = "Importe total del día",
+            monto = total.toString(),
+            color = ColorP1,
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
-    }
-}
-
-@Composable
-fun CardTotal(
-    modifier: Modifier,
-    total: String
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(20.dp),
-        shape = RoundedCornerShape(20.dp),
-        backgroundColor = ColorP1,
-        elevation = 5.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_dinero),
-                contentDescription = null,
-                modifier = Modifier.size(30.dp)
-            )
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(text = "Total del Día:", color = Color.White, fontWeight = FontWeight.SemiBold)
-            Spacer(modifier = Modifier.weight(1f))
-            Text(text = "S/$total", color = Color.White, fontWeight = FontWeight.SemiBold)
-        }
-    }
-}
-
-@Composable
-fun RowFechas() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 20.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = "Fecha: ", color = ColorP1, fontWeight = FontWeight.SemiBold)
-        Text(text = "18/03/2023", color = Color.Gray.copy(0.5f))
-        Spacer(modifier = Modifier.weight(1f))
-        Text(text = "Buscar fecha: ", color = ColorP1, fontWeight = FontWeight.SemiBold)
-        Button(
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = ColorP1,
-                contentColor = Color.White
-            )
-        ) {
-            Icon(imageVector = Icons.Default.CalendarMonth, contentDescription = null)
-        }
     }
 }

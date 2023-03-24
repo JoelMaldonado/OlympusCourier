@@ -14,7 +14,7 @@ fun BigText(text: String, modifier: Modifier = Modifier, color: Color = ColorP1)
         text = text,
         fontWeight = FontWeight.Bold,
         color = color,
-        fontSize = 30.sp,
+        fontSize = 28.sp,
         modifier = modifier
     )
 }

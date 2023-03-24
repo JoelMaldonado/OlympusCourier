@@ -7,77 +7,65 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jjmf.olympuscourier.Data.Model.Conformidad
 import com.jjmf.olympuscourier.Data.Repository.ConformidadRepository
+import com.jjmf.olympuscourier.Data.Usecase.GetListDiario
+import com.jjmf.olympuscourier.Data.Usecase.GetListMensual
+import com.jjmf.olympuscourier.util.Fecha
 import com.jjmf.olympuscourier.util.format
-import com.jjmf.olympuscourier.util.getFecha
 import com.jjmf.olympuscourier.util.toFecha
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ReporteDiarioViewModel @Inject constructor(
-    private val repository: ConformidadRepository
+    private val repository: ConformidadRepository,
+    private val getListDiario: GetListDiario,
+    private val getListMensual: GetListMensual
 ) : ViewModel() {
 
+    var fechaSelected by mutableStateOf("")
+
+    var listDias by mutableStateOf<List<Fecha>>(emptyList())
+
+    var listMeses by mutableStateOf<List<Fecha>>(emptyList())
+
     var cont by mutableStateOf(0)
-    var listado by mutableStateOf<List<Conformidad>>(emptyList())
-    var listadoDias by mutableStateOf<List<Conformidad>>(emptyList())
-    var listadoMeses by mutableStateOf<List<Conformidad>>(emptyList())
 
-    var fechaSelected by mutableStateOf(getFecha("dd/MM/yyyy"))
-    var mesSelected by mutableStateOf(getFecha("MM/yyyy"))
+    var listConformidad by mutableStateOf<List<Conformidad>>(emptyList())
 
-    var progressDias by mutableStateOf(false)
-    var progress by mutableStateOf(false)
 
-    fun getList() {
+    fun getListDias() {
         viewModelScope.launch(Dispatchers.IO) {
-            val listaDias = mutableListOf<Conformidad>()
-            repository.getList().forEach {conformidad->
-                if (conformidad.time?.toFecha().format() !in listaDias.map {
-                        it.time?.toFecha().format()
-                    }
-                ){
-                    listaDias.add(conformidad)
-                }
-            }
-            listadoDias = listaDias.filter { it.time?.toFecha()?.format("MM/yyyy") == mesSelected }
-            val listaMeses = mutableListOf<Conformidad>()
-            listaDias.forEach {conformidad->
-                if (conformidad.time?.toFecha().format("MM/yyyy") !in listaMeses.map {
-                        it.time?.toFecha().format("MM/yyyy")
-                    }
-                ){
-                    listaMeses.add(conformidad)
-                }
-            }
-            listadoMeses = listaMeses.sortedByDescending { it.time }
+            listDias = getListDiario().filter { it.mes == listMeses[cont].mes && it.anio == listMeses[cont].anio }
         }
     }
 
     fun getListConformidad() {
-        viewModelScope.launch(Dispatchers.IO){
-            progress = true
-            listado = repository.getList().filter { it.time.toFecha().format() == fechaSelected }
-            progress = false
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getListFlow(false).collect() { list ->
+                listConformidad = list.filter {
+                    val fecha = it.time?.toFecha()
+                    fecha.format() == fechaSelected
+                }
+            }
         }
     }
 
-    fun getListConformidadDias() {
-        viewModelScope.launch(Dispatchers.IO){
-            progressDias = true
-            val listaDias = mutableListOf<Conformidad>()
-            repository.getList().forEach {conformidad->
-                if (conformidad.time?.toFecha().format() !in listaDias.map {
-                        it.time?.toFecha().format()
-                    }
-                ){
-                    listaDias.add(conformidad)
-                }
+    var mensajeError by mutableStateOf<String?>(null)
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                listMeses = getListMensual()
+                listDias = getListDiario().filter { it.mes == listMeses[cont].mes }
+                cont = listMeses.size - 1
+                delay(1000)
+                fechaSelected = listDias.last().format()
+                getListConformidad()
+            }catch (e:Exception){
+                mensajeError = e.message
             }
-            listadoDias = listaDias.filter { it.time?.toFecha()?.format("MM/yyyy") == mesSelected }
-            progressDias = false
         }
     }
 }

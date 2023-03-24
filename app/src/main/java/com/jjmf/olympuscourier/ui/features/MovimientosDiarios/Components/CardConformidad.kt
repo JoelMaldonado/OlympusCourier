@@ -17,6 +17,7 @@ import com.jjmf.olympuscourier.Data.Model.Conformidad
 import com.jjmf.olympuscourier.R
 import com.jjmf.olympuscourier.ui.theme.ColorP1
 import com.jjmf.olympuscourier.ui.theme.ColorT1
+import com.jjmf.olympuscourier.util.sinDatos
 
 
 @Composable
@@ -60,15 +61,14 @@ fun CardConformidad(
                             modifier = Modifier.size(30.dp)
                         )
                         Text(
-                            text = "Conformidad #${conformidad.codigo}",
+                            text = "CODIGO: #${conformidad.codigo}",
                             color = ColorP1,
                             fontWeight = FontWeight.SemiBold
                         )
                     }
-                    val nombre = conformidad.nombres?.split(" ")?.first()
                     Text(
                         fontSize = 14.sp,
-                        text = "$nombre ${conformidad.apePaterno} ${conformidad.apeMaterno}",
+                        text = conformidad.fullName.sinDatos(),
                         color = ColorT1
                     )
                     Text(fontSize = 14.sp, text = conformidad.direccion.toString(), color = ColorT1)

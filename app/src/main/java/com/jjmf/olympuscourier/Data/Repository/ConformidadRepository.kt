@@ -20,7 +20,7 @@ interface ConformidadRepository {
     suspend fun getCorrelativo(): Int
 
     suspend fun insert(conformidad: Conformidad)
-    suspend fun update(conformidad: Conformidad, vigente:Boolean): EstadosResult<String>
+    suspend fun update(conformidad: Conformidad): EstadosResult<String>
 
 }
 
@@ -56,9 +56,7 @@ class ConformidadRepositoryImpl @Inject constructor(
     override suspend fun getCorrelativo(): Int {
         return try {
             (getList().maxBy { it.codigo ?: 0 }.codigo ?: 0) + 1
-        } catch (e: Exception) {
-            1
-        }
+        } catch (e: Exception) { 1 }
     }
 
     override suspend fun insert(conformidad: Conformidad) {
@@ -72,12 +70,11 @@ class ConformidadRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun update(conformidad: Conformidad, vigente:Boolean): EstadosResult<String> {
+    override suspend fun update(conformidad: Conformidad): EstadosResult<String> {
         return if (conformidad.id != null) {
             val user = prefs.getUser()!!
             fb.document(conformidad.id!!).set(
                 conformidad.copy(
-                    vigente = vigente,
                     idUsuarioDelete = user.id,
                     usuarioDelete = user.nombres.toMinusculas().split(" ").first() + " " + user.apePaterno.toMinusculas(),
                     fechaDelete = Timestamp.now()

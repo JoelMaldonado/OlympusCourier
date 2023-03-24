@@ -8,23 +8,29 @@ import com.google.gson.Gson
 import com.jjmf.olympuscourier.Data.Model.Conformidad
 import com.jjmf.olympuscourier.Data.Model.Usuario
 import com.jjmf.olympuscourier.app.BaseApp.Companion.prefs
-import com.jjmf.olympuscourier.ui.features.ConformidadEntrega.ConformidadEntregaScreen
-import com.jjmf.olympuscourier.ui.features.DetalleRegistro.DetalleRegistroScreen
 import com.jjmf.olympuscourier.ui.features.Login.LoginScreen
-import com.jjmf.olympuscourier.ui.features.Mapa.MapaScreen
 import com.jjmf.olympuscourier.ui.features.Menu.MenuScreen
 import com.jjmf.olympuscourier.ui.features.MovimientosDiarios.MovimientosDiariosScreen
-import com.jjmf.olympuscourier.ui.features.RegistrarGasto.RegistrarGastoScreen
+import com.jjmf.olympuscourier.ui.features.MovimientosDiarios.screens.ConformidadEntrega.ConformidadEntregaScreen
+import com.jjmf.olympuscourier.ui.features.MovimientosDiarios.screens.RegistrarGasto.RegistrarGastoScreen
+import com.jjmf.olympuscourier.ui.features.Perfil.PerfilScreen
 import com.jjmf.olympuscourier.ui.features.ReporteDiario.ReporteDiarioScreen
-import com.jjmf.olympuscourier.ui.features.ReporteGeneral.ReporteGeneralScreen
+import com.jjmf.olympuscourier.ui.features.ReporteDiario.features.DetalleRegistro.DetalleRegistroScreen
 import com.jjmf.olympuscourier.ui.features.Usuarios.DetalleUsuario.DetalleUsuarioScreen
 import com.jjmf.olympuscourier.ui.features.Usuarios.UsuariosScreen
+import com.jjmf.olympuscourier.ui.screen.SplashScreen
 
 @Composable
 fun NavegacionPrincipal() {
 
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Rutas.Login.route) {
+    NavHost(navController = navController, startDestination = Rutas.Splash.route) {
+        composable(Rutas.Splash.route){
+            SplashScreen {
+                navController.popBackStack()
+                navController.navigate(Rutas.Login.route)
+            }
+        }
         composable(Rutas.Login.route) {
             LoginScreen(
                 toMenu = {
@@ -52,10 +58,8 @@ fun NavegacionPrincipal() {
                 toReporte = {
                     navController.navigate(Rutas.ReporteDiario.route)
                 },
-                toGeneral = {
-                    navController.navigate(Rutas.ReporteGeneral.route){
-
-                    }
+                toPerfil = {
+                    navController.navigate(Rutas.Perfil.route)
                 }
             )
         }
@@ -120,9 +124,6 @@ fun NavegacionPrincipal() {
                 }
             )
         }
-        composable(Rutas.ReporteGeneral.route){
-            ReporteGeneralScreen()
-        }
         composable(Rutas.DetalleRegistro.route) {
             val registro = it.arguments?.getString("registro")
             if (registro != null) Gson().fromJson(registro, Conformidad::class.java)?.let {conformidad->
@@ -134,8 +135,15 @@ fun NavegacionPrincipal() {
                 )
             }
         }
-        composable(Rutas.Mapa.route) {
-            MapaScreen()
+        composable(Rutas.Perfil.route){
+            PerfilScreen(
+                logout = {
+                    prefs.clearUser()
+                    navController.backQueue.clear()
+                    navController.popBackStack()
+                    navController.navigate(Rutas.Login.route)
+                }
+            )
         }
     }
 }

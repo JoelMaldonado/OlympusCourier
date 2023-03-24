@@ -59,7 +59,7 @@ class AgregarPersonaViewModel @Inject constructor(
             progress = true
             val usuario = Usuario(
                 documento = documento,
-                clave = fecha.filter { it.toString() != "/" },
+                clave = "1234",
                 nombres = nombres,
                 apePaterno = apePaterno,
                 apeMaterno = apeMaterno,

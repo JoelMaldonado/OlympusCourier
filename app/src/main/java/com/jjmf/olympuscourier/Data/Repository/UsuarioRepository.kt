@@ -18,6 +18,7 @@ interface UsuarioRepository {
     suspend fun insert(usuario: Usuario) : EstadosResult<String>
     suspend fun login(documento: String, clave: String): EstadosResult<Usuario>
     suspend fun delete(id: String)
+    suspend fun update(usuario: Usuario) : EstadosResult<String>
 }
 
 class UsuarioRepositoryImpl @Inject constructor(
@@ -64,6 +65,13 @@ class UsuarioRepositoryImpl @Inject constructor(
 
     override suspend fun delete(id: String) {
         fb.document(id).delete().await()
+    }
+
+    override suspend fun update(usuario: Usuario): EstadosResult<String> {
+        return if (usuario.id != null) {
+            fb.document(usuario.id!!).set(usuario).await()
+            EstadosResult.Correcto("Actualizado Correctamente")
+        } else EstadosResult.Error("ID no encontrado")
     }
 
 }

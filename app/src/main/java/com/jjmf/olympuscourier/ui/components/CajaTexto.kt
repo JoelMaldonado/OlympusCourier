@@ -1,11 +1,12 @@
 package com.jjmf.olympuscourier.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.jjmf.olympuscourier.ui.theme.ColorP1
 
 
@@ -33,17 +35,19 @@ fun CajaTexto(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     readOnly : Boolean = false,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    color: Color = ColorP1
+    color: Color = ColorP1,
+    mensajeError:String? = null
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         Text(text = titulo, color = color, fontWeight = FontWeight.SemiBold)
         OutlinedTextField(
             value = valor,
             onValueChange = newValor,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 5.dp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 backgroundColor = Color.White,
                 unfocusedBorderColor = color,
@@ -67,5 +71,8 @@ fun CajaTexto(
             maxLines = 1,
             visualTransformation = visualTransformation
         )
+        mensajeError?.let {
+            Text(text = it, fontSize = 12.sp, color = MaterialTheme.colors.error, modifier = Modifier.padding(start = 10.dp))
+        }
     }
 }

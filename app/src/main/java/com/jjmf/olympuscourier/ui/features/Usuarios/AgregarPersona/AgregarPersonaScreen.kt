@@ -27,10 +27,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.jjmf.olympuscourier.R
 import com.jjmf.olympuscourier.ui.components.BigText
 import com.jjmf.olympuscourier.ui.components.CajaTexto
 import com.jjmf.olympuscourier.ui.theme.ColorP1
 import com.jjmf.olympuscourier.ui.theme.ColorS1
+import com.jjmf.olympuscourier.util.hayInternet
 import com.jjmf.olympuscourier.util.show
 import java.util.*
 
@@ -75,11 +77,13 @@ fun AgregarPersonaScreen(
     day = calendar.get(Calendar.DAY_OF_MONTH)
     calendar.time = Date()
 
-    val datePickerDialog = DatePickerDialog(context, { _: DatePicker, a: Int, mes: Int, dia: Int ->
+    val datePickerDialog = DatePickerDialog(context, R.style.temaDatePicker, { _: DatePicker, a: Int, mes: Int, dia: Int ->
         val d = if (dia < 10) "0$dia" else "$dia"
         val m = if ((mes + 1) < 10) "0${mes + 1}" else "${mes + 1}"
         viewModel.fecha = "$d/$m/$a"
     }, year, month, day)
+
+    datePickerDialog.datePicker.maxDate = calendar.timeInMillis
 
     Column(
         modifier = Modifier
@@ -100,7 +104,9 @@ fun AgregarPersonaScreen(
                     viewModel.documento = it
                 }
                 if (viewModel.documento.length == 8) {
-                    viewModel.reniec()
+                    hayInternet(context){
+                        viewModel.reniec()
+                    }
                 }
             },
             titulo = "Documento de Identidad (DNI)",

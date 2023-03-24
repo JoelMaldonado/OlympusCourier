@@ -14,5 +14,6 @@ data class Usuario(
     val celular:String? = null,
     val rol:String? = null,
     val correo:String? = null,
-    val fechaIngreso: Timestamp? = null
+    val fechaIngreso: Timestamp? = null,
+    val admin:Boolean? = false
 )

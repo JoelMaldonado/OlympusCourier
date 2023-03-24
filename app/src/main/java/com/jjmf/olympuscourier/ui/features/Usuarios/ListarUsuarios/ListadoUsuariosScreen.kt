@@ -75,7 +75,8 @@ fun ListadoUsuariosScreen(
                     .width(180.dp)
                     .padding(10.dp),
                 shape = RoundedCornerShape(20.dp),
-                elevation = 5.dp
+                elevation = 5.dp,
+                backgroundColor = Color.White
             ) {
                 Column(
                     modifier = Modifier
