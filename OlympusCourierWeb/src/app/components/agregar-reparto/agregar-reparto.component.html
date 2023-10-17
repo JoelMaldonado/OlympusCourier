@@ -35,22 +35,26 @@
         <button mat-raised-button (click)="openProductDialog()" color="primary">Agregar Producto</button>
     </div>
 
-    <h1 *ngFor="let item of listReparto.data">
-        {{item.descrip}}
-    </h1>
-
-    <table mat-table [dataSource]="listReparto.data">
+    <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="descrip">
             <th mat-header-cell *matHeaderCellDef>Descripción</th>
             <td mat-cell *matCellDef="let item">{{ item.descrip }}</td>
         </ng-container>
         <ng-container matColumnDef="precio">
             <th mat-header-cell *matHeaderCellDef>Precio</th>
-            <td mat-cell *matCellDef="let item">{{ item.precio }}</td>
+            <td mat-cell *matCellDef="let item">S/.{{ item.precio }}</td>
         </ng-container>
         <ng-container matColumnDef="cant">
             <th mat-header-cell *matHeaderCellDef>Cantidad</th>
             <td mat-cell *matCellDef="let item">{{ item.cant }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button (click)="remove(item)">
+                    <mat-icon class="mat-18">remove</mat-icon>
+                </button>
+            </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

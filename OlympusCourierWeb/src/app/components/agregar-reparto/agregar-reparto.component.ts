@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarItemRepartoComponent } from './agregar-item-reparto/agregar-item-reparto.component';
 import { ItemReparto } from './agregar-item-reparto/item-reparto';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-agregar-reparto',
@@ -17,9 +17,11 @@ export class AgregarRepartoComponent {
   reference: string = '';
   password: string = '';
   notes: string = '';
-  displayedColumns: string[] = ['descrip', 'precio', 'cant'];
+  displayedColumns: string[] = ['descrip', 'precio', 'cant', 'actions'];
+  dataSource : ItemReparto[]= [];
 
-
+  @ViewChild(MatTable) table!: MatTable<ItemReparto>;
+  
   constructor(
     public dialog: MatDialog
   ) {
@@ -29,20 +31,19 @@ export class AgregarRepartoComponent {
 
   }
 
-  listReparto = new MatTableDataSource<ItemReparto>();
+  remove(itemEliminar:any){
+    this.dataSource = this.dataSource.filter(item => item !== itemEliminar)
+  }
 
   openProductDialog() {
-    this.listReparto.data.push({numGuia: "sad", descrip: "Marron", precio: "5", cant: "10", tipo: "Paqueteria"})
     const dialogRef = this.dialog.open(AgregarItemRepartoComponent, {
       width: '800px',
       data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      let a: ItemReparto = result;
-      this.listReparto.data.push(a);
-      console.log(this.listReparto.data);
+      this.dataSource.push(result)
+      this.table.renderRows();
     });
   }
 }
