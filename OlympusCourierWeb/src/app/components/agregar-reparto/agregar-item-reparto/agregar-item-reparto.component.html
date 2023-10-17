@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Agregar Producto</h2>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Número de Guia" [(ngModel)]="data.numGuia">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tipo de producto</mat-label>
+    <mat-select [(ngModel)]="data.tipo">
+      <mat-option value="Sobre">Sobre</mat-option>
+      <mat-option value="Paqueteria" >Paqueteria</mat-option>
+      <mat-option value="Paquete">Paquete</mat-option>
+      <mat-option value="Bulto">Bulto</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Descripción" [(ngModel)]="data.descrip">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Cantidad" [(ngModel)]="data.cant">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Precio" [(ngModel)]="data.precio">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

@@ -1,0 +1,14 @@
+.example-container {
+    width: 100%;
+    height: 100vh;
+}
+
+mat-drawer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }

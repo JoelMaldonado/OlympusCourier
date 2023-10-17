@@ -1,0 +1,30 @@
+<mat-drawer-container class="example-container">
+    <mat-drawer #drawer mode="side">
+        <button mat-raised-button (click)="menu('repartos')">
+            <mat-icon matListIcon>dashboard</mat-icon>
+            <span matLine>Repartos</span>
+        </button>
+        <button mat-raised-button (click)="menu('clientes')">
+            <mat-icon matListIcon>dashboard</mat-icon>
+            <span matLine>Clientes</span>
+        </button>
+        <button mat-raised-button (click)="menu('destinos')">
+            <mat-icon matListIcon>dashboard</mat-icon>
+            <span matLine>Destinos</span>
+        </button>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+                (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>My App</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>favorite</mat-icon>
+            </button>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>
