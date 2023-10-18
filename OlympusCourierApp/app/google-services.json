@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "328413354532",
+    "project_id": "olympusfirebase-694ac",
+    "storage_bucket": "olympusfirebase-694ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328413354532:android:68e8cb17b3cba7a51596b1",
+        "android_client_info": {
+          "package_name": "com.jjmf.android.olympuscourier"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARSTkcrAEDv49O4Zq2j6yAZ8dfmdxsPFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
