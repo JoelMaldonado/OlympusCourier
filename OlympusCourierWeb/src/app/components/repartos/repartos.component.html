@@ -1,22 +1,49 @@
-<button mat-button (click)="agregar()" class="btn-add">Agregar</button>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-    </ng-container>
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Celular</th>
-        <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
-    </ng-container>
-    <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef>Total</th>
-        <td mat-cell *matCellDef="let element">S/{{element.total}} </td>
-    </ng-container>
-    <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef>Estado</th>
-        <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+<div>
+    <div>
+        <input type="date">
+        <button class="btn-add" (click)="agregar()">Agregar</button>
+    </div>
+</div>
+
+
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="text-align: center;">Venta<mat-icon class="icon" matListIcon>search</mat-icon></th>
+            <th>Nombre <mat-icon class="icon" matListIcon>search</mat-icon></th>
+            <th>Celular <mat-icon class="icon" matListIcon>search</mat-icon></th>
+            <th>Total <mat-icon  class="icon" matListIcon>search</mat-icon></th>
+            <th>Fecha <mat-icon  class="icon" matListIcon>search</mat-icon></th>
+            <th>Docs <mat-icon class="icon" matListIcon>search</mat-icon></th>
+            <th>Estado <mat-icon class="icon" matListIcon>search</mat-icon></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let element of dataSource">
+            <td style="text-align: center;">{{ element.venta }}</td>
+            <td>{{ element.nombre }}</td>
+            <td>{{ element.celular }}</td>
+            <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>
+            <td>{{ element.fecha }}</td>
+            <td>{{ element.fecha }}</td>
+            <td class="estado">
+                <div class="estado-content">
+                    <div class="estado-pendientes">Pendientes</div>
+                    <div class="estado-icons">
+                        <mat-icon matListIcon>visibility</mat-icon>
+                        <mat-icon matListIcon>more_horiz</mat-icon>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
 </table>
+
+

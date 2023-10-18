@@ -23,9 +23,9 @@ export class RepartosComponent {
 }
 
 const ELEMENT_DATA: any[] = [
-  { nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, estado: 'Pendiente' },
-  { nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, estado: 'Pendiente' },
-  { nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, estado: 'Pendiente' },
-  { nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, estado: 'Pendiente' },
-  { nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, estado: 'Pendiente' },
+  { venta:10, nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, fecha:'15 dic. 2023', estado: 'Pendiente' },
+  {venta:10, nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, fecha:'15 dic. 2023', estado: 'Pendiente' },
+  { venta:10,nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, fecha:'15 dic. 2023',estado: 'Pendiente' },
+  { venta:10,nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, fecha:'15 dic. 2023',estado: 'Pendiente' },
+  { venta:10,nombre: 'Joel Maldonado', celular: '936 416 623', total: 15, fecha:'15 dic. 2023',estado: 'Pendiente' },
 ];

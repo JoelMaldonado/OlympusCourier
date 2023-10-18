@@ -1,9 +1,95 @@
-table {
-   width: 1500px;
+.table {
+    width: 13 00px;
+    margin: 0 auto; /* Centrar la tabla en la página */
+    border-collapse: collapse;
+    margin-top: 20px; /* Espacio entre el botón y la tabla */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: none;
+
+
+  }
+  
+  .table th, .table td {
+    border-bottom: 1px solid #ddd;
+    padding: 1.2rem;
+    text-align: left;
+    margin-bottom: -1px;
+    min-width: 100px; /* Establece un ancho mínimo para las celdas */
+   
+  }
+  
+  
+  
+  .table th {
+    background-color: white
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #eeeeee;
+  }
+  .table tbody tr {
+    background-color: white;
+  }
+  
+  
+  .btn-add {
+    display: block;
+    margin: 20px auto; /* Centrar el botón */
+  }
+ 
+  .table th:nth-child(2), .table td:nth-child(2) {
+
+    width: 350px; /* Ajusta el ancho según tu preferencia */
+  }
+  .table th:nth-child(3), .table td:nth-child(3) {
+   
+    width: 180px; /* Ajusta el ancho según tu preferencia */
+  }
+  .table th:nth-child(4), .table td:nth-child(4) {
+  
+    width: 200px; /* Ajusta el ancho según tu preferencia */
+  }
+  .table th:nth-child(5), .table td:nth-child(5) {
+   
+    width: 200px; /* Ajusta el ancho según tu preferencia */
+  }
+  .table th:nth-child(6), .table td:nth-child(6) {
     
+    width: 100px; /* Ajusta el ancho según tu preferencia */
+  }
+  .table th:nth-child(7), .table td:nth-child(7) {
+  
+    width: 200px; /* Ajusta el ancho según tu preferencia */
+  }
+  a {
+    text-decoration: none;
+   padding: 5px 12px 5px 12px;
+   font-size: 0.9rem;
+    background-color: rgb(194, 236, 194);
+    color: rgb(62, 180, 62);
+    font-weight: 700;
+
+    border-radius: 20px; /* Redondea todas las esquinas */
+  }
+ .pagado{
+  margin-right: 40px;
+ }
+  .estado-content{
+    display: flex;
+    justify-content: space-between;
+
+  }
+  mat-icon{
+    margin-right: 13px;
+  }
+.icon{
+  position: relative;
+  top: 7px;
+  color: #bbbbbb;
+  left: 4px;
 }
 
-.btn-add{
-    background-color: green;
-    color: white;
+tr{
+  font-weight: 600;
 }
+ 
