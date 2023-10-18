@@ -1,15 +1,21 @@
+
+
+
+
+
 .form-cliente{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+   grid-template-columns: repeat(4 , 1fr);
+   gap: 7px;
 }
 
 .form-domilicio{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    gap: 7px;
+   
 }
 
-.form-datos{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+table{
+    width: 100%;
 }

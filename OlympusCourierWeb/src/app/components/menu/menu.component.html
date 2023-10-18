@@ -1,17 +1,24 @@
 <mat-drawer-container class="example-container">
     <mat-drawer #drawer mode="side">
-        <button mat-raised-button (click)="menu('repartos')">
-            <mat-icon matListIcon>dashboard</mat-icon>
-            <span matLine>Repartos</span>
-        </button>
-        <button mat-raised-button (click)="menu('clientes')">
-            <mat-icon matListIcon>dashboard</mat-icon>
-            <span matLine>Clientes</span>
-        </button>
-        <button mat-raised-button (click)="menu('destinos')">
-            <mat-icon matListIcon>dashboard</mat-icon>
-            <span matLine>Destinos</span>
-        </button>
+
+        <div class="container-drawer">
+            <a mat-raised-button (click)="menu('repartos')" style="height: 80px;">
+                <mat-icon matListIcon>dashboard</mat-icon>
+                <span matLine>Repartos</span>
+            </a>
+            <a mat-raised-button (click)="menu('clientes')" style="height: 80px;">
+                <mat-icon matListIcon>dashboard</mat-icon>
+                <span matLine>Clientes</span>
+            </a>
+            <a mat-raised-button (click)="menu('destinos')" style="height: 80px;">
+                <mat-icon matListIcon>dashboard</mat-icon>
+                <span matLine>Destinos</span>
+            </a>
+            <a mat-raised-button (click)="menu('repartos')" style="height: 80px;">
+                <mat-icon matListIcon>logout</mat-icon>
+                <span matLine>Repartos</span>
+            </a>
+        </div>
     </mat-drawer>
     <mat-drawer-content>
         <mat-toolbar>
@@ -25,6 +32,9 @@
                 <mat-icon>favorite</mat-icon>
             </button>
         </mat-toolbar>
-        <router-outlet></router-outlet>
+
+        <div class="container-form-pedido">
+            <router-outlet></router-outlet>
+        </div>
     </mat-drawer-content>
 </mat-drawer-container>
