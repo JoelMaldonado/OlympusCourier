@@ -132,6 +132,7 @@ fun MenuScreen(
                 .padding(5.dp)
         )
     }
+
     BackHandler {
         alertaCerrarSesion(
             context = context,

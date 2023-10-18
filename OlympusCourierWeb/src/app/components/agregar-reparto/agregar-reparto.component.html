@@ -14,7 +14,8 @@
                             <input matInput placeholder="Nombre del Cliente" name="clientName" [(ngModel)]="clientName">
                         </mat-form-field>
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Celular del Cliente" name="clientCelular" [(ngModel)]="clientCelular">
+                            <input matInput placeholder="Celular del Cliente" name="clientCelular"
+                                [(ngModel)]="clientCelular">
                         </mat-form-field>
                         <mat-form-field class="full-width">
                             <input matInput type="password" placeholder="Clave" name="password" [(ngModel)]="password">
@@ -31,17 +32,17 @@
                                 <mat-option value="D5">El Carmen</mat-option>
                             </mat-select>
                         </mat-form-field>
-    
+
                         <mat-form-field class="full-width">
                             <input matInput placeholder="Dirección" name="address" [(ngModel)]="address">
                         </mat-form-field>
-    
+
                         <mat-form-field class="full-width">
                             <input matInput placeholder="Referencia" name="reference" [(ngModel)]="reference">
                         </mat-form-field>
-    
+
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Anotaciones" name="notes" [(ngModel)]="notes"/>
+                            <input matInput placeholder="Anotaciones" name="notes" [(ngModel)]="notes" />
                         </mat-form-field>
                     </div>
                 </div>
@@ -52,6 +53,12 @@
 
     <div class="item-form">
         <button mat-raised-button (click)="openProductDialog()" color="primary">Agregar Producto</button>
+    </div>
+
+    hola
+    
+    <div *ngFor="let item of distritos">
+        {{item.nombre}}
     </div>
 
     <table mat-table [dataSource]="dataSource">

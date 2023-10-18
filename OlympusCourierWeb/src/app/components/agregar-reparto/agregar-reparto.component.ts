@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AgregarItemRepartoComponent } from './agregar-item-reparto/agregar-item-reparto.component';
 import { ItemReparto } from './agregar-item-reparto/item-reparto';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { DestinoService } from 'src/app/shared/services/destino.service';
+import { Destino } from 'src/app/models/destino';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-agregar-reparto',
@@ -21,11 +24,28 @@ export class AgregarRepartoComponent {
   displayedColumns: string[] = ['descrip', 'precio', 'cant', 'actions'];
   dataSource : ItemReparto[]= [];
 
+  distritos : Destino[] = [
+    {nombre: 'descrip',}
+  ];
+
   @ViewChild(MatTable) table!: MatTable<ItemReparto>;
   
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private destinoService:DestinoService
   ) {
+    this.listarDestinos()
+  }
+  async listarDestinos() {
+    const call = await (await this.destinoService.getAll()).pipe(
+      map((destinos:any) => {
+        return destinos.map((destino: any) => {
+          return { nombre: destino.nombre } as Destino;
+        });
+      })
+    ).toPromise();
+  
+    this.distritos = call;
   }
 
   submitOrder() {
@@ -47,4 +67,6 @@ export class AgregarRepartoComponent {
       this.table.renderRows();
     });
   }
+
+
 }

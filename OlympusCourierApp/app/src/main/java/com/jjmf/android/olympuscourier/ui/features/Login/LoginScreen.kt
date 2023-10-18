@@ -53,6 +53,7 @@ import com.jjmf.android.olympuscourier.ui.theme.ColorP1
 
 @Composable
 fun LoginScreen(
+    toMenu: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val isVisible = remember { mutableStateOf(false) }
@@ -140,8 +141,7 @@ fun LoginScreen(
             RecordarUsuario()
             Spacer(modifier = Modifier.height(5.dp))
             Button(
-                onClick = {
-                },
+                onClick = toMenu,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = ColorP1,
                     contentColor = Color.White,

@@ -15,6 +15,10 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { DestinosComponent } from './components/destinos/destinos.component';
 import { AgregarRepartoComponent } from './components/agregar-reparto/agregar-reparto.component';
 import { AgregarItemRepartoComponent } from './components/agregar-reparto/agregar-item-reparto/agregar-item-reparto.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { AgregarItemRepartoComponent } from './components/agregar-reparto/agrega
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]

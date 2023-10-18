@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "olympusfirebase-694ac": {
+      "hosting": {
+        "OlympusCourierWeb": [
+          "olympuscourier"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "olympusfirebase-694ac"
+  }
+}
