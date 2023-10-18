@@ -5,27 +5,46 @@
         </mat-card-header>
         <mat-card-content>
             <form (ngSubmit)="submitOrder()">
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Documento" name="document" [(ngModel)]="document">
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Nombre del Cliente" name="clientName" [(ngModel)]="clientName">
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Distrito" name="district" [(ngModel)]="district">
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Dirección" name="address" [(ngModel)]="address">
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input matInput placeholder="Referencia" name="reference" [(ngModel)]="reference">
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input matInput type="password" placeholder="Clave" name="password" [(ngModel)]="password">
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <textarea matInput placeholder="Anotaciones" name="notes" [(ngModel)]="notes"></textarea>
-                </mat-form-field>
+                <div class="form-datos">
+                    <div class="form-cliente">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <input matInput placeholder="Documento" name="document" [(ngModel)]="document">
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Nombre del Cliente" name="clientName" [(ngModel)]="clientName">
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Celular del Cliente" name="clientCelular" [(ngModel)]="clientCelular">
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <input matInput type="password" placeholder="Clave" name="password" [(ngModel)]="password">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-domilicio">
+                        <mat-form-field>
+                            <mat-label>Distrito</mat-label>
+                            <mat-select>
+                                <mat-option value="D1">Chincha Alta</mat-option>
+                                <mat-option value="D2">Chincha Baja</mat-option>
+                                <mat-option value="D3">Tambo de Mora</mat-option>
+                                <mat-option value="D4">Sunampe</mat-option>
+                                <mat-option value="D5">El Carmen</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Dirección" name="address" [(ngModel)]="address">
+                        </mat-form-field>
+    
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Referencia" name="reference" [(ngModel)]="reference">
+                        </mat-form-field>
+    
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Anotaciones" name="notes" [(ngModel)]="notes"/>
+                        </mat-form-field>
+                    </div>
+                </div>
                 <button mat-raised-button color="primary" type="submit">Enviar Pedido</button>
             </form>
         </mat-card-content>

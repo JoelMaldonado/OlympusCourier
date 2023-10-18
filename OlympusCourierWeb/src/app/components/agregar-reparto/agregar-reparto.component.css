@@ -1,0 +1,15 @@
+.form-cliente{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-domilicio{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-datos{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

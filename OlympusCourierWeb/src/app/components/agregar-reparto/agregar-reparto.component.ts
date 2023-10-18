@@ -12,6 +12,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 export class AgregarRepartoComponent {
   document: string = '';
   clientName: string = '';
+  clientCelular: string = '';
   district: string = '';
   address: string = '';
   reference: string = '';
