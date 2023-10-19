@@ -13,13 +13,16 @@ import { DestinosComponent } from './components/destinos/destinos.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RepartosComponent } from './components/repartos/repartos.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AgregarItemRepartoComponent } from './components/agregar-reparto/agregar-item-reparto/agregar-item-reparto.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DrawerComponent } from './shared/components/drawer/drawer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 import { ComprobanteComponent } from './components/comprobante/comprobante.component';
+import { GenerarBoletaComponent } from './components/comprobante/generar-boleta/generar-boleta.component';
+import { DialogAddClienteComponent } from './shared/components/dialog-add-cliente/dialog-add-cliente.component';
+import { CajaTextoComponent } from './shared/components/caja-texto/caja-texto.component';
+import { DialogAddItemRepartoComponent } from './shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,12 @@ import { ComprobanteComponent } from './components/comprobante/comprobante.compo
     LoginComponent,
     MenuComponent,
     RepartosComponent,
-    AgregarItemRepartoComponent,
     DrawerComponent,
-    ComprobanteComponent
+    ComprobanteComponent,
+    GenerarBoletaComponent,
+    DialogAddClienteComponent,
+    CajaTextoComponent,
+    DialogAddItemRepartoComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,7 @@ import { ComprobanteComponent } from './components/comprobante/comprobante.compo
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,

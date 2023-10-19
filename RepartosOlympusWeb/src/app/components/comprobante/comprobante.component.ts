@@ -18,12 +18,8 @@ export class ComprobanteComponent {
     this.listarComprobantes()
   }
 
-  listarComprobantes() {
-    const call = this.sunatService.listarDocumentos();
-    call.subscribe(data => {
-      this.listComprobantes = data;
-      console.log(data);
-    })
+  async listarComprobantes() {
+    this.listComprobantes = await this.sunatService.listarDocumentos();
 
   }
 
