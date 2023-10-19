@@ -93,3 +93,29 @@ tr{
   font-weight: 600;
 }
  
+
+
+
+.date-input {
+  display: flex;
+}
+
+.input-container {
+  position: relative;
+  margin-right: 10px;
+}
+
+.input-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-container i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}

@@ -1,15 +1,21 @@
 
 
 
-<div>
-    <div>
-        <input type="date">
-        <button class="btn-add" (click)="agregar()">Agregar</button>
+
+<div class="date-input">
+    <div class="input-container">
+      <input type="text" id="from" placeholder="Desde">
+      <i class="material-icons">calendar_today</i>
     </div>
-</div>
+    <div class="input-container">
+      <input type="text" id="to" placeholder="Hasta">
+      <i class="material-icons">calendar_today</i>
+    </div>
+  </div>
+  
+  
 
-
-
+  <button class="btn-add" (click)="agregar()">Agregar</button>
 
 
 
