@@ -26,13 +26,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jjmf.android.olympuscourier.R
+import com.jjmf.android.olympuscourier.data.firebase.RepartoDto
+import com.jjmf.android.olympuscourier.domain.model.Reparto
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
 import com.jjmf.android.olympuscourier.ui.theme.ColorT1
 
 
 @Composable
 fun CardConformidad(
-    toDetalle: () -> Unit
+    reparto: Reparto,
+    toDetalle: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -70,20 +73,24 @@ fun CardConformidad(
                             modifier = Modifier.size(30.dp)
                         )
                         Text(
-                            text = "CODIGO: #00001",
+                            text = reparto.direc,
                             color = ColorP1,
                             fontWeight = FontWeight.SemiBold
                         )
                     }
                     Text(
                         fontSize = 14.sp,
-                        text = "Datos",
+                        text = "${reparto.cliente.nombres} ${reparto.cliente.apellidos}",
                         color = ColorT1
                     )
-                    Text(fontSize = 14.sp, text = "Datos 2", color = ColorT1)
+                    Text(
+                        fontSize = 14.sp,
+                        text = reparto.formatFecha(),
+                        color = ColorT1
+                    )
                 }
                 Text(
-                    text = "S/50",
+                    text = "S/${reparto.total}",
                     color = ColorP1,
                     fontWeight = FontWeight.SemiBold
                 )
