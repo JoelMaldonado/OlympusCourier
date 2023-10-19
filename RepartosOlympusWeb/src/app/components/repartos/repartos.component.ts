@@ -10,6 +10,7 @@ import { RepartoService } from 'src/app/shared/services/reparto.service';
   styleUrls: ['./repartos.component.css']
 })
 export class RepartosComponent {
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: Reparto[] = [];
 
@@ -35,5 +36,4 @@ export class RepartosComponent {
       return fecha.toDate().toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: '2-digit' });
     }
   }
-
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "olympusfirebase-694ac": {
+      "hosting": {
+        "RepartosOlympusWeb": [
+          "sistemarepartos-olympuscourier"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "olympusfirebase-694ac"
+  }
+}

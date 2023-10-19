@@ -6,6 +6,8 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DestinoService } from 'src/app/shared/services/destino.service';
 import { Destino } from 'src/app/models/destino';
 import { map } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RepartoService } from 'src/app/shared/services/reparto.service';
 
 @Component({
   selector: 'app-agregar-reparto',
@@ -13,6 +15,9 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./agregar-reparto.component.css']
 })
 export class AgregarRepartoComponent {
+
+  formulario: FormGroup;
+
   document: string = '';
   clientName: string = '';
   clientCelular: string = '';
@@ -22,40 +27,44 @@ export class AgregarRepartoComponent {
   password: string = '';
   notes: string = '';
   displayedColumns: string[] = ['descrip', 'precio', 'cant', 'actions'];
-  dataSource : ItemReparto[]= [];
+  dataSource: ItemReparto[] = [];
 
-  distritos : Destino[] = [
-    {nombre: 'descrip',}
-  ];
+  distritos: Destino[] = [];
 
   @ViewChild(MatTable) table!: MatTable<ItemReparto>;
-  
+
   constructor(
     public dialog: MatDialog,
-    private destinoService:DestinoService
+    private destinoservice: DestinoService,
+    private repartoService:RepartoService,
+    private fb: FormBuilder
   ) {
+
+    this.formulario = this.fb.group({
+      documento: ['', Validators.required],
+      nombres: [''],
+      apellidos: [''],
+      celular: ['', [Validators.maxLength(9)]],
+      clave: ['', Validators.required],
+      distrito: [''],
+      direc: ['', Validators.required],
+      referencia: [''],
+      anotaciones: ['']
+    })
+
+
     this.listarDestinos()
   }
+
   async listarDestinos() {
-    const call = await (await this.destinoService.getAll()).pipe(
-      map((destinos:any) => {
-        return destinos.map((destino: any) => {
-          return { nombre: destino.nombre } as Destino;
-        });
-      })
-    ).toPromise();
-  
-    this.distritos = call;
+    this.distritos = await this.destinoservice.listarUsuarios()
   }
 
-  submitOrder() {
-
-  }
-
-  remove(itemEliminar:any){
+  remove(itemEliminar: any) {
     this.dataSource = this.dataSource.filter(item => item !== itemEliminar)
   }
 
+  /** Abrir Alerta*/
   openProductDialog() {
     const dialogRef = this.dialog.open(AgregarItemRepartoComponent, {
       width: '800px',
@@ -68,5 +77,13 @@ export class AgregarRepartoComponent {
     });
   }
 
+
+  /** Insertar Reparto **/
+  submitForm() {
+    if(this.formulario.valid){
+      this.repartoService.insert(this.formulario.value)
+      this.formulario.reset()
+    }
+  }
 
 }

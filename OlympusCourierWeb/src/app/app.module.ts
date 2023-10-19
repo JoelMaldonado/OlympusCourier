@@ -10,15 +10,13 @@ import { RepartosComponent } from './components/repartos/repartos.component';
 import { DrawerComponent } from './shared/components/drawer/drawer.component';
 import { MaterialModule } from './shared/modules/material.module';
 import { SharedModule } from './shared/modules/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { DestinosComponent } from './components/destinos/destinos.component';
 import { AgregarRepartoComponent } from './components/agregar-reparto/agregar-reparto.component';
 import { AgregarItemRepartoComponent } from './components/agregar-reparto/agregar-item-reparto/agregar-item-reparto.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+
+import { FirebaseModule } from './shared/modules/firebase.module';
 
 @NgModule({
   declarations: [
@@ -38,10 +36,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
-    FormsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    FirebaseModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

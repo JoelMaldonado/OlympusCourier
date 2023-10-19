@@ -1,0 +1,19 @@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Documento</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Celular</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listClientes">
+            <td>{{ item.documento }}</td>
+            <td>{{ item.nombres }}</td>
+            <td>{{ item.apellidos }}</td>
+            <td>{{ item.celular }}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ItemReparto } from './item-reparto';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar-item-reparto',
@@ -9,12 +8,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./agregar-item-reparto.component.css']
 })
 export class AgregarItemRepartoComponent {
+
   
   formulario: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AgregarItemRepartoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ItemReparto,
     private fb: FormBuilder
   ) {
 
@@ -28,6 +26,5 @@ export class AgregarItemRepartoComponent {
   }
   
   onNoClick(): void {
-    this.dialogRef.close();
   }
 }

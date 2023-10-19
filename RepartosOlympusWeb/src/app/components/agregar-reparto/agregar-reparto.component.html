@@ -1,0 +1,53 @@
+<div class="order-form">
+    <h1>Formulario de Pedido</h1>
+    <form [formGroup]="formulario" (ngSubmit)="submitForm()">
+        <div class="form-datos">
+            <div>
+                <input placeholder="Documento" formControlName="documento" class="input">
+                <button (click)="buscarDoc()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <div class="row">
+                <input placeholder="Nombres" formControlName="nombres" class="input">
+                <input placeholder="Apellidos" formControlName="apellidos" class="input">
+                <input placeholder="Celular del Cliente" formControlName="celular" class="input">
+                <input type="password" placeholder="Clave" formControlName="clave" class="input">
+            </div>
+            <div class="row">
+                <select class="select">
+                    <option *ngFor="let item of listDistritos" [value]="item.nombre">{{item.nombre}}
+                    </option>
+                </select>
+                <input placeholder="Dirección" formControlName="direc" class="input">
+                <input placeholder="Referencia" formControlName="referencia" class="input">
+                <input placeholder="Anotaciones" formControlName="anotaciones" class="input">
+            </div>
+        </div>
+        <button type="submit">Enviar Pedido</button>
+    </form>
+
+    <button (click)="openDialog()" color="primary">Agregar Producto</button>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Guia</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listItemRepartos">
+                <td>{{ item.numGuia }}</td>
+                <td>{{ item.descrip }}</td>
+                <td>{{ item.cant }}</td>
+                <td>S/{{ item.precio }}</td>
+                <td>S/{{ item.cant * item.precio }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

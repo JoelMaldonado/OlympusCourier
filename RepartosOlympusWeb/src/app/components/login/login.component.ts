@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
 
   formulario: FormGroup;
   
@@ -25,6 +23,6 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.router.navigateByUrl('menu')
+    this.router.navigateByUrl('menu/repartos')
   }
 }

@@ -1,0 +1,10 @@
+<div class="login-container">
+    <h1>Iniciar Sesión</h1>
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <label>Correo Electrónico</label>
+        <input matInput formControlName="user" required>
+        <label>Contraseña</label>
+        <input matInput type="password" formControlName="clave" required>
+        <button mat-raised-button color="primary" type="submit" class="login-button">Iniciar Sesión</button>
+    </form>
+</div>

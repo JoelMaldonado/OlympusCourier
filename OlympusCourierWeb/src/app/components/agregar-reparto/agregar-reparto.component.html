@@ -4,45 +4,41 @@
             <mat-card-title>Formulario de Pedido</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <form (ngSubmit)="submitOrder()">
+            <form [formGroup]="formulario" (ngSubmit)="submitForm()">
                 <div class="form-datos">
                     <div class="form-cliente">
                         <mat-form-field class="full-width" appearance="outline">
-                            <input matInput placeholder="Documento" name="document" [(ngModel)]="document">
+                            <input matInput placeholder="Documento" formControlName="documento">
                         </mat-form-field>
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Nombre del Cliente" name="clientName" [(ngModel)]="clientName">
+                            <input matInput placeholder="Nombre del Cliente" formControlName="nombres">
                         </mat-form-field>
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Celular del Cliente" name="clientCelular"
-                                [(ngModel)]="clientCelular">
+                            <input matInput placeholder="Celular del Cliente" formControlName="celular">
                         </mat-form-field>
                         <mat-form-field class="full-width">
-                            <input matInput type="password" placeholder="Clave" name="password" [(ngModel)]="password">
+                            <input matInput type="password" placeholder="Clave" formControlName="clave">
                         </mat-form-field>
                     </div>
                     <div class="form-domilicio">
                         <mat-form-field>
                             <mat-label>Distrito</mat-label>
                             <mat-select>
-                                <mat-option value="D1">Chincha Alta</mat-option>
-                                <mat-option value="D2">Chincha Baja</mat-option>
-                                <mat-option value="D3">Tambo de Mora</mat-option>
-                                <mat-option value="D4">Sunampe</mat-option>
-                                <mat-option value="D5">El Carmen</mat-option>
+                                <mat-option *ngFor="let item of distritos"
+                                    [value]="item.nombre">{{item.nombre}}</mat-option>
                             </mat-select>
                         </mat-form-field>
 
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Dirección" name="address" [(ngModel)]="address">
+                            <input matInput placeholder="Dirección" formControlName="direc">
                         </mat-form-field>
 
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Referencia" name="reference" [(ngModel)]="reference">
+                            <input matInput placeholder="Referencia" formControlName="referencia">
                         </mat-form-field>
 
                         <mat-form-field class="full-width">
-                            <input matInput placeholder="Anotaciones" name="notes" [(ngModel)]="notes" />
+                            <input matInput placeholder="Anotaciones" formControlName="anotaciones" />
                         </mat-form-field>
                     </div>
                 </div>
@@ -53,12 +49,6 @@
 
     <div class="item-form">
         <button mat-raised-button (click)="openProductDialog()" color="primary">Agregar Producto</button>
-    </div>
-
-    hola
-    
-    <div *ngFor="let item of distritos">
-        {{item.nombre}}
     </div>
 
     <table mat-table [dataSource]="dataSource">

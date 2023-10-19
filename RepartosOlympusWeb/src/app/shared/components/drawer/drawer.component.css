@@ -1,0 +1,245 @@
+.sidenav {
+    background: var(--colorP1);
+    transition: all .5s ease;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 5rem;
+    height: 100vh;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+}
+
+.logo-container {
+
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem 1rem;
+    width: 100%;
+
+    .logo {
+        background: #fff;
+        text-align: center;
+        width: 3rem;
+        min-width: 3rem;
+        border-radius: 0.3rem;
+        font-size: 24px;
+        padding: 5px;
+        cursor: pointer;
+        border: none;
+    }
+
+    .logo-text {
+        margin-left: 1.5rem;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .btn-close {
+        margin-left: 20px;
+        cursor: pointer;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background-color: transparent;
+        border: none;
+
+        .fa-solid {
+            color: #fff;
+            font-size: 24px;
+        }
+    }
+}
+
+.sidenav-collapsed {
+    width: 18rem;
+}
+
+.sidenav-nav {
+    list-style: none;
+    padding: 1rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    .sidenav-nav-item {
+        width: 100%;
+        margin-bottom: 1rem;
+
+        .sidenav-nav-link {
+            display: flex;
+            align-items: center;
+            height: 3rem;
+            color: #f3f3f3;
+            text-decoration: none;
+            border-radius: 1rem;
+            transition: all .3s ease;
+        }
+
+        .sidenav-link-icon {
+            font-size: 18px;
+            width: 2rem;
+            min-width: 2rem;
+            margin: 0 0.5rem;
+            text-align: center;
+        }
+
+        .sidenav-link-text {
+            margin-left: 1rem;
+            font-size: 18px;
+        }
+    }
+
+    .sidenav-nav-item:hover {
+
+        .sidenav-nav-link {
+            background: #fff;
+            color: black;
+        }
+    }
+}
+
+
+
+.connection-status {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: auto;
+    gap: 10px;
+}
+
+.circleTrue {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: greenyellow;
+}
+
+.circleFalse {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: grey;
+}
+
+.btnRefresh {
+    border: none;
+    font-size: 18px;
+    padding: 3px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.text {
+    font-size: 18px;
+    color: white;
+}
+
+.qr-contador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Cambia el color de fondo y el texto para indicar el estado */
+.connected {
+    background-color: green;
+    color: white;
+}
+
+.disconnected {
+    background-color: gray;
+    color: white;
+}
+
+/**Loader**/
+
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-color: white transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/**Loader 2**/
+.loader2 {
+    margin-top: 50px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+}
+
+.loader2::before,
+.loader2::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #FFF;
+    animation: prixClipFix 2s linear infinite;
+}
+
+.loader2::after {
+    border-color: #FFF;
+    animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
+    inset: 6px;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+    }
+
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+    }
+
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+    }
+
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+    }
+}

@@ -1,6 +1,3 @@
-
-
-
 <div>
     <div>
         <input type="date">
@@ -8,21 +5,16 @@
     </div>
 </div>
 
-
-
-
-
-
 <table class="table">
     <thead>
         <tr>
-            <th style="text-align: center;">Venta<mat-icon class="icon" matListIcon>search</mat-icon></th>
-            <th>Nombre <mat-icon class="icon" matListIcon>search</mat-icon></th>
-            <th>Celular <mat-icon class="icon" matListIcon>search</mat-icon></th>
-            <th>Total <mat-icon  class="icon" matListIcon>search</mat-icon></th>
-            <th>Fecha <mat-icon  class="icon" matListIcon>search</mat-icon></th>
-            <th>Docs <mat-icon class="icon" matListIcon>search</mat-icon></th>
-            <th>Estado <mat-icon class="icon" matListIcon>search</mat-icon></th>
+            <th style="text-align: center;">Venta<i class="icon" matListIcon>search</i></th>
+            <th>Nombre</th>
+            <th>Celular</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th>Docs</th>
+            <th>Estado</th>
         </tr>
     </thead>
     <tbody>
@@ -35,15 +27,13 @@
             <td>{{ formatFecha(element?.fecha) }}</td>
             <td class="estado">
                 <div class="estado-content">
-                    <div class="estado-pendientes">Pendientes</div>
+                    <div class="estado-pendientes">{{element.estado}}</div>
                     <div class="estado-icons">
-                        <mat-icon matListIcon>visibility</mat-icon>
-                        <mat-icon matListIcon>more_horiz</mat-icon>
+                        <i class="fa-solid fa-eye"></i>
+                        <i class="fa-solid fa-ellipsis"></i>
                     </div>
                 </div>
             </td>
         </tr>
     </tbody>
 </table>
-
-

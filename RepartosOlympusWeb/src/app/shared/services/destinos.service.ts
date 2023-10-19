@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
-import { collection, getDocs } from 'firebase/firestore';
+import { Firestore, collection, getDocs } from '@angular/fire/firestore';
 import { Destino } from 'src/app/models/destino';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class DestinoService {
-
+export class DestinosService {
 
   constructor(
     private fb: Firestore
@@ -16,7 +13,7 @@ export class DestinoService {
 
   }
   
-  async listarUsuarios(): Promise<Destino[]> {
+  async listarDestinos(): Promise<Destino[]> {
     const col = collection(this.fb, 'Destino');
     const allTodos = await getDocs(col);
     const destinos: Destino[] = [];
@@ -27,7 +24,6 @@ export class DestinoService {
     });
     return destinos;
   }
-
 
 
 }

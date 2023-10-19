@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Agregar Producto</h2>
+<form [formGroup]="formulario">
+  <input placeholder="Número de Guia" class="input" formControlName="numGuia">
+  <select formControlName="tipo">
+    <option value="Sobre">Sobre</option>
+    <option value="Paqueteria">Paqueteria</option>
+    <option value="Paquete">Paquete</option>
+    <option value="Bulto">Bulto</option>
+  </select>
+  <input placeholder="Descripción" formControlName="descrip">
+  <input placeholder="Cantidad" formControlName="cant">
+  <input placeholder="Precio" formControlName="precio">
+
+</form>
+<button (click)="onNoClick()" color="warn">Cancelar</button>
+<button cdkFocusInitial>Aceptar</button>
