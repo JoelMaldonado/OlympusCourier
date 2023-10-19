@@ -17,6 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AgregarItemRepartoComponent } from './components/agregar-reparto/agregar-item-reparto/agregar-item-reparto.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DrawerComponent } from './shared/components/drawer/drawer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/modules/material.module';
+import { ComprobanteComponent } from './components/comprobante/comprobante.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { DrawerComponent } from './shared/components/drawer/drawer.component';
     MenuComponent,
     RepartosComponent,
     AgregarItemRepartoComponent,
-    DrawerComponent
+    DrawerComponent,
+    ComprobanteComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,9 @@ import { DrawerComponent } from './shared/components/drawer/drawer.component';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
     HttpClientModule
   ],
   providers: [],

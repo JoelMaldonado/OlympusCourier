@@ -6,6 +6,7 @@ import { RepartosComponent } from './components/repartos/repartos.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { DestinosComponent } from './components/destinos/destinos.component';
 import { AgregarRepartoComponent } from './components/agregar-reparto/agregar-reparto.component';
+import { ComprobanteComponent } from './components/comprobante/comprobante.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'repartos', component: RepartosComponent },
       { path: 'clientes', component: ClientesComponent },
       { path: 'destinos', component: DestinosComponent },
+      { path: 'comprobantes', component: ComprobanteComponent },
       { path: 'agregar-reparto', component: AgregarRepartoComponent },
     ]
   },

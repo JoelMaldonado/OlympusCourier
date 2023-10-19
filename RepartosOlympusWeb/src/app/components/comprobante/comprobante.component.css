@@ -1,3 +1,15 @@
+/**Fechas**/
+.fechas{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: end;
+  }
+
+
+/**Tabla*/
+
 .table {
     width: 13 00px;
     margin: 0 auto;

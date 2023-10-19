@@ -25,4 +25,5 @@ export class LoginComponent {
   onSubmit() {
     this.router.navigateByUrl('menu/repartos')
   }
+
 }

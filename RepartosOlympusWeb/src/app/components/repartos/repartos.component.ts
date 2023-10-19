@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { Reparto } from 'src/app/models/reparto';
 import { RepartoService } from 'src/app/shared/services/reparto.service';

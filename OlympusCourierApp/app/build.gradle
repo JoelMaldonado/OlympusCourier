@@ -82,6 +82,9 @@ dependencies {
     //Coil
     implementation("io.coil-kt:coil-compose:2.2.2")
 
+    //Permisos
+    implementation "com.google.accompanist:accompanist-permissions:0.28.0"
+
     //HILT COMPOSE
     implementation "com.google.dagger:hilt-android:2.44"
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'

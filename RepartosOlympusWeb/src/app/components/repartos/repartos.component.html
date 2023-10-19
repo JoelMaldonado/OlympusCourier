@@ -1,39 +1,56 @@
-<div>
-    <div>
-        <input type="date">
-        <button class="btn-add" (click)="agregar()">Agregar</button>
+<div class="container">
+    <div class="navbar">
+        <button mat-raised-button color="primary" class="btn-add" (click)="agregar()">NuevoReparto</button>
     </div>
-</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th style="text-align: center;">Venta<i class="icon" matListIcon>search</i></th>
-            <th>Nombre</th>
-            <th>Celular</th>
-            <th>Total</th>
-            <th>Fecha</th>
-            <th>Docs</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let element of dataSource">
-            <td style="text-align: center;">1</td>
-            <td>{{ element.cliente?.nombres }}</td>
-            <td>{{ element.cliente?.celular }}</td>
-            <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>
-            <td>{{ formatFecha(element?.fecha) }}</td>
-            <td>{{ formatFecha(element?.fecha) }}</td>
-            <td class="estado">
-                <div class="estado-content">
-                    <div class="estado-pendientes">{{element.estado}}</div>
-                    <div class="estado-icons">
-                        <i class="fa-solid fa-eye"></i>
-                        <i class="fa-solid fa-ellipsis"></i>
+    <div class="fechas">
+        <mat-form-field>
+            <mat-label>Desde</mat-label>
+            <input matInput [matDatepicker]="picker1">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Hasta</mat-label>
+            <input matInput [matDatepicker]="picker2">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Venta<i class="icon" matListIcon>search</i></th>
+                <th>Nombre</th>
+                <th>Celular</th>
+                <th>Total</th>
+                <th>Fecha</th>
+                <th>Docs</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let element of dataSource">
+                <td style="text-align: center;">1</td>
+                <td>{{ element.cliente?.nombres }}</td>
+                <td>{{ element.cliente?.celular }}</td>
+                <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>
+                <td>{{ formatFecha(element?.fecha) }}</td>
+                <td>{{ formatFecha(element?.fecha) }}</td>
+                <td class="estado">
+                    <div class="estado-content">
+                        <div class="estado-pendientes">{{element.estado}}</div>
+                        <div class="estado-icons">
+                            <i class="fa-solid fa-eye"></i>
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

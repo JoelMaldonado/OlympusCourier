@@ -13,6 +13,8 @@ data class Reparto(
     val estado: String,
     val total: Double,
     val fecha: Timestamp,
+    val clave:String,
+    val anotacion:String,
 ){
     fun formatFecha(pattern:String = "dd/MM/yyyy") : String{
         return SimpleDateFormat(pattern, Locale.getDefault()).format(fecha.toDate())

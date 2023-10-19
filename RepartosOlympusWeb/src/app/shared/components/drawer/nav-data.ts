@@ -11,7 +11,12 @@ export const navbarData = [
     },
     {
         routerLink: '/menu/destinos',
-        icon: 'fa-solid fa-map',
-        label: 'Destinos'
+        icon: 'fa-solid fa-tag',
+        label: 'Tarifario'
+    },
+    {
+        routerLink: '/menu/comprobantes',
+        icon: 'fa-solid fa-file',
+        label: 'Comprobantes'
     }
 ];

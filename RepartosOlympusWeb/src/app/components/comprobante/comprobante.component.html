@@ -1,0 +1,95 @@
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Boletas">
+
+        <div class="fechas">
+            <mat-form-field>
+                <mat-label>Desde</mat-label>
+                <input matInput [matDatepicker]="picker1">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Hasta</mat-label>
+                <input matInput [matDatepicker]="picker2">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listComprobantes">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ timestampAfechaActualFormateada(item.issueTime) }}</td>
+                    <td>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" 
+                        matTooltip="Ver PDF">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="verPdf(item.id, 'ticket58mm', item.fileName)">
+                                <span>58mm</span>
+                            </button>
+                            <button mat-menu-item (click)="verPdf(item.id, 'ticket80mm', item.fileName)">
+                                <span>80mm</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-tab>
+    <mat-tab label="Facturas">
+
+        <div class="fechas">
+            <mat-form-field>
+                <mat-label>Desde</mat-label>
+                <input matInput [matDatepicker]="picker3">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Hasta</mat-label>
+                <input matInput [matDatepicker]="picker4">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Celular</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listComprobantes">
+                    <td>{{ item }}</td>
+                    <td>{{ item.nombres }}</td>
+                    <td>{{ item.apellidos }}</td>
+                    <td>{{ item.celular }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-tab>
+    <mat-tab>
+
+    </mat-tab>
+</mat-tab-group>

@@ -13,6 +13,8 @@ data class RepartoDto(
     val estado: String? = null,
     val total: Double? = null,
     val fecha: Timestamp? = null,
+    val clave:String? = null,
+    val anotacion:String? = null,
 ) {
     fun toDomain(
         cliente: Cliente?,
@@ -31,7 +33,9 @@ data class RepartoDto(
             referencia = referencia ?: "Sin Valor",
             estado = estado ?: "Sin Valor",
             total = total ?: 0.0,
-            fecha = fecha ?: Timestamp.now()
+            fecha = fecha ?: Timestamp.now(),
+            clave = clave ?: "Sin Valor",
+            anotacion = anotacion ?: "Sin Valor"
         )
     }
 }
