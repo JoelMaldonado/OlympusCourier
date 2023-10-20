@@ -3,28 +3,25 @@
         <button mat-raised-button color="primary" class="btn-add" (click)="agregar()">NuevoReparto</button>
     </div>
 
-    <div class="fechas">
-        <mat-form-field>
-            <mat-label>Desde</mat-label>
-            <input matInput [matDatepicker]="picker1">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-          
-          <mat-form-field>
-            <mat-label>Hasta</mat-label>
-            <input matInput [matDatepicker]="picker2">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-    </div>
+    <div class="date-input">
+        <div class="input-container">
+          <input type="text" id="from" placeholder="Desde" [matDatepicker]="picker1" (click)="picker1.open()">
+          <i class="material-icons" (click)="picker1.open()">calendar_today</i>
+          <mat-datepicker #picker1></mat-datepicker>
+        </div>
+        <div class="input-container">
+          <input type="text" id="to" placeholder="Hasta" [matDatepicker]="picker2" (click)="picker2.open()">
+          <i class="material-icons" (click)="picker2.open()">calendar_today</i>
+          <mat-datepicker #picker2></mat-datepicker>
+        </div>
+      </div>
+      
+      
 
     <table class="table">
         <thead>
             <tr>
-                <th style="text-align: center;">Venta<i class="icon" matListIcon>search</i></th>
+                <th style="text-align: center;">Venta</th>  
                 <th>Nombre</th>
                 <th>Celular</th>
                 <th>Total</th>

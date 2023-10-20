@@ -7,7 +7,7 @@
 }
 
 .table {
-    width: 13 00px;
+    width: 1500px;
     margin: 0 auto; /* Centrar la tabla en la página */
     border-collapse: collapse;
     margin-top: 20px; /* Espacio entre el botón y la tabla */
@@ -101,3 +101,55 @@ tr{
   font-weight: 600;
 }
  
+.fa-solid{
+  margin-right: 15px;
+  font-size: 20px;
+  margin-top: 5px;
+}
+.estado-pendientes{
+ 
+   padding: 5px 12px 5px 12px;
+   font-size: 0.9rem;
+    background-color: rgb(238, 241, 39);
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+
+    border-radius: 20px;
+}
+
+.date-input {
+  display: flex;
+}
+
+.input-container {
+  position: relative;
+  margin-right: 10px;
+}
+
+.input-container input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 150px; /* Ajusta el ancho según tu preferencia */
+  font-size: 14px; /* Ajusta el tamaño de fuente según tu preferencia */
+}
+
+.input-container i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777; /* Cambia el color del ícono según tu preferencia */
+}
+
+/* Estilos adicionales para dar una apariencia más atractiva */
+.input-container input:focus {
+  border-color: #007BFF; /* Cambia el color del borde al enfocar el campo */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega un efecto de sombra al enfocar el campo */
+}
+
+.input-container i:hover {
+  color: #007BFF; /* Cambia el color del ícono al pasar el cursor sobre él */
+}
