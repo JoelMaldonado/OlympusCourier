@@ -1,10 +1,18 @@
 import { Component, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ItemReparto } from './agregar-item-reparto/item-reparto';
+import { MatDialog } from '@angular/material/dialog';
 import { Destino } from 'src/app/models/destino';
+import { DialogAddItemRepartoComponent } from 'src/app/shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
 import { DestinosService } from 'src/app/shared/services/destinos.service';
 import { RepartoService } from 'src/app/shared/services/reparto.service';
-import { AgregarItemRepartoComponent } from './agregar-item-reparto/agregar-item-reparto.component';
+
+export interface ItemReparto {
+  numGuia: string
+  tipo: string
+  descrip: string
+  precio: number
+  cant: number
+}
 
 @Component({
   selector: 'app-agregar-reparto',
@@ -31,7 +39,7 @@ export class AgregarRepartoComponent {
     private destinoservice: DestinosService,
     private repartoService: RepartoService,
     private fb: FormBuilder,
-    private renderer: Renderer2
+    public dialog: MatDialog
   ) {
 
     this.formulario = this.fb.group({
@@ -60,7 +68,14 @@ export class AgregarRepartoComponent {
 
   /** Abrir Alerta*/
   openDialog() {
+    const dialogRef = this.dialog.open(DialogAddItemRepartoComponent, {
+      data: {},
+      width: "650px"
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
   }
 
   /**Buscar documento Reniec**/

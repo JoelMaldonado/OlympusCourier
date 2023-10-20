@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="top">
+    <span>Nuevo cliente</span>
+    <button mat-icon-button (click)="onNoClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="select">
+    <mat-chip-listbox>
+      <mat-chip-option>Ruc</mat-chip-option>
+      <mat-chip-option selected>DNI</mat-chip-option>
+      <mat-chip-option>Carnet Extranjeria</mat-chip-option>
+      <mat-chip-option>Sin Documento</mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+
+  <form [formGroup]="formulario" (ngSubmit)="submitForm()">
+    <input placeholder="Documento" formControlName="nombreLegal" class="input">
+    <input placeholder="Nombre Legal" formControlName="nombreLegal" class="input">
+    <input placeholder="Celular" formControlName="celular" class="input">
+  </form>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button [mat-dialog-close]="data.animal" color="primary">Guardar</button>
+  </div>
+</div>

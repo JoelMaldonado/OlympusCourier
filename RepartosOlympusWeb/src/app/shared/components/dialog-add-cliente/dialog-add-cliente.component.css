@@ -1,0 +1,36 @@
+.container{
+    width: 100% - calc(15px);
+    padding: 15px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.input {
+    width: 80%;
+    height: 25px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid var(--colorT2);
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0px 0px 20px -18px;
+}
+
+.input:hover {
+    border: 2px solid var(--colorP2);
+    box-shadow: 0px 0px 20px -17px;
+}
+
+.input:active {
+    transform: scale(0.95);
+}
+
+.input:focus {
+    border: 2px solid var(--colorP2);
+}

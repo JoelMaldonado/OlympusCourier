@@ -1,15 +1,13 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ItemReparto } from './item-reparto';
 
 @Component({
-  selector: 'app-agregar-item-reparto',
-  templateUrl: './agregar-item-reparto.component.html',
-  styleUrls: ['./agregar-item-reparto.component.css']
+  selector: 'app-dialog-add-item-reparto',
+  templateUrl: './dialog-add-item-reparto.component.html',
+  styleUrls: ['./dialog-add-item-reparto.component.css']
 })
-export class AgregarItemRepartoComponent {
+export class DialogAddItemRepartoComponent {
 
-  
   formulario: FormGroup;
 
   constructor(
@@ -24,7 +22,7 @@ export class AgregarItemRepartoComponent {
       precio: ['']
     })
   }
-  
+
   onNoClick(): void {
   }
 }
