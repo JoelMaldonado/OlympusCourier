@@ -34,10 +34,19 @@ export class RepartosComponent {
   }
 
   formatFecha(fecha: Timestamp | undefined) {
-    if (fecha === undefined){
-      return "Sin fecha"
-    }else{
-      return fecha.toDate().toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: '2-digit' });
+    if (fecha === undefined) {
+      return "Sin fecha";
+    } else {
+      const formattedDate = fecha.toDate().toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      });
+  
+      return formattedDate.split('/').join('-'); // Reemplaza barras diagonales por guiones
     }
   }
+  
+
+  
 }

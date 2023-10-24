@@ -1,38 +1,72 @@
 <div class="container">
-    <div class="navbar">
-        <button mat-raised-button color="primary" class="btn-add" (click)="agregar()">NuevoReparto</button>
+
+
+    <div class="container__fecha">
+
+        <div class="btn__navbar">
+            <button class="btn-add" (click)="agregar()">+ Añadir Reparto</button>
+        </div>
+
+
+        <div class="date-input">
+
+            <div class="container__1">
+                <label for="">Fechas</label>
+                <div class="input-container">
+                    <input type="text" id="from" placeholder="Desde" [matDatepicker]="picker1" (click)="picker1.open()"
+                        readonly>
+                    <i class="material-icons" (click)="picker1.open()">calendar_today</i>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </div>
+
+                <div class="input-container">
+                    <input type="text" id="to" placeholder="Hasta" [matDatepicker]="picker2" (click)="picker2.open()"
+                        readonly>
+                    <i class="material-icons" (click)="picker2.open()">calendar_today</i>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </div>
+
+                <div class="input__icon1">
+                    <a href="">
+                        <i class="material-icons">save_alt</i>
+                    </a>
+                </div>
+
+                <div class="input__icon1">
+                    <a href="">
+                        <i class="material-icons">person_outline</i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="input__search">
+                <label for="">Buscar</label>
+                <div class="container__input">
+                    <input type="text" class="search-input" >
+                    <span class="search-icon material-icons">search</span>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <div class="date-input">
-        <div class="input-container">
-          <input type="text" id="from" placeholder="Desde" [matDatepicker]="picker1" (click)="picker1.open()">
-          <i class="material-icons" (click)="picker1.open()">calendar_today</i>
-          <mat-datepicker #picker1></mat-datepicker>
-        </div>
-        <div class="input-container">
-          <input type="text" id="to" placeholder="Hasta" [matDatepicker]="picker2" (click)="picker2.open()">
-          <i class="material-icons" (click)="picker2.open()">calendar_today</i>
-          <mat-datepicker #picker2></mat-datepicker>
-        </div>
-      </div>
-      
-      
 
     <table class="table">
         <thead>
             <tr>
-                <th style="text-align: center;">Venta</th>  
-                <th>Nombre</th>
-                <th>Celular</th>
-                <th>Total</th>
+               
+                <th style="text-align: center;">ID</th>
+                <th>Cliente</th>
+                <th>Dirección</th>
+                <th>Distrito</th>
                 <th>Fecha</th>
-                <th>Docs</th>
-                <th>Estado</th>
+                <th>E. Flete</th>
+                <th >Venta</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let element of dataSource">
-                <td style="text-align: center;">1</td>
+                <td class="venta" style="text-align: center;">132</td>
                 <td>{{ element.cliente?.nombres }}</td>
                 <td>{{ element.cliente?.celular }}</td>
                 <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>

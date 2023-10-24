@@ -1,16 +1,55 @@
-<h2 mat-dialog-title>Agregar Producto</h2>
-<form [formGroup]="formulario">
-  <input placeholder="Número de Guia" class="input" formControlName="numGuia">
-  <select formControlName="tipo">
-    <option value="Sobre">Sobre</option>
-    <option value="Paqueteria">Paqueteria</option>
-    <option value="Paquete">Paquete</option>
-    <option value="Bulto">Bulto</option>
-  </select>
-  <input placeholder="Descripción" class="input" formControlName="descrip">
-  <input placeholder="Cantidad" class="input" formControlName="cant">
-  <input placeholder="Precio" class="input" formControlName="precio">
+<div class="container__product">
+  <h2>Nuevo Producto / servicio</h2>
+  <form>
+    <div class="container__form">
 
-</form>
-<button (click)="onNoClick()" color="warn">Cancelar</button>
-<button cdkFocusInitial>Aceptar</button>
+
+      <div class="campo__form">
+        <label for="">Nombre</label>
+        <input type="text" class="input">
+      </div>
+
+      <div class="campo__form">
+        <label for="">Categoria</label>
+        <select id="animal">
+          <option value="perro">Perro</option>
+          <option value="gato">Gato</option>
+          <option value="pajaro">Pájaro</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+
+
+      <div class="campo__form">
+        <label for="">Descricion</label>
+        <input type="text" class="input">
+      </div>
+
+
+      <div class="campo__form">
+        <label for="">Cantidad</label>
+        <input type="number" placeholder="Cantidad" class="input">
+      </div>
+
+
+      <div class="campo__form">
+        <label for="">Precio</label>
+        <input type="number" placeholder="Precio" class="input">
+      </div>
+
+
+    </div>
+
+  </form>
+
+  <div class="guardar">
+    <h2>Opciones Avanzadas</h2>
+    
+    <div class="raparto__btn">
+      <button onclick="onNoClick()">Cancelar</button>
+      <div class="btn__navbar">
+        <button class="btn-add" onclick="onAceptar()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

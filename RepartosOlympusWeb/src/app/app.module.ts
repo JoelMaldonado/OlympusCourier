@@ -23,6 +23,7 @@ import { GenerarBoletaComponent } from './components/comprobante/generar-boleta/
 import { DialogAddClienteComponent } from './shared/components/dialog-add-cliente/dialog-add-cliente.component';
 import { CajaTextoComponent } from './shared/components/caja-texto/caja-texto.component';
 import { DialogAddItemRepartoComponent } from './shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DialogAddItemRepartoComponent } from './shared/components/dialog-add-it
     GenerarBoletaComponent,
     DialogAddClienteComponent,
     CajaTextoComponent,
-    DialogAddItemRepartoComponent
+    DialogAddItemRepartoComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
