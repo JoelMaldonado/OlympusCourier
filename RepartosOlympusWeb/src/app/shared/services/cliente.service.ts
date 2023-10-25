@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs, getDoc, doc, query, where} from '@angular/fire/firestore';
+import { Firestore, collection, getDocs, getDoc, doc, query, where } from '@angular/fire/firestore';
 import { Cliente } from 'src/app/models/cliente';
 
 @Injectable({
@@ -11,6 +11,12 @@ export class ClienteService {
     private fb: Firestore
   ) {
 
+  }
+
+  
+
+  isLogged(): boolean{
+    return localStorage.getItem('token') ? true : false;
   }
 
   async getClienteById(clienteId: string): Promise<Cliente> {
@@ -30,22 +36,6 @@ export class ClienteService {
     return list;
   }
 
-  /*async searchCliente(data: string): Promise<Cliente[]> {
-    const col = collection(this.fb, 'Cliente');
-    const q = query(
-      col,
-      where('nombres', '>=', data),
-      where('nombres', '<', data + '\uf8ff')
-    );
-    const result = await getDocs(q);
-    const list : Cliente[] = []
-    result.forEach(doc=>{
-      const cliente = doc.data() as Cliente;
-      list.push(cliente);
-    })
-    return list;
-  }*/
-
   async searchCliente(data: string): Promise<Cliente[]> {
     const col = collection(this.fb, 'Cliente');
     const nameQuery = query(
@@ -53,28 +43,28 @@ export class ClienteService {
       where('nombres', '>=', data),
       where('nombres', '<', data + '\uf8ff')
     );
-  
+
     const docNumberQuery = query(
       col,
       where('documento', '>=', data),
       where('documento', '<', data + '\uf8ff')
     );
-  
+
     const [nameResults, docNumberResults] = await Promise.all([getDocs(nameQuery), getDocs(docNumberQuery)]);
-  
+
     const nameMatches: Cliente[] = [];
     nameResults.forEach((doc) => {
       const cliente = doc.data() as Cliente;
       nameMatches.push(cliente);
     });
-  
+
     const docNumberMatches: Cliente[] = [];
     docNumberResults.forEach((doc) => {
       const cliente = doc.data() as Cliente;
       docNumberMatches.push(cliente);
     });
     const combinedResults = [...new Set([...nameMatches, ...docNumberMatches])];
-  
+
     return combinedResults;
   }
 }
