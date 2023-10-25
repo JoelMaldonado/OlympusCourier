@@ -1,21 +1,73 @@
+<!-- HTML en tu archivo de plantilla (drawer.component.html) -->
+<div class="navigation" [class.closed]="collapsed">
+    <ul>
+
+        <li>
+            <a href="#">
+                <span class="title">OLYMPUS COURIER</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon"><img src="../../../../assets/logo.png" alt=""></span>
+                <span class="title">Repartos</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon"><i class="fa-solid fa-x"></i></span>
+                <span class="title">Clientes</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon"><i class="fa-solid fa-x"></i></span>
+                <span class="title">Tarifario</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon"><i class="fa-solid fa-x"></i></span>
+                <span class="title">Comprobantes</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon"><mat-icon>logout</mat-icon></span>
+                <span class="title">Salir</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="container__admin">
+        <div class="admin">
+            <span class="icon"><i class="fa-solid fa-x"></i></span>
+            <div class="admin__nombre">
+                <label class="admin__title" for="">Admin</label>
+                <label class="admin__nombre" for="">Nombre</label>
+            </div>
+        </div>
+        <div class="toggle" (click)="toggleNavigation()"></div>
+    </div>
+</div>
 
 
 
 
-
+<!--
 
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
     <div class="logo-container">
         <button class="logo"  (click)="click()">
            <img src="/src/assets/logo.png" alt=""> 
-           <img src="/src/assets/OBJECTS" alt=""><!--<i class="fa-solid fa-paper-plane" style="color: var(--p1);"></i>-->
+           <img src="/src/assets/OBJECTS.png" alt=""><i class="fa-solid fa-paper-plane" style="color: var(--p1);"></i>
         </button>
         <div class="logo-text" *ngIf="collapsed">OLYMPUS COURIER</div>
-        <!--
+     
         <button class="btn-close" *ngIf="collapsed" (click)="close()">
             <i class="fa-solid fa-x"></i>
         </button>
-        -->
+        
     </div>
 
 
@@ -31,3 +83,4 @@
 
     </ul>
 </div>
+-->

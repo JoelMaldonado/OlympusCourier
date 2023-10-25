@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { navbarData } from './nav-data';
 
 @Component({
   selector: 'app-drawer',
@@ -7,26 +6,21 @@ import { navbarData } from './nav-data';
   styleUrls: ['./drawer.component.css']
 })
 export class DrawerComponent {
-
-
-  constructor(
-  ) {
+  constructor() {
   }
 
   @Input() conected = false;
   @Output() onToggleSideNav: EventEmitter<boolean> = new EventEmitter();
   collapsed = true;
   screenWidth = 0;
-  navData = navbarData;
 
-  click() {
+  toggleNavigation() {
     this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit(false)
+    this.onToggleSideNav.emit(!this.collapsed);
   }
 
   close() {
     this.collapsed = false;
-    this.onToggleSideNav.emit(true)
+    this.onToggleSideNav.emit(true);
   }
-
 }

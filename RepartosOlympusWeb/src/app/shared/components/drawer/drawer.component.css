@@ -1,285 +1,194 @@
-@import url('https://fonts.cdnfonts.com/css/metropolis-2');
-
-.sidenav {
-    background: white;
-    transition: all .5s ease;
+.navigation {
     position: fixed;
-    z-index: 1;
-    top: 0;
-    width: 5.12rem;
-    height: 100vh;
-    border-right: 1px solid #d6d7d8;
+    inset: 20px;
+    background-color: #047CC4;
+    width: 80px;
+    border-left: 10px solid #047CC4;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.05);
+    transition: 0.5s;
+   
 
 }
 
-.logo-container {
 
+.navigation.active .admin {
+    display: block;
+}
+
+.closed {
+    width: 300px;
+    border-radius: 20px;
+   
+}
+.container__admin{
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    bottom: 50px;
+    right: 15px;
+    gap: 100px;
+}
+
+.admin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+.admin__nombre{
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-top: 20px;
+
+}
+.admin__title{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+}
+.admin__nombre{
+color: white;
+font-size: 1.2rem;
+ font-weight: 400;
 }
 
-
-/* */
-/* */
-/* */
-/* */
-/* */
-/* */
-
-.logo {
-    background: #fff;
-    color: #dd2246;
-    width: 100%;
+.toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
     display: flex;
     justify-content: center;
-    min-width: 3rem;
-    font-size: 24px;
-    cursor: pointer;
-    border: none;
+    align-items: center;
 }
 
-img {
-    width: 65px;
-    height: 48px;
+.toggle::before {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #047CC4;
+    transform: translateY(-5px);
+    transition: 1s;
 }
 
-.logo-text {
-    font-size: 24px;
+.toggle::after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #047CC4;
+    transform: translateY(5px);
+    transition: 1s;
+}
+
+.navigation.active .toggle::before {
+    transform: translateY(0px);
+    rotate: (-405deg);
+}
+
+.navigation.active .toggle::after {
+    transform: translateY(0px);
+    rotate: (225deg);
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.navigation ul li:hover {
+    background: white;
+
+}
+.navigation ul li:nth-child(1) {
+    top: 20px;
+    left: 22px;
+    margin-bottom: 40px;
+    background: none;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #000000;
+   
+
+}
+
+.navigation ul li:not(:first-child):hover::before{
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-bottom-right-radius: 20px;
+    box-shadow:  7.5px 7.5px 0 7.5px  white;
+}
+
+.navigation ul li:not(:first-child):hover::after{
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-top-right-radius: 20px;  
+    box-shadow:  7.5px -7.5px 0 7.5px  white;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: white;
+}
+
+
+.navigation ul li:not(:first-child):hover a {
+    color: #047CC4;
+}
+
+.navigation ul li a .icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
     text-align: center;
 }
 
-.btn-close {
-    margin-left: 20px;
-    cursor: pointer;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background-color: transparent;
-    border: none;
+.navigation ul li a .icon i{
+    font-size: 1.75rem;
+
 
 }
 
-/* */
-
-.sidenav-collapsed {
-    width: 280px;
-
-}
-
-.sidenav-nav {
-    list-style: none;
-    padding: 1rem;
-    margin-top: 80px;
-    cursor: pointer;
-
-    .sidenav-nav-item {
-
-        margin-bottom: 1rem;
-
-        .sidenav-nav-link {
-            display: flex;
-            align-items: center;
-            height: 43px;
-            color: #000000;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: all .1s ease;
-        }
-
-        .sidenav-link-icon {
-            font-size: 1.25rem;
-            line-height: 1.75rem;
-            width: 25px;
-            height: 28.68px;
-            margin: 0 0.5rem;
-            text-align: center;
-        }
-
-        .sidenav-link-text {
-            padding-right: 12px;
-            font-size: 20px;
-            font-weight: 400;
-            line-height: 24px;
-            color: #808080;
-            font-family: metropolis;
-
-        }
-    }
-
-    .sidenav-nav-item:hover {
-
-        .sidenav-nav-link {
-            background: #05ACD7;
-            color: rgb(255, 255, 255);
-        }
-
-        .sidenav-link-icon {
-            color: white;
-        }
-
-        .sidenav-link-text {
-            color: white;
-        }
-    }
-}
-
-.sidenav-nav-item:first-child {
-    .sidenav-link-text {
-        color:
-            #047CC4;
-        font-weight: 700;
-        letter-spacing: -0.3px;
-    }
-
-    .sidenav-link-icon {
-        color:
-            #047CC4;
-    }
-}
-
-
-
-.connection-status {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    cursor: auto;
-    gap: 10px;
-}
-
-.circleTrue {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: greenyellow;
-}
-
-.circleFalse {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 10px;
-    background-color: grey;
-}
-
-.btnRefresh {
-    border: none;
-    font-size: 18px;
-    padding: 3px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.text {
-    font-size: 18px;
-    color: white;
-}
-
-.qr-contador {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-/* Cambia el color de fondo y el texto para indicar el estado */
-.connected {
-    background-color: green;
-    color: white;
-}
-
-.disconnected {
-    background-color: gray;
-    color: white;
-}
-
-/**Loader**/
-
-.loader {
-    width: 30px;
-    height: 30px;
-    border: 2px solid;
-    border-color: white transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/**Loader 2**/
-.loader2 {
-    margin-top: 50px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+.navigation ul li a .title{
     position: relative;
-    animation: rotate 1s linear infinite
-}
+    display: block;
+    padding: 0 10px ;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;  
+    white-space: nowrap;
 
-.loader2::before,
-.loader2::after {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    inset: 0px;
-    border-radius: 50%;
-    border: 5px solid #FFF;
-    animation: prixClipFix 2s linear infinite;
-}
-
-.loader2::after {
-    border-color: #FFF;
-    animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
-    inset: 6px;
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg)
-    }
-
-    100% {
-        transform: rotate(360deg)
-    }
-}
-
-@keyframes prixClipFix {
-    0% {
-        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
-    }
-
-    25% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
-    }
-
-    50% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
-    }
-
-    75% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
-    }
-
-    100% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
-    }
 }
