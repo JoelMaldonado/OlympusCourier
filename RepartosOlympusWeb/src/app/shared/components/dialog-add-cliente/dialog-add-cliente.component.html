@@ -1,6 +1,10 @@
 <div class="container">
   <form action="" class="container__form">
+
+    <div class="icon__form">
     <span>Agregar Cliente</span>
+    <mat-icon>close</mat-icon>
+  </div> 
 
     <select [formControl]="tipo">
       <option value="Dni">Dni</option>
@@ -30,8 +34,8 @@
         <input [formControl]="direc"><br>
       </div>
 
-      <div class="form__dir">
-        <label  for="">Distrito</label>
+      <div class="form__dir" >
+        <label  style="position: relative; left: -12px;" for="">Distrito</label>
         <select [formControl]="distrito">
           <option value="CA" selected>Chincha Alta</option>
           <option value="CB">Chincha Baja</option>
@@ -48,8 +52,8 @@
     <label  for="">Referencia</label>
     <input [formControl]="ref">
   </div>
-    <div>
 
+    <div class="btn__form">
       <button (click)="closeDialog()">Cancelar</button>
       <button (click)="guardar()">Guardar</button>
     </div>

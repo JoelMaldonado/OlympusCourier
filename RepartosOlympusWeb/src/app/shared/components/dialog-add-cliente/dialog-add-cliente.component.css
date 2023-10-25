@@ -1,4 +1,4 @@
-
+@import url('https://fonts.cdnfonts.com/css/metropolis-2');
 .container{
   padding: 3rem 4rem;
 }
@@ -12,7 +12,17 @@
 
 }
 
+.icon__form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
+mat-icon{
+  font-size: 2rem;
+  color: 
+  #808080;
+}
 .container__form {
   display: flex;
   flex-direction: column;
@@ -47,13 +57,14 @@ span{
   margin-top: -20px;
 
 }
+
 .form__dir input{
   margin-left: -4px;
-  width: 290px;
+  width: 370px;
 }
 
 .form__dir select{
-  width: 300px;
+  width: 220px;
 }
 .form__dir select{
   margin-left: -90px;
@@ -62,15 +73,44 @@ span{
 
 /* Estilo para input y select */
 input {
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem ;
   width: 700px;
   height: 49px;
   background-color: 
   #F1F1F1;
   border-radius: 15px;
   border: none;
+  font-size: 1.1rem;
+  color: #808080;
+  font-family: metropolis;
 }
+
+/* Estilo común para input */
+input {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  width: 700px;
+  height: 49px;
+  background-color: #F1F1F1;
+  border-radius: 15px;
+  border: none;
+  font-size: 1.1rem;
+  color: #808080;
+  font-family: 'Metropolis', sans-serif;
+}
+
+/* Estilo para el clic en el input */
+input:active {
+  border: 2px solid #FF5733; /* Cambia el color del borde cuando se hace clic */
+}
+
+/* Estilo para el foco en el input (mientras se escribe) */
+input:focus {
+  border: 2px solid #047CC4; /* Cambia el color del borde cuando está enfocado */
+}
+
+/* Resto de tus estilos */
 
 select {
   padding-left: 1.25rem !important;
@@ -79,7 +119,13 @@ select {
   height: 53px;
   background-color: #f4f4f5;
   border-radius: 15px;
+  font-size: 1.1rem;
+  color: #808080;
+  font-family: 'Metropolis', sans-serif;
   border: none;
+}
+option{
+  padding: 20px;
 }
 
 /* Estilo para el ícono de triángulo (puedes mantener este estilo) */
@@ -95,12 +141,12 @@ select {
 
 
 select:focus {
-  border: 2px solid black;
+  border: 2px solid #047CC4;
 }
 
 label {
   width: 150px;
-  font-size: 1.05rem !important;
+  font-size: 1.15rem !important;
   opacity: 1;
   color: #808080;
   line-height: 1.5rem !important;
@@ -154,3 +200,33 @@ h2 {
   flex-direction: row;
   gap: 16px;
 }
+
+
+.btn__form{
+  margin-top: 55px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn__form button{
+  padding: 1rem;
+  background-color: 
+  #05ACD7;
+  color: white;
+  border-radius: 5px;
+  width: 180px;
+  border: none;
+    font-family: metropolis;
+  font-weight: 600;
+  font-size: 0.98rem;
+
+}
+
+.btn__form :nth-child(2){
+  background-color: 
+  #E8E8E8;
+  color: #808080;
+}
+
