@@ -1,27 +1,27 @@
 <div class="container">
-  <div class="top">
-    <span>Nuevo cliente</span>
-    <button mat-icon-button (click)="onNoClick()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <div class="select">
-    <mat-chip-listbox>
-      <mat-chip-option>Ruc</mat-chip-option>
-      <mat-chip-option selected>DNI</mat-chip-option>
-      <mat-chip-option>Carnet Extranjeria</mat-chip-option>
-      <mat-chip-option>Sin Documento</mat-chip-option>
-    </mat-chip-listbox>
-  </div>
 
-  <form [formGroup]="formulario" (ngSubmit)="submitForm()">
-    <input placeholder="Documento" formControlName="nombreLegal" class="input">
-    <input placeholder="Nombre Legal" formControlName="nombreLegal" class="input">
-    <input placeholder="Celular" formControlName="celular" class="input">
-  </form>
+  Agregar Cliente
+  <br>
+  <select [formControl]="tipo">
+    <option value="Dni">Dni</option>
+    <option value="Ruc">Ruc</option>
+    <option value="CE">Carnet Extranjeria</option>
+    <option value="Otros">Otros</option>
+  </select>
 
-  <div mat-dialog-actions>
-    <button mat-raised-button (click)="onNoClick()">Cancelar</button>
-    <button mat-raised-button [mat-dialog-close]="data.animal" color="primary">Guardar</button>
-  </div>
+  <input placeholder="N° Documento" [formControl]="doc"><br>
+  <input placeholder="Nombres" [formControl]="nombres"><br>
+  <input placeholder="Celular" [formControl]="cel"><br>
+  <select [formControl]="distrito">
+    <option value="CA" selected>Chincha Alta</option>
+    <option value="CB">Chincha Baja</option>
+    <option value="SN">Sunampe</option>
+    <option value="Grocio">Grocio Prado</option>
+    <option value="EC">El Carmen</option>
+  </select><br>
+  <input placeholder="Direccion" [formControl]="direc"><br>
+  <input placeholder="Referencia" [formControl]="ref">
+
+  <button (click)="closeDialog()">Cancelar</button>
+  <button (click)="guardar()">Guardar</button>
 </div>

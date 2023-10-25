@@ -2,39 +2,39 @@
   <h2>Nuevo Producto / servicio</h2>
   <form>
     <div class="container__form">
-
-
       <div class="campo__form">
-        <label for="">Nombre</label>
-        <input type="text" class="input">
+        <label for="">N° Guia</label>
+        <input type="text" class="input" [formControl]="nGuia">
       </div>
 
       <div class="campo__form">
         <label for="">Categoria</label>
-        <select id="animal">
-          <option value="perro">Perro</option>
-          <option value="gato">Gato</option>
-          <option value="pajaro">Pájaro</option>
-          <option value="otro">Otro</option>
+        <select [formControl]="cat">
+          <option value="Sobre">Sobre</option>
+          <option value="Paqueteria">Paqueteria</option>
+          <option value="Paquete">Paquete</option>
+          <option value="Caja">Caja</option>
+          <option value="Bulto">Bulto</option>
+          <option value="Otro">Otro</option>
         </select>
       </div>
 
 
       <div class="campo__form">
-        <label for="">Descricion</label>
-        <input type="text" class="input">
+        <label for="">Descripción</label>
+        <input type="text" class="input" [formControl]="descrip">
       </div>
 
 
       <div class="campo__form">
         <label for="">Cantidad</label>
-        <input type="number" placeholder="Cantidad" class="input">
+        <input type="number" placeholder="Cantidad" class="input" [formControl]="cant">
       </div>
 
 
       <div class="campo__form">
         <label for="">Precio</label>
-        <input type="number" placeholder="Precio" class="input">
+        <input type="number" placeholder="Precio" class="input" [formControl]="precio">
       </div>
 
 
@@ -43,12 +43,10 @@
   </form>
 
   <div class="guardar">
-    <h2>Opciones Avanzadas</h2>
-    
     <div class="raparto__btn">
-      <button onclick="onNoClick()">Cancelar</button>
+      <button (click)="closeDialog()">Cancelar</button>
       <div class="btn__navbar">
-        <button class="btn-add" onclick="onAceptar()">Guardar</button>
+        <button class="btn-add" [disabled]="!formValid" (click)="onAceptar()">Guardar</button>
       </div>
     </div>
   </div>

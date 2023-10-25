@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DialogData } from './dialog-data';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormControl, Validators } from '@angular/forms';
+import { Cliente } from 'src/app/models/cliente';
 
 @Component({
   selector: 'app-dialog-add-cliente',
@@ -9,28 +9,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./dialog-add-cliente.component.css']
 })
 export class DialogAddClienteComponent {
-  
-  formulario: FormGroup;
-  
+
+  tipo = new FormControl('', Validators.required);
+  doc = new FormControl('', Validators.required);
+  nombres = new FormControl('', Validators.required);
+  cel = new FormControl('', Validators.required);
+  distrito = new FormControl('', Validators.required);
+  direc = new FormControl('', Validators.required);
+  ref = new FormControl('');
+
   constructor(
-    public dialogRef: MatDialogRef<DialogAddClienteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<DialogAddClienteComponent>
   ) {
-    this.formulario = fb.group({
-      documento: ['', Validators.required],
-      nombreLegal: ['', Validators.required],
-      celular: ['', Validators.maxLength(9)],
-    })
   }
 
-  onNoClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 
-  submitForm() {
-    if (this.formulario.valid) {
-      this.formulario.reset()
-    }
+  guardar() {
+    const clienteData: Cliente = {
+      tipo: String(this.tipo.value),
+      doc: String(this.doc.value),
+      nombres: String(this.nombres.value),
+      celular: String(this.cel.value),
+      distrito: String(this.distrito.value),
+      direc: String(this.direc.value),
+      ref: String(this.ref.value),
+    };
+    this.dialogRef.close(clienteData);
   }
 }

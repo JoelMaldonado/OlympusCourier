@@ -1,3 +1,4 @@
+
 <!-- HTML en tu archivo de plantilla (drawer.component.html) -->
 <div class="navigation" [class.closed]="collapsed">
     <ul>
@@ -53,34 +54,3 @@
 
 
 
-
-<!--
-
-<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
-    <div class="logo-container">
-        <button class="logo"  (click)="click()">
-           <img src="/src/assets/logo.png" alt=""> 
-           <img src="/src/assets/OBJECTS.png" alt=""><i class="fa-solid fa-paper-plane" style="color: var(--p1);"></i>
-        </button>
-        <div class="logo-text" *ngIf="collapsed">OLYMPUS COURIER</div>
-     
-        <button class="btn-close" *ngIf="collapsed" (click)="close()">
-            <i class="fa-solid fa-x"></i>
-        </button>
-        
-    </div>
-
-
-
-
-    <ul class="sidenav-nav">
-        <li class="sidenav-nav-item" *ngFor="let data of navData">
-            <a class="sidenav-nav-link" [routerLink]="[data.routerLink]">
-                <i class="sidenav-link-icon" [class]="data.icon"></i>
-                <span class="sidenav-link-text" *ngIf="collapsed">{{data.label}}</span>
-            </a>
-        </li>
-
-    </ul>
-</div>
--->

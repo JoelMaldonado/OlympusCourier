@@ -1,53 +1,69 @@
-<div class="order-form">
+<div>
     <h1>Formulario de Pedido</h1>
-    <form [formGroup]="formulario" (ngSubmit)="submitForm()">
-        <div class="form-datos">
-            <div>
-                <input placeholder="Documento" formControlName="documento" class="input">
-                <button (click)="buscarDoc()">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-            <div class="row">
-                <input placeholder="Nombres" formControlName="nombres" class="input">
-                <input placeholder="Apellidos" formControlName="apellidos" class="input">
-                <input placeholder="Celular del Cliente" formControlName="celular" class="input">
-                <input type="password" placeholder="Clave" formControlName="clave" class="input">
-            </div>
-            <div class="row">
-                <select class="select">
-                    <option *ngFor="let item of listDistritos" [value]="item.nombre">{{item.nombre}}
-                    </option>
-                </select>
-                <input placeholder="Dirección" formControlName="direc" class="input">
-                <input placeholder="Referencia" formControlName="referencia" class="input">
-                <input placeholder="Anotaciones" formControlName="anotaciones" class="input">
-            </div>
+    <div>
+        Cliente
+
+        <div *ngFor="let item of listClientes">
+            {{item.nombres}}
         </div>
-        <button type="submit">Enviar Pedido</button>
-    </form>
 
-    <button (click)="openDialog()" color="primary">Agregar Producto</button>
+        <input
+        [spellcheck]="false"
+         placeholder="Buscar clientes"
+         type="text"
+         (ngModelChange)="search()"
+         [formControl]="documento"/>
 
+        <ul>
+            <li *ngFor="let cliente of data$">{{cliente.nombres}}</li>
+        </ul>
 
-    <table class="table">
+        <button (click)="openDialogCliente()">
+            Agregar Cliente
+        </button>
+    </div>
+    <div *ngIf="cliente">
+        <span>Documento {{cliente.doc}}</span><br>
+        <span>Celular {{cliente.celular}}</span><br>
+        <span>Distrito {{cliente.distrito}}</span><br>
+        <span>Direccion {{cliente.direc}}</span><br>
+        <span>Referencia {{cliente.ref}}</span>
+    </div>
+
+    <table>
         <thead>
             <tr>
-                <th>Guia</th>
-                <th>Descripción</th>
+                <th>N° Guia</th>
+                <th>Tipo</th>
+                <th>Descripcion</th>
                 <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Total</th>
+                <th>Precio U.</th>
+                <th>Precio T.</th>
+                <th>
+                    <button mat-mini-fab color="primary" (click)="openDialogAddItemReparto()" matTooltip="Agregar Item">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of listItemRepartos">
-                <td>{{ item.numGuia }}</td>
+                <td>{{ item.nGuia }}</td>
+                <td>{{ item.cat }}</td>
                 <td>{{ item.descrip }}</td>
                 <td>{{ item.cant }}</td>
                 <td>S/{{ item.precio }}</td>
                 <td>S/{{ item.cant * item.precio }}</td>
+                <td>
+                    <button mat-icon-button color="primary" matTooltip="Editar" (click)="editItemReparto(item)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="deleteItemReparto(item)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
+    <button (click)="submitForm()">Guardar</button>
 </div>
