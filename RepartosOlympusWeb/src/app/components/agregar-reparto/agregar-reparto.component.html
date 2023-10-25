@@ -10,7 +10,7 @@
         (ngModelChange)="search()"
         [formControl]="documento"/>
         <ul>
-            <li *ngFor="let item of data$">
+            <li style="background-color: red;max-width: 5px;" *ngFor="let item of data$">
                 {{item.nombres}}
             </li>
         </ul>

@@ -1,0 +1,156 @@
+
+.container{
+  padding: 3rem 4rem;
+}
+
+.container__product {
+  width: 580px;
+  padding: 2rem;
+  height: 690px;
+  border-radius: 50px;
+
+
+}
+
+
+.container__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.campo__form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.campo__form:nth-child(2) {
+
+  margin-bottom: 20px
+}
+.campo__form div {
+  /* Asegúrate de que cada div tenga la misma altura o establece una altura fija si es necesario */
+  height: 100px; /* Ajusta la altura según tus necesidades */
+}
+
+span{
+  color: #047CC4;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.form__dir{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: -20px;
+
+}
+.form__dir input{
+  margin-left: -4px;
+  width: 290px;
+}
+
+.form__dir select{
+  width: 300px;
+}
+.form__dir select{
+  margin-left: -90px;
+}
+
+
+/* Estilo para input y select */
+input {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  width: 700px;
+  height: 49px;
+  background-color: 
+  #F1F1F1;
+  border-radius: 15px;
+  border: none;
+}
+
+select {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  width: 400px;
+  height: 53px;
+  background-color: #f4f4f5;
+  border-radius: 15px;
+  border: none;
+}
+
+/* Estilo para el ícono de triángulo (puedes mantener este estilo) */
+.custom-select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 16px;
+}
+
+
+select:focus {
+  border: 2px solid black;
+}
+
+label {
+  width: 150px;
+  font-size: 1.05rem !important;
+  opacity: 1;
+  color: #808080;
+  line-height: 1.5rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 600 !important;
+  letter-spacing: -0.2px;
+}
+
+
+
+.btn__navbar {
+  position: relative;
+}
+
+.btn-add {
+  padding: 14px;
+  border-radius: 13px;
+  border: none;
+  width: 150px;
+  background-color: rgba(226, 30, 66, 255);
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+.btn-add:hover {
+  opacity: 0.9;
+}
+
+
+.guardar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+
+}
+
+h2 {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  margin: 0 0 -16px;
+}
+
+.raparto__btn {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}

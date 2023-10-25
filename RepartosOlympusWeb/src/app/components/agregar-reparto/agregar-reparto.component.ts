@@ -113,7 +113,7 @@ export class AgregarRepartoComponent {
 
   openDialogCliente() {
     const dialogRef = this.dialog.open(DialogAddClienteComponent, {
-      width: "650px"
+      width: "950px",
     })
 
     dialogRef.afterClosed().subscribe((data: Cliente) => {

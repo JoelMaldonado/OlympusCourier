@@ -1,27 +1,58 @@
 <div class="container">
+  <form action="" class="container__form">
+    <span>Agregar Cliente</span>
 
-  Agregar Cliente
-  <br>
-  <select [formControl]="tipo">
-    <option value="Dni">Dni</option>
-    <option value="Ruc">Ruc</option>
-    <option value="CE">Carnet Extranjeria</option>
-    <option value="Otros">Otros</option>
-  </select>
+    <select [formControl]="tipo">
+      <option value="Dni">Dni</option>
+      <option value="Ruc">Ruc</option>
+      <option value="CE">Carnet Extranjeria</option>
+      <option value="Otros">Otros</option>
+    </select>
+    <div class="campo__form">
+      <label for="">N° Documento</label>
+      <input [formControl]="doc"><br>
+    </div>
 
-  <input placeholder="N° Documento" [formControl]="doc"><br>
-  <input placeholder="Nombres" [formControl]="nombres"><br>
-  <input placeholder="Celular" [formControl]="cel"><br>
-  <select [formControl]="distrito">
-    <option value="CA" selected>Chincha Alta</option>
-    <option value="CB">Chincha Baja</option>
-    <option value="SN">Sunampe</option>
-    <option value="Grocio">Grocio Prado</option>
-    <option value="EC">El Carmen</option>
-  </select><br>
-  <input placeholder="Direccion" [formControl]="direc"><br>
-  <input placeholder="Referencia" [formControl]="ref">
+    <div class="campo__form">
+      <label for="">Nombres</label>
+      <input [formControl]="nombres"><br>
+    </div>
 
-  <button (click)="closeDialog()">Cancelar</button>
-  <button (click)="guardar()">Guardar</button>
+    <div class="campo__form">
+      <label for="">Teléfono</label>
+      <input  [formControl]="cel"><br>
+    </div>
+
+    <div class="campo__form">
+
+      <div class="form__dir">
+        <label for="">Dirección</label>
+        <input [formControl]="direc"><br>
+      </div>
+
+      <div class="form__dir">
+        <label  for="">Distrito</label>
+        <select [formControl]="distrito">
+          <option value="CA" selected>Chincha Alta</option>
+          <option value="CB">Chincha Baja</option>
+          <option value="SN">Sunampe</option>
+          <option value="Grocio">Grocio Prado</option>
+          <option value="EC">El Carmen</option>
+        </select><br>
+      </div>
+
+    </div>
+
+
+   <div class="campo__form " style="margin-top: -20px;">
+    <label  for="">Referencia</label>
+    <input [formControl]="ref">
+  </div>
+    <div>
+
+      <button (click)="closeDialog()">Cancelar</button>
+      <button (click)="guardar()">Guardar</button>
+    </div>
+
+  </form>
 </div>
