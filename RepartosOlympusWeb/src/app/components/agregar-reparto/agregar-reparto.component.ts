@@ -1,14 +1,17 @@
-import { Component, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, finalize, map, startWith } from 'rxjs';
+import { Cliente } from 'src/app/models/cliente';
 import { Destino } from 'src/app/models/destino';
+import { DialogAddClienteComponent } from 'src/app/shared/components/dialog-add-cliente/dialog-add-cliente.component';
 import { DialogAddItemRepartoComponent } from 'src/app/shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
+import { ClienteService } from 'src/app/shared/services/cliente.service';
 import { DestinosService } from 'src/app/shared/services/destinos.service';
-import { RepartoService } from 'src/app/shared/services/reparto.service';
 
 export interface ItemReparto {
-  numGuia: string
-  tipo: string
+  nGuia: string
+  cat: string
   descrip: string
   precio: number
   cant: number
@@ -21,13 +24,14 @@ export interface ItemReparto {
 })
 export class AgregarRepartoComponent {
 
-
-  formulario: FormGroup;
+  displayFn(option: any): string {
+    return option && option.doc ? option.doc : '';
+  }
 
   listItemRepartos: ItemReparto[] = [
     {
-      numGuia: '001-000001',
-      tipo: 'Caja',
+      nGuia: '001-000001',
+      cat: 'Caja',
       descrip: 'Marron',
       precio: 20,
       cant: 2,
@@ -37,66 +41,89 @@ export class AgregarRepartoComponent {
 
   constructor(
     private destinoservice: DestinosService,
-    private repartoService: RepartoService,
-    private fb: FormBuilder,
+    private clienteService: ClienteService,
     public dialog: MatDialog
   ) {
-
-    this.formulario = this.fb.group({
-      documento: ['', Validators.required],
-      nombres: [''],
-      apellidos: [''],
-      celular: ['', [Validators.maxLength(9)]],
-      clave: ['', Validators.required],
-      distrito: [''],
-      direc: ['', Validators.required],
-      referencia: [''],
-      anotaciones: ['']
-    })
-
-
     this.listarDestinos()
+    this.listarClientes()
   }
 
   async listarDestinos() {
     this.listDistritos = await this.destinoservice.listarDestinos()
   }
 
+  async listarClientes() {
+    this.listClientes = await this.clienteService.listarClientes()
+  }
+
   remove(itemEliminar: any) {
     this.listItemRepartos = this.listItemRepartos.filter(item => item !== itemEliminar)
   }
 
-  /** Abrir Alerta*/
-  openDialog() {
+  /** Añadir Item Reparto*/
+  openDialogAddItemReparto() {
     const dialogRef = this.dialog.open(DialogAddItemRepartoComponent, {
-      data: {},
       width: "650px"
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      
+    dialogRef.afterClosed().subscribe((data: ItemReparto) => {
+      if (data) {
+        this.listItemRepartos.push(data)
+      }
     });
+  }
+
+  editItemReparto(item: ItemReparto) {
+    const dialogRef = this.dialog.open(DialogAddItemRepartoComponent, {
+      data: item,
+      width: "650px"
+    })
+
+    dialogRef.afterClosed().subscribe((data: ItemReparto) => {
+      if (data) {
+        const index = this.listItemRepartos.findIndex((element) => element === item);
+        if (index !== -1) {
+          this.listItemRepartos[index] = data;
+        }
+      }
+    });
+  }
+
+  deleteItemReparto(item: ItemReparto) {
+    const index = this.listItemRepartos.indexOf(item);
+    if (index !== -1) {
+      this.listItemRepartos.splice(index, 1);
+    }
+  }
+
+  cliente: Cliente | undefined = undefined;
+
+  openDialogCliente() {
+    const dialogRef = this.dialog.open(DialogAddClienteComponent, {
+      width: "650px"
+    })
+
+    dialogRef.afterClosed().subscribe((data: Cliente) => {
+      if (data) {
+        this.cliente = data
+      }
+    })
   }
 
   /**Buscar documento Reniec**/
   buscarDoc() {
-    const doc = this.formulario.get('documento')?.value as string
-    if (doc.length === 8) {
-      this.formulario.get('nombres')?.setValue('Joel Joas')
-      this.formulario.get('apellidos')?.setValue('Maldonado Fernandez')
-      this.formulario.get('celular')?.setValue('936416623')
-      this.formulario.get('distrito')?.setValue('Chincha Alta')
-      this.formulario.get('direc')?.setValue('Prol. Luis Massaro 118')
-      this.formulario.get('referencia')?.setValue('Atrás de plaza vea')
-    }
+
   }
 
   /** Insertar Reparto **/
   submitForm() {
-    if (this.formulario.valid) {
-      this.repartoService.insert(this.formulario.value)
-      this.formulario.reset()
-    }
+
   }
 
+  documento = new FormControl('')
+  data$: Cliente[] = [];
+  listClientes: Cliente[] = [];
+
+  search(): void {
+  }
 }

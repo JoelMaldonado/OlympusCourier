@@ -1,7 +1,10 @@
 export interface Cliente {
-    id?:string;
-    documento?: string;
+    id?: string;
+    tipo: string;
+    doc?: string;
     nombres?: string;
-    apellidos?: string;
-    celular?:string;
+    celular?: string;
+    distrito?: string;
+    direc?: string;
+    ref?: string;
 }

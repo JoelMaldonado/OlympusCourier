@@ -13,6 +13,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -29,7 +31,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatTooltipModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatSelectModule
   ],
   exports: [
     MatButtonModule,
@@ -43,7 +47,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatMenuModule,
     MatTooltipModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, Timestamp, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, addDoc, Timestamp, collection, getDocs, collectionData } from '@angular/fire/firestore';
 import { Reparto } from 'src/app/models/reparto';
 import { ClienteService } from './cliente.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,12 @@ export class RepartoService {
     private clienteService:ClienteService
   ) {
 
+  }
+
+  getAll(): Observable<Reparto[]>{
+    const col = collection(this.fb, 'Reparto')
+    const list = collectionData(col)
+    return list
   }
 
   async listarRepartos(): Promise<Reparto[]> {
@@ -42,17 +49,17 @@ export class RepartoService {
     const col = collection(this.fb, 'Reparto')
     const reparto: Reparto = {
       cliente: {
-        documento: datos.documento,
+        tipo: datos.tipo,
+        doc: datos.documento,
         nombres: datos.nombres,
-        apellidos: datos.apellidos,
         celular: datos.celular,
+        distrito: datos.distrito,
+        direc: datos.direc,
+        ref: datos.referencia,
       },
       total: parseInt(datos.total, 10) ?? 0,
       fecha: Timestamp.now(),
       estado: "Pendiente",
-      distrito: datos.distrito,
-      direc: datos.direc,
-      referencia: datos.referencia,
       clave: datos.clave,
       anotacion: datos.anotaciones,
     }
