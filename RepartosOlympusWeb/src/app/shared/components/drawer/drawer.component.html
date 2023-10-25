@@ -16,19 +16,19 @@
         </li>
         <li>
             <a href="#">
-                <span class="icon"><i class="fa-solid fa-x"></i></span>
+                <span class="icon"><mat-icon>group</mat-icon></span>
                 <span class="title">Clientes</span>
             </a>
         </li>
         <li>
             <a href="#">
-                <span class="icon"><i class="fa-solid fa-x"></i></span>
+                <span class="icon"><mat-icon>paid</mat-icon></span>
                 <span class="title">Tarifario</span>
             </a>
         </li>
         <li>
             <a href="#">
-                <span class="icon"><i class="fa-solid fa-x"></i></span>
+                <span class="icon"><mat-icon>description</mat-icon></span>
                 <span class="title">Comprobantes</span>
             </a>
         </li>
@@ -48,7 +48,10 @@
                 <label class="admin__nombre" for="">Nombre</label>
             </div>
         </div>
-        <div class="toggle" (click)="toggleNavigation()"></div>
+        <button mat-mini-fab style="background-color:white; color:  #047CC4;;" (click)="toggleNavigation()" >
+            <mat-icon>menu</mat-icon>
+          </button>
+       <!-- <div class="toggle" (click)="toggleNavigation()"></div>-->
     </div>
 </div>
 
