@@ -1,24 +1,31 @@
-<div>
-    <h1>Formulario de Pedido</h1>
-    <div>
-        Cliente
+<div class="reparto__container">
+    <div class="title__reparto">
+        <mat-icon>arrow_back</mat-icon>
+       <span>Nuevo Reparto</span>
+    </div>
 
-        <input 
-        [spellcheck]="false"
-        placeholder="Buscar clientes"
-        type="text"
-        (ngModelChange)="search()"
-        [formControl]="documento"/>
-        <ul>
-            <li style="background-color: red;max-width: 5px;" *ngFor="let item of data$">
-                {{item.nombres}}
-            </li>
-        </ul>
+    <div class="buscar__container">
+
+       <span>Cliente</span>
+
+        <div class="buscar">
+            <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()"
+                [formControl]="documento" />
+
+            <ul>
+                <li style="background-color: red;max-height: 5px;" *ngFor="let item of data$">
+                    {{item.nombres}}
+                </li>
+            </ul>
+        </div>
 
         <button (click)="openDialogCliente()">
             Agregar Cliente
         </button>
+
     </div>
+
+
     <div *ngIf="cliente">
         <span>Documento {{cliente.doc}}</span><br>
         <span>Celular {{cliente.celular}}</span><br>
