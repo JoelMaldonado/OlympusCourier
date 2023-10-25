@@ -2,9 +2,11 @@
   <form action="" class="container__form">
 
     <div class="icon__form">
-    <span>Agregar Cliente</span>
-    <mat-icon>close</mat-icon>
-  </div> 
+      <span>Agregar Cliente</span>
+      <button mat-icon-button (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
 
     <select [formControl]="tipo">
       <option value="Dni">Dni</option>
@@ -24,7 +26,7 @@
 
     <div class="campo__form">
       <label for="">Teléfono</label>
-      <input  [formControl]="cel"><br>
+      <input [formControl]="cel"><br>
     </div>
 
     <div class="campo__form">
@@ -34,8 +36,8 @@
         <input [formControl]="direc"><br>
       </div>
 
-      <div class="form__dir" >
-        <label  style="position: relative; left: -12px;" for="">Distrito</label>
+      <div class="form__dir">
+        <label style="position: relative; left: -12px;" for="">Distrito</label>
         <select [formControl]="distrito">
           <option value="CA" selected>Chincha Alta</option>
           <option value="CB">Chincha Baja</option>
@@ -48,10 +50,10 @@
     </div>
 
 
-   <div class="campo__form " style="margin-top: -20px;">
-    <label  for="">Referencia</label>
-    <input [formControl]="ref">
-  </div>
+    <div class="campo__form " style="margin-top: -20px;">
+      <label for="">Referencia</label>
+      <input [formControl]="ref">
+    </div>
 
     <div class="btn__form">
       <button (click)="closeDialog()">Cancelar</button>
