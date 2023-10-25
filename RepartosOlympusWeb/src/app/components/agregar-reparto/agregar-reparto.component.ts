@@ -1,7 +1,7 @@
 import { Component, } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, finalize, map, startWith } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Cliente } from 'src/app/models/cliente';
 import { Destino } from 'src/app/models/destino';
 import { DialogAddClienteComponent } from 'src/app/shared/components/dialog-add-cliente/dialog-add-cliente.component';
@@ -44,8 +44,21 @@ export class AgregarRepartoComponent {
     private clienteService: ClienteService,
     public dialog: MatDialog
   ) {
+
     this.listarDestinos()
     this.listarClientes()
+
+    this.searchTerms
+    .pipe(
+      debounceTime(1000),
+      distinctUntilChanged()
+    )
+    .subscribe(async (searchTerm: string) => {
+      const results = await this.clienteService.searchCliente(searchTerm);
+      this.data$ = results;
+      console.log(results);
+    });
+
   }
 
   async listarDestinos() {
@@ -124,6 +137,12 @@ export class AgregarRepartoComponent {
   data$: Cliente[] = [];
   listClientes: Cliente[] = [];
 
-  search(): void {
+  private searchTerms = new Subject<string>();
+  
+  async search() {
+    if (!this.documento.value) {
+      return;
+    }
+    this.searchTerms.next(this.documento.value); // Emitir el valor de búsqueda al observable
   }
 }

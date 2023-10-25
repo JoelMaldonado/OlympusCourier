@@ -2,15 +2,17 @@
     <h1>Formulario de Pedido</h1>
     <div>
         Cliente
-        <input
-        [spellcheck]="false"
-         placeholder="Buscar clientes"
-         type="text"
-         (ngModelChange)="search()"
-         [formControl]="documento"/>
 
+        <input 
+        [spellcheck]="false"
+        placeholder="Buscar clientes"
+        type="text"
+        (ngModelChange)="search()"
+        [formControl]="documento"/>
         <ul>
-            <li *ngFor="let cliente of data$">{{cliente.nombres}}</li>
+            <li *ngFor="let item of data$">
+                {{item.nombres}}
+            </li>
         </ul>
 
         <button (click)="openDialogCliente()">
