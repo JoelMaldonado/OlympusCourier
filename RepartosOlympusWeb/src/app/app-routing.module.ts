@@ -7,9 +7,13 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { DestinosComponent } from './components/destinos/destinos.component';
 import { AgregarRepartoComponent } from './components/agregar-reparto/agregar-reparto.component';
 import { ComprobanteComponent } from './components/comprobante/comprobante.component';
+import { authGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'menu', component: MenuComponent,
     children: [
@@ -18,7 +22,8 @@ const routes: Routes = [
       { path: 'destinos', component: DestinosComponent },
       { path: 'comprobantes', component: ComprobanteComponent },
       { path: 'agregar-reparto', component: AgregarRepartoComponent },
-    ]
+    ],
+    canActivate: [authGuard]
   },
   { path: '**', redirectTo: 'login' }
 ];

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drawer',
@@ -8,6 +9,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class DrawerComponent {
   constructor() {
   }
+
+  router = inject(Router)
 
   @Input() conected = false;
   @Output() onToggleSideNav: EventEmitter<boolean> = new EventEmitter();
@@ -22,5 +25,10 @@ export class DrawerComponent {
   close() {
     this.collapsed = false;
     this.onToggleSideNav.emit(true);
+  }
+
+  logout() {
+    this.router.navigate(['/login']);
+    localStorage.removeItem('token');
   }
 }

@@ -42,7 +42,7 @@
             <div class="input__search">
                 <label for="">Buscar</label>
                 <div class="container__input">
-                    <input type="text" class="search-input" >
+                    <input type="text" class="search-input">
                     <span class="search-icon material-icons">search</span>
                 </div>
             </div>
@@ -54,14 +54,14 @@
     <table class="table">
         <thead>
             <tr>
-               
+
                 <th style="text-align: center;">ID</th>
                 <th>Cliente</th>
                 <th>Dirección</th>
                 <th>Distrito</th>
                 <th>Fecha</th>
                 <th>E. Flete</th>
-                <th >Venta</th>
+                <th>Venta</th>
             </tr>
         </thead>
         <tbody>
@@ -76,8 +76,19 @@
                     <div class="estado-content">
                         <div class="estado-pendientes">{{element.estado}}</div>
                         <div class="estado-icons">
-                            <i class="fa-solid fa-eye"></i>
-                            <i class="fa-solid fa-ellipsis"></i>
+                            <button mat-icon-button matTooltip="Ver más" [matMenuTriggerFor]="mas">
+                                <mat-icon>more_horiz</mat-icon>
+                            </button>
+                            <mat-menu #mas="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon color="primary">visibility</mat-icon>
+                                    <span>Ver Detalle</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon color="warn">delete</mat-icon>
+                                    <span>Eliminar</span>
+                                </button>
+                            </mat-menu>
                         </div>
                     </div>
                 </td>

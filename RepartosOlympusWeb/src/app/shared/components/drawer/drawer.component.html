@@ -1,40 +1,36 @@
-
 <!-- HTML en tu archivo de plantilla (drawer.component.html) -->
 <div class="navigation" [class.closed]="collapsed">
     <ul>
 
         <li>
-            <a href="#">
-                <img src="../../../../assets/logo.png" alt="">
-                <span class="title">OLYMPUS COURIER</span>
-            </a>
+                <span class="icon"><img src="../../../../assets/logo.png" alt=""></span>
         </li>
         <li>
-            <a href="#">
+            <a routerLink="/menu/repartos">
                 <span class="icon"><mat-icon>local_shipping</mat-icon></span>
                 <span class="title">Repartos</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a routerLink="/menu/clientes">
                 <span class="icon"><mat-icon>group</mat-icon></span>
                 <span class="title">Clientes</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a routerLink="/menu/destinos">
                 <span class="icon"><mat-icon>paid</mat-icon></span>
                 <span class="title">Tarifario</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a routerLink="/menu/comprobantes">
                 <span class="icon"><mat-icon>description</mat-icon></span>
                 <span class="title">Comprobantes</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a (click)="logout()">
                 <span class="icon"><mat-icon>logout</mat-icon></span>
                 <span class="title">Salir</span>
             </a>
@@ -49,12 +45,9 @@
                 <label class="admin__nombre" for="">Nombre</label>
             </div>
         </div>
-        <button mat-mini-fab style="background-color:white; color:  #047CC4;" (click)="toggleNavigation()" >
+        <button mat-mini-fab style="background-color:white; color:  #047CC4;" (click)="toggleNavigation()">
             <mat-icon>menu</mat-icon>
-          </button>
-       <!-- <div class="toggle" (click)="toggleNavigation()"></div>-->
+        </button>
+        <!-- <div class="toggle" (click)="toggleNavigation()"></div>-->
     </div>
 </div>
-
-
-
