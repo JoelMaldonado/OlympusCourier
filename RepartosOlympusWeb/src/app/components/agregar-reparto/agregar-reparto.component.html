@@ -1,6 +1,6 @@
 <div class="reparto__container">
     <div class="title__reparto">
-        <button mat-icon-button (click)="router.navigate(['../'])"><mat-icon>arrow_back</mat-icon></button>
+        <button mat-icon-button (click)="cancel()"><mat-icon>arrow_back</mat-icon></button>
         <span>Nuevo Reparto</span>
     </div>
 
@@ -10,13 +10,21 @@
             <div class="input-container">
                 <mat-spinner class="icon" [diameter]="30" color="#047CC4" *ngIf="isLoading"></mat-spinner>
                 <button class="icon" mat-icon-button (click)="search()" matTooltip="Buscar"
-                    *ngIf="!isLoading"><mat-icon>search</mat-icon></button>
+                    *ngIf="!isLoading && !cliente"><mat-icon>search</mat-icon></button>
+
+                <button class="icon" mat-icon-button (click)="cliente = undefined; documento.setValue('')" matTooltip="Limpiar"
+                    *ngIf="cliente"><mat-icon>close</mat-icon></button>
+
                 <input placeholder="Ingrese documentos o nombres" type="text" [formControl]="documento"
                     class="input-with-icon" />
             </div>
-            <button mat-button (click)="openDialogCliente()" class="btn__agregar">
+            <button mat-button (click)="openDialogCliente()" class="btn__agregar" *ngIf="!cliente">
                 <mat-icon>person_add</mat-icon>
                 <span>Agregar Cliente</span>
+            </button>
+            <button mat-button (click)="openDialogCliente()" class="btn__agregar" *ngIf="cliente">
+                <mat-icon>edit</mat-icon>
+                <span>Editar Cliente</span>
             </button>
         </div>
         <!-- Lista de sugerencias -->
@@ -120,6 +128,7 @@
     </div>
     <div class="container__btn">
         <button mat-raised-button>Guardar</button>
-        <button mat-raised-button style="background-color: #E8E8E8; color: #808080;">Cancelar</button>
+        <button mat-raised-button style="background-color: #E8E8E8; color: #808080;"
+            (click)="cancel()">Cancelar</button>
     </div>
 </div>

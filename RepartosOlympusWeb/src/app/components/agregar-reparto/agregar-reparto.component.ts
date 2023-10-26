@@ -81,6 +81,23 @@ export class AgregarRepartoComponent {
     });
   }
 
+  cancel() {
+    Swal.fire({
+      title: '¡Alerta de Seguridad!',
+      text: '¿Estás seguro de que deseas regresar a la pantalla anterior? Todos los datos ingresados se perderán.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#047CC4',
+      cancelButtonColor: '#CF475B',
+      confirmButtonText: 'Sí, regresar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['../'])
+      }
+    });
+  }
+
   editItemReparto(item: ItemReparto) {
     const dialogRef = this.dialog.open(DialogAddItemRepartoComponent, {
       data: item,
@@ -121,6 +138,7 @@ export class AgregarRepartoComponent {
   openDialogCliente() {
     const dialogRef = this.dialog.open(DialogAddClienteComponent, {
       width: "950px",
+      data: this.cliente,
     })
 
     dialogRef.afterClosed().subscribe((data: Cliente) => {
@@ -128,6 +146,10 @@ export class AgregarRepartoComponent {
         this.cliente = data
       }
     })
+  }
+
+  editCliente(){
+
   }
 
   /** Insertar Reparto **/

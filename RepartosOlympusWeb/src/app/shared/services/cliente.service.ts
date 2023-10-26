@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, getDocs, getDoc, doc, query, where, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, getDocs, getDoc, doc, query, where, addDoc, setDoc } from '@angular/fire/firestore';
 import { Cliente } from 'src/app/models/cliente';
 import Swal from 'sweetalert2';
 
@@ -43,6 +43,18 @@ export class ClienteService {
         text: 'Hubo un problema al guardar los datos del cliente. Por favor, inténtalo de nuevo.',
         confirmButtonColor: '#05ACD7',
       });
+      return false;
+    }
+  }
+
+  async editCliente(cliente: Cliente): Promise<boolean> {
+    try {
+      const col = collection(this.fb, 'Cliente');
+      const clienteDoc = doc(col, cliente.id);
+      await setDoc(clienteDoc, cliente);
+      return true;
+    } catch (error) {
+      console.error('Error al editar el cliente:', error);
       return false;
     }
   }

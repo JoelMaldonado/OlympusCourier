@@ -70,11 +70,9 @@
         <tbody>
             <tr *ngFor="let element of listRepartos; let i = index">
                 <td>{{i+1}}. {{ element.cliente?.nombres }}</td>
-                <td>{{ element.cliente?.celular }}</td>
-                <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>
-                <td>{{ formatFecha(element?.fecha) }}</td>
                 <td>{{ formatFecha(element?.fecha) }}</td>
                 <td class="pago"> S/{{ element.total }}</td>
+
                 <td class="estado__pendiente">
                     <div class="estado-pendientes">{{element.estado}}</div>
                 </td>
@@ -99,7 +97,7 @@
                         </div>
                         
                     </div>
-                </td>
+                </td>                
             </tr>
         </tbody>
     </table>

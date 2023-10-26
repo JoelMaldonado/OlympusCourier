@@ -1,7 +1,6 @@
 /**Componentes**/
 import { AppComponent } from './app.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
-import { DestinosComponent } from './components/destinos/destinos.component';
 import { AgregarRepartoComponent } from './components/agregar-reparto/agregar-reparto.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -37,7 +36,6 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     AppComponent,
     AgregarRepartoComponent,
     ClientesComponent,
-    DestinosComponent,
     LoginComponent,
     MenuComponent,
     RepartosComponent,
