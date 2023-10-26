@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="" class="container__form">
+  <form [formGroup]="form" class="container__form">
 
     <div class="icon__form">
       <span>Agregar Cliente</span>
@@ -8,7 +8,7 @@
       </button>
     </div>
 
-    <select [formControl]="tipo">
+    <select formControlName="tipo">
       <option value="Dni">Dni</option>
       <option value="Ruc">Ruc</option>
       <option value="CE">Carnet Extranjeria</option>
@@ -16,34 +16,30 @@
     </select>
     <div class="campo__form">
       <label for="">N° Documento</label>
-      <input [formControl]="doc"><br>
+      <input placeholder="Ingresa documento de identidad o pasaporte" formControlName="doc"><br>
     </div>
 
     <div class="campo__form">
       <label for="">Nombres</label>
-      <input [formControl]="nombres"><br>
+      <input placeholder="Ingresa nombres y apellidos" formControlName="nombres"><br>
     </div>
 
     <div class="campo__form">
       <label for="">Teléfono</label>
-      <input [formControl]="cel"><br>
+      <input placeholder="Ingresa celular" formControlName="cel"><br>
     </div>
 
     <div class="campo__form">
 
       <div class="form__dir">
         <label for="">Dirección</label>
-        <input [formControl]="direc"><br>
+        <input placeholder="Ingresa lugar de domicilio" formControlName="direc"><br>
       </div>
 
       <div class="form__dir">
         <label style="position: relative; left: -12px;" for="">Distrito</label>
-        <select [formControl]="distrito">
-          <option value="CA" selected>Chincha Alta</option>
-          <option value="CB">Chincha Baja</option>
-          <option value="SN">Sunampe</option>
-          <option value="Grocio">Grocio Prado</option>
-          <option value="EC">El Carmen</option>
+        <select formControlName="distrito">
+          <option *ngFor="let item of listDistritos" [value]="item.nombre" selected>{{item.nombre}}</option>
         </select><br>
       </div>
 
@@ -52,12 +48,12 @@
 
     <div class="campo__form " style="margin-top: -20px;">
       <label for="">Referencia</label>
-      <input [formControl]="ref">
+      <input placeholder="Ingresa una referencia" formControlName="ref">
     </div>
 
     <div class="btn__form">
-      <button (click)="closeDialog()">Cancelar</button>
-      <button (click)="guardar()">Guardar</button>
+      <button mat-raised-button (click)="guardar()">Guardar</button>
+      <button mat-raised-button style="background-color: #E8E8E8; color: #808080;" (click)="closeDialog()">Cancelar</button>
     </div>
 
   </form>

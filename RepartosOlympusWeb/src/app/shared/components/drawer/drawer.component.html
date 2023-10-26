@@ -3,7 +3,7 @@
     <ul>
 
         <li>
-                <span class="icon"><img src="../../../../assets/logo.png" alt=""></span>
+            <span class="icon"><img src="../../../../assets/logo.png" alt=""></span>
         </li>
         <li>
             <a routerLink="/menu/repartos">
@@ -30,6 +30,13 @@
             </a>
         </li>
         <li>
+            <a routerLink="/menu/usuarios">
+                <span class="icon"><mat-icon>admin_panel_settings</mat-icon></span>
+                <span class="title">Usuarios</span>
+            </a>
+        </li>
+
+        <li>
             <a (click)="logout()">
                 <span class="icon"><mat-icon>logout</mat-icon></span>
                 <span class="title">Salir</span>
@@ -39,7 +46,7 @@
 
     <div class="container__admin">
         <div class="admin">
-            <span class="icon"><i class="fa-solid fa-x"></i></span>
+            <span class="icon"><mat-icon>close</mat-icon></span>
             <div class="admin__nombre">
                 <label class="admin__title" for="">Admin</label>
                 <label class="admin__nombre" for="">Nombre</label>

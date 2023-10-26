@@ -37,15 +37,11 @@ export class AgregarRepartoComponent {
       cant: 2,
     }
   ];
-  listDistritos: Destino[] = [];
 
   constructor(
-    private destinoservice: DestinosService,
     private clienteService: ClienteService,
     public dialog: MatDialog
   ) {
-
-    this.listarDestinos()
     this.listarClientes()
 
     this.searchTerms
@@ -61,9 +57,6 @@ export class AgregarRepartoComponent {
 
   }
 
-  async listarDestinos() {
-    this.listDistritos = await this.destinoservice.listarDestinos()
-  }
 
   async listarClientes() {
     this.listClientes = await this.clienteService.listarClientes()
