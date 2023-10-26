@@ -64,6 +64,9 @@ input {
 
 
 /* Estilo para el foco en el input (mientras se escribe) */
+input:focus{
+  outline: none;
+  }
 input:focus {
   border: 2px solid #047CC4; /* Cambia el color del borde cuando está enfocado */
 }

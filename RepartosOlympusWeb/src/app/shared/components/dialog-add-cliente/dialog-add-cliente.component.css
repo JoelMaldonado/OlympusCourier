@@ -58,10 +58,16 @@ span{
 }
 
 .form__dir input{
-  margin-left: -4px;
-  width: 370px;
+  margin-left: -15px;
+  width: 340px;
 }
 
+input:focus{
+outline: none;
+}
+.campo__form select{
+  width: 700px;
+}
 .form__dir select{
   width: 220px;
 }
@@ -126,7 +132,7 @@ select:focus {
 }
 
 label {
-  width: 150px;
+  width: 200px;
   font-size: 1.15rem !important;
   opacity: 1;
   color: #808080;

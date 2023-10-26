@@ -29,13 +29,44 @@
         </div>
     </div>
 
-    <div *ngIf="cliente">
-        <span>Documento {{cliente.doc}}</span><br>
-        <span>Celular {{cliente.celular}}</span><br>
-        <span>Distrito {{cliente.distrito}}</span><br>
-        <span>Direccion {{cliente.direc}}</span><br>
-        <span>Referencia {{cliente.ref}}</span>
+    <div class="container__completado">
+        <div class="completado" *ngIf="cliente">
+
+            <div class="span__completado">
+                <mat-icon>description</mat-icon><span class="title">Documento</span>
+                <span class="sub__title"> {{cliente.doc}} </span>
+            </div>
+
+            <div class="span__completado">
+                <mat-icon>phone_in_talk</mat-icon><span class="title">Celular</span>
+                <span class="sub__title"> {{cliente.celular}}</span>
+            </div>
+
+            <div class="span__completado">
+                <mat-icon>location_on</mat-icon><span class="title">Distrito</span>
+                <span class="sub__title"> {{cliente.distrito}}</span>
+            </div>
+
+            <div class="span__completado">
+                <mat-icon>person_pin_circle</mat-icon><span class="title">Direccion</span>
+                <span class="sub__title"> {{cliente.direc}}</span>
+            </div>
+
+            <div class="span__completado">
+                <mat-icon>person</mat-icon><span  class="title">Referencia</span>
+                <span class="sub__title"> {{cliente.ref}}</span>
+            </div>
+
+        
+
+
+           
+           
+           
+      
+        </div>
     </div>
+
 
     <table class="table">
         <thead>

@@ -176,6 +176,46 @@ mat-icon {
 }
 
 
+.container__completado{
+  position: relative;
+padding-top: 1rem;
+}
+
+.container__completado span{
+  font-size: 1.2rem;
+}
+
+.span__completado{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.span__completado mat-icon{
+
+  color: 
+  #808080;
+  font-size: 20px;
+}
+
+.title{
+  font-family: metropolis;
+  color: #808080;
+  font-weight: 600;
+  width: 100px;
+}
+
+.sub__title{
+  margin-left: 60px;
+  font-family: metropolis;
+  color: #808080;
+  font-weight: 400;
+}
+
 .table {
   width: 1400px;
   /* Centrar la tabla en la página */
