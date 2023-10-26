@@ -5,36 +5,27 @@
     </div>
 
     <div class="buscar__container">
-
         <span>Cliente</span>
-
         <div class="buscar">
             <div class="input-container">
                 <mat-icon class="icon">search</mat-icon>
-                <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()"
-                    [formControl]="documento" class="input-with-icon" />
+                <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()" [formControl]="documento" class="input-with-icon" />
             </div>
-
-
-
+            <button class="btn__agregar" (click)="openDialogCliente()">
+                <mat-icon>person_add</mat-icon>
+                <span>Agregar Cliente</span>
+            </button>
         </div>
-
-        <button class="btn__agregar" (click)="openDialogCliente()">
-            <mat-icon>person_add</mat-icon>
-            <span>Agregar Cliente</span>
-        </button>
-
+        <!-- Lista de sugerencias -->
+        <div class="sugerencias">
+            <ul class="auto__completar">
+                <li *ngFor="let item of data$">
+                    {{item.nombres}}
+                </li>
+            </ul>
+        </div>
     </div>
-
     
-    <div class="container__autocompletar">
-        <ul class="auto__completar">
-            <li *ngFor="let item of data$">
-                {{item.nombres}}
-            </li>
-        </ul>
-    </div>
-
     <div *ngIf="cliente">
         <span>Documento {{cliente.doc}}</span><br>
         <span>Celular {{cliente.celular}}</span><br>

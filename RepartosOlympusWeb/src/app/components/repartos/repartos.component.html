@@ -53,32 +53,31 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr style="border-top: 1px solid #D9D9D9;">
 
-                <th style="text-align: center;">ID</th>
                 <th>Cliente</th>
-                <th>Dirección</th>
-                <th>Distrito</th>
                 <th>Fecha</th>
                 <th>E. Flete</th>
-                <th>Venta</th>
+                <th>Estado</th>
+                <th><mat-icon>menu</mat-icon></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let element of dataSource">
-                <td class="venta" style="text-align: center;">132</td>
-                <td>{{ element.cliente?.nombres }}</td>
-                <td>{{ element.cliente?.celular }}</td>
-                <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>
+                <td>{{element.cliente?.nombres}}</td>
                 <td>{{ formatFecha(element?.fecha) }}</td>
-                <td>{{ formatFecha(element?.fecha) }}</td>
+                <td class="pago"> S/{{ element.total }}</td>
+                <td class="estado__pendiente">
+                    <div class="estado-pendientes">{{element.estado}}</div>
+                </td>
                 <td class="estado">
                     <div class="estado-content">
-                        <div class="estado-pendientes">{{element.estado}}</div>
+
                         <div class="estado-icons">
-                            <button mat-icon-button matTooltip="Ver más" [matMenuTriggerFor]="mas">
-                                <mat-icon>more_horiz</mat-icon>
+                            <button class="btn__icon" mat-icon-button matTooltip="Ver más" [matMenuTriggerFor]="mas">
+                                <mat-icon class="icon__horizontal larger-icon">more_horiz</mat-icon>
                             </button>
+                            
                             <mat-menu #mas="matMenu">
                                 <button mat-menu-item>
                                     <mat-icon color="primary">visibility</mat-icon>
@@ -90,6 +89,7 @@
                                 </button>
                             </mat-menu>
                         </div>
+                        
                     </div>
                 </td>
             </tr>

@@ -1,21 +1,30 @@
-form {
-  margin-top: 7rem;
+.container{
+  padding: 3rem 4.5rem;
 }
 
-.container__product {
-  width: 580px;
-  padding: 2rem;
-  height: 690px;
-  border-radius: 50px;
-
-
+.icon__form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  align-items: center;
 }
 
-
-.container__form {
+mat-icon{
+  color: 
+  #808080;
+}
+.container__form{
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 12px;
+}
+
+
+.container__cantidad{
+  display: flex;
+  flex-direction: row;
+  gap: 11px;
 }
 
 .campo__form {
@@ -25,26 +34,56 @@ form {
   justify-content: space-between;
 }
 
+.campo__form div {
+  /* Asegúrate de que cada div tenga la misma altura o establece una altura fija si es necesario */
+  height: 100px; /* Ajusta la altura según tus necesidades */
+}
 
-/* Estilo para input y select */
+span{
+  color: #047CC4;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+
+
+
+
 input {
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
-  width: 360px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  width: 450px;
   height: 49px;
-  background-color: #f4f4f5;
+  background-color: #F1F1F1;
   border-radius: 15px;
   border: none;
+  font-size: 1.1rem;
+  color: #808080;
+  font-family: 'Metropolis', sans-serif;
 }
+
+
+/* Estilo para el foco en el input (mientras se escribe) */
+input:focus {
+  border: 2px solid #047CC4; /* Cambia el color del borde cuando está enfocado */
+}
+
+/* Resto de tus estilos */
 
 select {
   padding-left: 1.25rem !important;
   padding-right: 1.25rem !important;
-  width: 400px;
+  width: 450px;
   height: 53px;
   background-color: #f4f4f5;
   border-radius: 15px;
+  font-size: 1.1rem;
+  color: #808080;
+  font-family: 'Metropolis', sans-serif;
   border: none;
+}
+option{
+  padding: 20px;
 }
 
 /* Estilo para el ícono de triángulo (puedes mantener este estilo) */
@@ -60,69 +99,73 @@ select {
 
 
 select:focus {
-  border: 2px solid black;
+  border: 2px solid #047CC4;
 }
 
 label {
-  font-size: 1rem !important;
+  width: 150px;
+  font-size: 1.15rem !important;
   opacity: 1;
-  color: rgba(0, 0, 0, var(--tw-text-opacity)) !important;
+  color: #808080;
   line-height: 1.5rem !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 600 !important;
   letter-spacing: -0.2px;
 }
 
-label:after {
-  content: "*";
-  font-size: 1rem;
-  line-height: 1.5rem;
-  margin-left: 0.25rem;
-  --tw-text-opacity: 1;
-  color: rgba(239, 68, 68, var(--tw-text-opacity));
+
+.container__cantidad .campo__form input{
+  width: 180px;
+  margin-left: 27px;
 }
+
+
+
 
 
 .btn__navbar {
   position: relative;
 }
 
-.btn-add {
-  padding: 14px;
-  border-radius: 13px;
-  border: none;
-  width: 150px;
-  background-color: rgba(226, 30, 66, 255);
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-}
-
-.btn-add:hover {
-  opacity: 0.9;
-}
 
 
-.guardar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 
-
-}
-
-h2 {
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  margin: 0 0 -16px;
-}
 
 .raparto__btn {
+  
   display: flex;
   flex-direction: row;
   gap: 16px;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+
+.btn__form{
+  margin-top: 55px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.raparto__btn button{
+  padding: 1rem;
+  background-color: 
+  #05ACD7;
+  color: white;
+  border-radius: 5px;
+  width: 180px;
+  border: none;
+    font-family: metropolis;
+  font-weight: 600;
+  font-size: 0.98rem;
+  height: 50px;
+}
+
+.btn__form :nth-child(2){
+  background-color: 
+  #E8E8E8;
+  color: #808080;
 }

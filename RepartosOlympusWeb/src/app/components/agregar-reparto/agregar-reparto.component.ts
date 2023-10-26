@@ -69,7 +69,7 @@ export class AgregarRepartoComponent {
   /** Añadir Item Reparto*/
   openDialogAddItemReparto() {
     const dialogRef = this.dialog.open(DialogAddItemRepartoComponent, {
-      width: "650px"
+      width: "770px"
     });
 
     dialogRef.afterClosed().subscribe((data: ItemReparto) => {
@@ -82,7 +82,7 @@ export class AgregarRepartoComponent {
   editItemReparto(item: ItemReparto) {
     const dialogRef = this.dialog.open(DialogAddItemRepartoComponent, {
       data: item,
-      width: "650px"
+      width: "770px"
     })
 
     dialogRef.afterClosed().subscribe((data: ItemReparto) => {

@@ -70,20 +70,6 @@ span{
 }
 
 
-/* Estilo para input y select */
-input {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem ;
-  width: 700px;
-  height: 49px;
-  background-color: 
-  #F1F1F1;
-  border-radius: 15px;
-  border: none;
-  font-size: 1.1rem;
-  color: #808080;
-  font-family: metropolis;
-}
 
 /* Estilo común para input */
 input {
@@ -99,10 +85,6 @@ input {
   font-family: 'Metropolis', sans-serif;
 }
 
-/* Estilo para el clic en el input */
-input:active {
-  border: 2px solid #FF5733; /* Cambia el color del borde cuando se hace clic */
-}
 
 /* Estilo para el foco en el input (mientras se escribe) */
 input:focus {

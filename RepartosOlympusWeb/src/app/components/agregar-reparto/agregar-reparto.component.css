@@ -28,12 +28,52 @@ font-size: 1.5rem;
 cursor: pointer;
 }
 
-.buscar__container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
+.buscar__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
+.buscar{
+  display: flex;
+  gap: 20px;
+}
+
+.btn__agregar {
+  margin-left: 10px; /* Agrega un margen izquierdo para separar el botón del campo de búsqueda */
+}
+
+.sugerencias {
+  margin-top: 3px;
+  position: absolute;
+  top: 100%; /* Coloca la lista de sugerencias justo debajo del input */
+  left: 81px;
+  background-color: white; /* Fondo blanco */
+  z-index: 1; /* Asegura que esté en la parte superior del contenido */
+  max-height: 200px; /* Limita la altura máxima de la lista de sugerencias */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+  width: 500px; /* Asegura que ocupe todo el ancho del contenedor */
+}
+
+.sugerencias .auto__completar li{
+  font-size: 1.3rem;
+  color: #ffffff;
+  border-radius: 10px;
+  font-family: metropolis;
+  background-color: #047CC4;
+  padding-top: 10px;
+  padding-left: 15px;
+  margin-bottom: 1px;
+  padding-bottom: 10px;
+  z-index: 2;
+}
+
+.sugerencias .auto__completar li:hover{
+  background-color: #0467a5;
+  cursor: pointer;
+}
+
+/* Otros estilos según tus preferencias */
 
 .buscar__container span{
     font-size: 1.1rem;
