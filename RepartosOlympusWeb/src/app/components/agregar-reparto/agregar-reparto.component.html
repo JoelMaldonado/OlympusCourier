@@ -1,25 +1,22 @@
 <div class="reparto__container">
     <div class="title__reparto">
         <mat-icon>arrow_back</mat-icon>
-       <span>Nuevo Reparto</span>
+        <span>Nuevo Reparto</span>
     </div>
 
     <div class="buscar__container">
 
-       <span>Cliente</span>
+        <span>Cliente</span>
 
         <div class="buscar">
             <div class="input-container">
                 <mat-icon class="icon">search</mat-icon>
-                <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()" [formControl]="documento" class="input-with-icon" />
-              </div>
-              
+                <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()"
+                    [formControl]="documento" class="input-with-icon" />
+            </div>
 
-            <ul>
-                <li style="background-color: red" *ngFor="let item of data$">
-                    {{item.nombres}}
-                </li>
-            </ul>
+
+
         </div>
 
         <button class="btn__agregar" (click)="openDialogCliente()">
@@ -29,6 +26,14 @@
 
     </div>
 
+    
+    <div class="container__autocompletar">
+        <ul class="auto__completar">
+            <li *ngFor="let item of data$">
+                {{item.nombres}}
+            </li>
+        </ul>
+    </div>
 
     <div *ngIf="cliente">
         <span>Documento {{cliente.doc}}</span><br>
@@ -47,12 +52,13 @@
                 <th>Cantidad</th>
                 <th>Precio U.</th>
                 <th>Precio T.</th>
-                <th >
-                    <button style="margin-left: 17px;" class="btn__item centered-button" (click)="openDialogAddItemReparto()" matTooltip="Agregar Item">
+                <th>
+                    <button style="margin-left: 17px;" class="btn__item centered-button"
+                        (click)="openDialogAddItemReparto()" matTooltip="Agregar Item">
                         <mat-icon>add</mat-icon>
                     </button>
                 </th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -67,12 +73,28 @@
                     <button matTooltip="Editar" (click)="editItemReparto(item)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button  matTooltip="Eliminar" (click)="deleteItemReparto(item)">
+                    <button matTooltip="Eliminar" (click)="deleteItemReparto(item)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
             </tr>
         </tbody>
     </table>
-    <button (click)="submitForm()">Guardar</button>
+
+    <div class="container__total">
+        <div class="container__clave">
+            <span>Clave</span>
+            <input type="text">
+        </div>
+
+        <div class="container__costo">
+            <span class="costo">Costo T.</span>
+            <span>42.00</span>
+        </div>
+
+    </div>
+    <div class="container__btn">
+        <button mat-raised-button>Guardar</button>
+        <button mat-raised-button style="background-color: #E8E8E8; color: #808080;">Cancelar</button>
+    </div>
 </div>

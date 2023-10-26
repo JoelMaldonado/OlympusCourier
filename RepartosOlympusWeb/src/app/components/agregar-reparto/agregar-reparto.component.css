@@ -59,6 +59,10 @@ cursor: pointer;
     color: #808080;
     font-family: 'Metropolis', sans-serif;
   }
+  .input-container input:focus{
+    outline: none;
+    border: 2px solid #047CC4;
+  }
   
   .icon {
     position: absolute;
@@ -69,7 +73,16 @@ cursor: pointer;
     color: #808080; /* Color del ícono */
   }
   
+  .icon:focus{
+    color: #047CC4;
+  }
 
+
+  .container__autocompletar{
+    width: 300px;
+    position: relative;
+    top: -150px;
+  }
 .btn__agregar{
     border: none;
     background-color: white;
@@ -194,3 +207,88 @@ cursor: pointer;
     font-size: 1.6rem;
   }
   
+.container__total{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  height: 120px;
+  gap: 59rem;
+}
+
+.container__clave{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: 100px;
+}
+.container__clave span{
+  font-size: 1.2rem;
+  color: #808080;
+  font-family: metropolis;
+  font-weight: 700;
+}
+
+.container__clave input{
+
+  width: 130px;
+  height: 35px;
+  border: none;
+  padding: 1rem;
+  background-color: 
+  #F1F1F1;
+  color: #808080;
+  font-family: metropolis;
+  font-weight: 400;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+
+.container__clave input:focus{
+  outline: none;
+  border: 2px solid #047CC4 ;
+}
+
+.container__costo{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.2rem;
+  color: #808080;
+  font-family: metropolis;
+  font-weight: 400;
+}
+
+.costo{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  color: #047CC4;
+  font-family: metropolis;
+  font-weight: 700;
+}
+
+.container__btn{
+  display: flex;
+margin-left: 71.6rem;
+gap: 20px;
+}
+
+.container__btn button{ 
+  background-color: 
+  #05ACD7;
+  color: white;
+  border-radius: 5px;
+  width: 120px;
+  border: none;
+    font-family: metropolis;
+  font-weight: 600;
+  font-size: 0.98rem;
+  height: 38px;
+}
+
+.container__btn :nth-child(2){
+  background-color: 
+  #E8E8E8;
+  color: #808080;
+}
