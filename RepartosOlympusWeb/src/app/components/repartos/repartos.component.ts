@@ -15,8 +15,8 @@ import { RepartoService } from 'src/app/shared/services/reparto.service';
 })
 export class RepartosComponent {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource: Reparto[] = [];
+  listRepartos: Reparto[] = [];
+  loaderRepartos = false;
 
   constructor(
     private router: Router,
@@ -26,7 +26,9 @@ export class RepartosComponent {
   }
 
   async listarRepartos() {
-    this.dataSource = await this.repartoService.listarRepartos();
+    this.loaderRepartos = true
+    this.listRepartos = await this.repartoService.listarRepartos();
+    this.loaderRepartos = false;
   }
 
   agregar() {

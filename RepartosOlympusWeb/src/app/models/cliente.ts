@@ -4,6 +4,8 @@ export interface Cliente {
     doc?: string;
     nombres?: string;
     celular?: string;
+    genero?: string;
+    correo?: string;
     distrito?: string;
     direc?: string;
     ref?: string;

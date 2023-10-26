@@ -106,7 +106,7 @@ cursor: pointer;
   
   .icon {
     position: absolute;
-    right: 15px; /* Ajusta la posición del ícono */
+    right: 0px; /* Ajusta la posición del ícono */
     top: 50%;
     transform: translateY(-50%);
     font-size: 25px; /* Tamaño del ícono */

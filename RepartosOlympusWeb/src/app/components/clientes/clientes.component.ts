@@ -29,7 +29,7 @@ export class ClientesComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddClienteComponent, {
       data: {name: this.name, animal: this.animal},
-      width: "650px"
+      width: "950px"
     });
 
     dialogRef.afterClosed().subscribe(result => {

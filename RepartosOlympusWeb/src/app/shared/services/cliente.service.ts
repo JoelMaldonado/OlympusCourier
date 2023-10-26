@@ -1,21 +1,53 @@
-import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs, getDoc, doc, query, where } from '@angular/fire/firestore';
+import { Injectable, inject } from '@angular/core';
+import { Firestore, collection, getDocs, getDoc, doc, query, where, addDoc } from '@angular/fire/firestore';
 import { Cliente } from 'src/app/models/cliente';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  constructor(
-    private fb: Firestore
-  ) {
 
+  /**
+   * getDocs() => Obtiene la información una sola vez
+   * collectionData() => Obtiene la información en tiempo real
+   * **/
+
+  fb = inject(Firestore)
+
+  async addCliente(cliente: Cliente): Promise<string | boolean> {
+    try {
+      const col = collection(this.fb, 'Cliente')
+      const q = query(col, where('doc', '==', cliente.doc));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        const doc = await addDoc(col, cliente);
+        return doc.id;
+      } else {
+        console.error('El cliente con este documento ya está registrado');
+        Swal.fire({
+          icon: 'error',
+          title: 'Documento ya registrado',
+          text: 'El cliente con este documento ya está registrado en nuestra base de datos.',
+          confirmButtonColor: '#05ACD7',
+        });
+        return false;
+      }
+    } catch (error) {
+      console.error('Error al insertar el cliente:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al insertar el cliente',
+        text: 'Hubo un problema al guardar los datos del cliente. Por favor, inténtalo de nuevo.',
+        confirmButtonColor: '#05ACD7',
+      });
+      return false;
+    }
   }
 
-  
-
-  isLogged(): boolean{
+  isLogged(): boolean {
     return localStorage.getItem('token') ? true : false;
   }
 
@@ -46,8 +78,8 @@ export class ClienteService {
 
     const docNumberQuery = query(
       col,
-      where('documento', '>=', data),
-      where('documento', '<', data + '\uf8ff')
+      where('doc', '>=', data),
+      where('doc', '<', data + '\uf8ff')
     );
 
     const [nameResults, docNumberResults] = await Promise.all([getDocs(nameQuery), getDocs(docNumberQuery)]);

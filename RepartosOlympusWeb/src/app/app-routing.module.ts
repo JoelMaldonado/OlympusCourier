@@ -8,6 +8,7 @@ import { DestinosComponent } from './components/destinos/destinos.component';
 import { AgregarRepartoComponent } from './components/agregar-reparto/agregar-reparto.component';
 import { ComprobanteComponent } from './components/comprobante/comprobante.component';
 import { authGuard } from './shared/guards/auth.guard';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'clientes', component: ClientesComponent },
       { path: 'destinos', component: DestinosComponent },
       { path: 'comprobantes', component: ComprobanteComponent },
+      { path: 'usuarios', component: UsuariosComponent },
       { path: 'agregar-reparto', component: AgregarRepartoComponent },
     ],
     canActivate: [authGuard]
