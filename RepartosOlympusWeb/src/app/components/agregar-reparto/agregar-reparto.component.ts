@@ -51,6 +51,14 @@ export class AgregarRepartoComponent {
     this.listarClientes()
   }
 
+  showSugerencias = false
+
+  selectCliente(item: Cliente) {
+    this.cliente = item;
+    this.documento.setValue(item.nombres ? item.nombres : this.documento.value)
+    this.showSugerencias = false
+  }
+
 
   async listarClientes() {
     this.listClientes = await this.clienteService.listarClientes()
@@ -98,8 +106,8 @@ export class AgregarRepartoComponent {
       confirmButtonText: 'Eliminar',
       showCancelButton: true,
       confirmButtonColor: '#047CC4'
-    }).then((res)=>{
-      if(res.isConfirmed){
+    }).then((res) => {
+      if (res.isConfirmed) {
         const index = this.listItemRepartos.indexOf(item);
         if (index !== -1) {
           this.listItemRepartos.splice(index, 1);
@@ -126,7 +134,7 @@ export class AgregarRepartoComponent {
   submitForm() {
 
   }
- 
+
   isLoading = false;
 
   async search() {
@@ -134,6 +142,7 @@ export class AgregarRepartoComponent {
       return;
     }
     this.isLoading = true;
+    this.showSugerencias = true;
     const results = await this.clienteService.searchCliente(this.documento.value);
     this.data$ = results;
     this.isLoading = false;

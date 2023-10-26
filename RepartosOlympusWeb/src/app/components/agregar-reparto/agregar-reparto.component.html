@@ -8,47 +8,27 @@
         <span>Cliente</span>
         <div class="buscar">
             <div class="input-container">
-<<<<<<< HEAD
-                <mat-icon class="icon">search</mat-icon>
-                <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()" [formControl]="documento" class="input-with-icon" />
-=======
                 <mat-spinner class="icon" [diameter]="30" color="#047CC4" *ngIf="isLoading"></mat-spinner>
                 <button class="icon" mat-icon-button (click)="search()" matTooltip="Buscar"
                     *ngIf="!isLoading"><mat-icon>search</mat-icon></button>
                 <input placeholder="Ingrese documentos o nombres" type="text" [formControl]="documento"
                     class="input-with-icon" />
->>>>>>> de648e2af3499bec38ee670d30ba4f4730ea0e60
             </div>
-            <button class="btn__agregar" (click)="openDialogCliente()">
+            <button mat-button (click)="openDialogCliente()" class="btn__agregar">
                 <mat-icon>person_add</mat-icon>
                 <span>Agregar Cliente</span>
             </button>
         </div>
         <!-- Lista de sugerencias -->
         <div class="sugerencias">
-            <ul class="auto__completar">
-                <li *ngFor="let item of data$">
+            <ul class="auto__completar" *ngIf="showSugerencias">
+                <li *ngFor="let item of data$" (click)="selectCliente(item)">
                     {{item.nombres}}
                 </li>
             </ul>
         </div>
     </div>
-<<<<<<< HEAD
-    
-=======
 
-
-    <div class="container__autocompletar">
-        <ul class="auto__completar">
-            <li *ngFor="let item of data$">
-                {{item.nombres}}
-                <button (click)="cliente = item;
-                this.documento.setValue(item.nombres ? item.nombres : this.documento.value)">select</button>
-            </li>
-        </ul>
-    </div>
-
->>>>>>> de648e2af3499bec38ee670d30ba4f4730ea0e60
     <div *ngIf="cliente">
         <span>Documento {{cliente.doc}}</span><br>
         <span>Celular {{cliente.celular}}</span><br>

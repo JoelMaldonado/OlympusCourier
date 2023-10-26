@@ -57,12 +57,9 @@
 
     <table class="table">
         <thead>
-<<<<<<< HEAD
             <tr style="border-top: 1px solid #D9D9D9;">
 
-=======
             <tr>
->>>>>>> de648e2af3499bec38ee670d30ba4f4730ea0e60
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>E. Flete</th>
@@ -71,16 +68,11 @@
             </tr>
         </thead>
         <tbody>
-<<<<<<< HEAD
-            <tr *ngFor="let element of dataSource">
-                <td>{{element.cliente?.nombres}}</td>
-=======
             <tr *ngFor="let element of listRepartos; let i = index">
                 <td>{{i+1}}. {{ element.cliente?.nombres }}</td>
                 <td>{{ element.cliente?.celular }}</td>
                 <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>
                 <td>{{ formatFecha(element?.fecha) }}</td>
->>>>>>> de648e2af3499bec38ee670d30ba4f4730ea0e60
                 <td>{{ formatFecha(element?.fecha) }}</td>
                 <td class="pago"> S/{{ element.total }}</td>
                 <td class="estado__pendiente">
@@ -111,6 +103,4 @@
             </tr>
         </tbody>
     </table>
-
-    <span *ngIf="loaderRepartos" class="loader"></span>
 </div>

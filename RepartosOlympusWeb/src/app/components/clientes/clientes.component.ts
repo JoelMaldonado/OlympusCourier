@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Cliente } from 'src/app/models/cliente';
 import { DialogAddClienteComponent } from 'src/app/shared/components/dialog-add-cliente/dialog-add-cliente.component';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
@@ -9,12 +11,27 @@ import { ClienteService } from 'src/app/shared/services/cliente.service';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent {
+export class ClientesComponent implements AfterViewInit{
   animal: string = "";
   name: string = "Joel";
 
-  listClientes: Cliente[] = [];
+  listClientes = new MatTableDataSource<Cliente>();
+  columnas: string[] = [
+    'nombres',
+    'tipo',
+    'documento',
+    'direc',
+    'telf',
+    'act',
+  ];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.listClientes.paginator = this.paginator;
+    this.paginator._intl.itemsPerPageLabel = 'Clientes por página';
+  }
+  
   constructor(
     private clienteService: ClienteService,
     public dialog: MatDialog
@@ -23,7 +40,7 @@ export class ClientesComponent {
   }
 
   async listarClientes() {
-    this.listClientes = await this.clienteService.listarClientes();
+    this.listClientes.data = await this.clienteService.listarClientes();
   }
 
   openDialog(): void {
@@ -36,4 +53,8 @@ export class ClientesComponent {
       this.animal = result;
     });
   }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
