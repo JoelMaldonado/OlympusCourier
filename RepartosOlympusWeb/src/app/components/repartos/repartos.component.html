@@ -4,7 +4,11 @@
     <div class="container__fecha">
 
         <div class="btn__navbar">
-            <button class="btn-add" (click)="agregar()">+ Añadir Reparto</button>
+            <button mat-raised-button class="btn-add" (click)="agregar()"
+                style="background-color: #047CC4; color: white;">
+                <mat-icon>add</mat-icon>
+                Añadir Reparto
+            </button>
         </div>
 
 
@@ -95,4 +99,6 @@
             </tr>
         </tbody>
     </table>
+
+    <span *ngIf="loaderRepartos" class="loader"></span>
 </div>

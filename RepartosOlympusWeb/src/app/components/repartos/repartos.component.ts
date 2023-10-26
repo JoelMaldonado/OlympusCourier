@@ -17,6 +17,7 @@ export class RepartosComponent {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: Reparto[] = [];
+  loaderRepartos = false;
 
   constructor(
     private router: Router,
@@ -26,7 +27,9 @@ export class RepartosComponent {
   }
 
   async listarRepartos() {
+    this.loaderRepartos = true
     this.dataSource = await this.repartoService.listarRepartos();
+    this.loaderRepartos = false;
   }
 
   agregar() {

@@ -1,13 +1,12 @@
-import { Component, } from '@angular/core';
+import { Component, inject, } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Cliente } from 'src/app/models/cliente';
-import { Destino } from 'src/app/models/destino';
 import { DialogAddClienteComponent } from 'src/app/shared/components/dialog-add-cliente/dialog-add-cliente.component';
 import { DialogAddItemRepartoComponent } from 'src/app/shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
-import { DestinosService } from 'src/app/shared/services/destinos.service';
 
 export interface ItemReparto {
   nGuia: string
@@ -37,6 +36,8 @@ export class AgregarRepartoComponent {
       cant: 2,
     }
   ];
+
+  router = inject(Router)
 
   constructor(
     private clienteService: ClienteService,
@@ -116,9 +117,8 @@ export class AgregarRepartoComponent {
     })
   }
 
-  /**Buscar documento Reniec**/
-  buscarDoc() {
-
+  back(){
+    this.router.navigate(['../'])
   }
 
   /** Insertar Reparto **/
