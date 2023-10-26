@@ -169,8 +169,6 @@ label {
   color: white;
   font-weight: 700;
   font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
 }
 
 .btn-add:hover {
@@ -220,7 +218,7 @@ h2 {
     font-family: metropolis;
   font-weight: 600;
   font-size: 0.98rem;
-
+  height: 50px;
 }
 
 .btn__form :nth-child(2){
@@ -228,4 +226,3 @@ h2 {
   #E8E8E8;
   color: #808080;
 }
-

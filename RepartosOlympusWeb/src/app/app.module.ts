@@ -30,6 +30,7 @@ import { environment } from '../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     DialogAddClienteComponent,
     CajaTextoComponent,
     DialogAddItemRepartoComponent,
-    NavbarComponent
+    NavbarComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,
