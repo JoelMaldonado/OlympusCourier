@@ -9,18 +9,22 @@
        <span>Cliente</span>
 
         <div class="buscar">
-            <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()"
-                [formControl]="documento" />
+            <div class="input-container">
+                <mat-icon class="icon">search</mat-icon>
+                <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()" [formControl]="documento" class="input-with-icon" />
+              </div>
+              
 
             <ul>
-                <li style="background-color: red;max-height: 5px;" *ngFor="let item of data$">
+                <li style="background-color: red" *ngFor="let item of data$">
                     {{item.nombres}}
                 </li>
             </ul>
         </div>
 
-        <button (click)="openDialogCliente()">
-            Agregar Cliente
+        <button class="btn__agregar" (click)="openDialogCliente()">
+            <mat-icon>person_add</mat-icon>
+            <span>Agregar Cliente</span>
         </button>
 
     </div>
@@ -34,7 +38,7 @@
         <span>Referencia {{cliente.ref}}</span>
     </div>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>N° Guia</th>
@@ -43,11 +47,12 @@
                 <th>Cantidad</th>
                 <th>Precio U.</th>
                 <th>Precio T.</th>
-                <th>
-                    <button mat-mini-fab color="primary" (click)="openDialogAddItemReparto()" matTooltip="Agregar Item">
+                <th >
+                    <button style="margin-left: 17px;" class="btn__item centered-button" (click)="openDialogAddItemReparto()" matTooltip="Agregar Item">
                         <mat-icon>add</mat-icon>
                     </button>
                 </th>
+                
             </tr>
         </thead>
         <tbody>
@@ -58,11 +63,11 @@
                 <td>{{ item.cant }}</td>
                 <td>S/{{ item.precio }}</td>
                 <td>S/{{ item.cant * item.precio }}</td>
-                <td>
-                    <button mat-icon-button color="primary" matTooltip="Editar" (click)="editItemReparto(item)">
+                <td class="btn__crud">
+                    <button matTooltip="Editar" (click)="editItemReparto(item)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" matTooltip="Eliminar" (click)="deleteItemReparto(item)">
+                    <button  matTooltip="Eliminar" (click)="deleteItemReparto(item)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
