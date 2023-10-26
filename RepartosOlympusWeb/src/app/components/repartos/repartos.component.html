@@ -58,8 +58,6 @@
     <table class="table">
         <thead>
             <tr>
-
-                <th style="text-align: center;">ID</th>
                 <th>Cliente</th>
                 <th>Dirección</th>
                 <th>Distrito</th>
@@ -69,9 +67,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let element of dataSource">
-                <td class="venta" style="text-align: center;">132</td>
-                <td>{{ element.cliente?.nombres }}</td>
+            <tr *ngFor="let element of listRepartos; let i = index">
+                <td>{{i+1}}. {{ element.cliente?.nombres }}</td>
                 <td>{{ element.cliente?.celular }}</td>
                 <td class="pago"><a class="pagado" href="">Pagado</a> S/{{ element.total }}</td>
                 <td>{{ formatFecha(element?.fecha) }}</td>

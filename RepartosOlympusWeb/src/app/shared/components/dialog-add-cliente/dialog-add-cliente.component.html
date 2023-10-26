@@ -9,24 +9,39 @@
     </div>
 
     <select formControlName="tipo">
-      <option value="Dni">Dni</option>
-      <option value="Ruc">Ruc</option>
-      <option value="CE">Carnet Extranjeria</option>
-      <option value="Otros">Otros</option>
+      <option>Dni</option>
+      <option>Ruc</option>
+      <option>Carnet Extranjeria</option>
+      <option>Otros</option>
     </select>
+    
     <div class="campo__form">
       <label for="">N° Documento</label>
       <input placeholder="Ingresa documento de identidad o pasaporte" formControlName="doc"><br>
     </div>
 
     <div class="campo__form">
-      <label for="">Nombres</label>
+      <label for="">Nombre legal</label>
       <input placeholder="Ingresa nombres y apellidos" formControlName="nombres"><br>
     </div>
 
     <div class="campo__form">
       <label for="">Teléfono</label>
       <input placeholder="Ingresa celular" formControlName="cel"><br>
+    </div>
+
+    <div class="campo__form">
+      <label>Genero</label>
+      <select formControlName="genero">
+        <option>Sin especificar</option>
+        <option>Hombre</option>
+        <option>Mujer</option>
+      </select>
+    </div>
+
+    <div class="campo__form">
+      <label>Correo</label>
+      <input placeholder="Ingresa correo electronico" formControlName="correo"><br>
     </div>
 
     <div class="campo__form">
@@ -53,7 +68,8 @@
 
     <div class="btn__form">
       <button mat-raised-button (click)="guardar()">Guardar</button>
-      <button mat-raised-button style="background-color: #E8E8E8; color: #808080;" (click)="closeDialog()">Cancelar</button>
+      <button mat-raised-button style="background-color: #E8E8E8; color: #808080;"
+        (click)="closeDialog()">Cancelar</button>
     </div>
 
   </form>

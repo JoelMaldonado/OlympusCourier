@@ -1,9 +1,6 @@
 <div class="reparto__container">
     <div class="title__reparto">
-
-        <mat-icon>arrow_back</mat-icon>
-
-        <button mat-icon-button (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+        <button mat-icon-button (click)="router.navigate(['../'])"><mat-icon>arrow_back</mat-icon></button>
         <span>Nuevo Reparto</span>
     </div>
 
@@ -13,9 +10,11 @@
 
         <div class="buscar">
             <div class="input-container">
-                <mat-icon class="icon">search</mat-icon>
-                <input [spellcheck]="false" placeholder="Buscar clientes" type="text" (ngModelChange)="search()"
-                    [formControl]="documento" class="input-with-icon" />
+                <mat-spinner class="icon" [diameter]="30" color="#047CC4" *ngIf="isLoading"></mat-spinner>
+                <button class="icon" mat-icon-button (click)="search()" matTooltip="Buscar"
+                    *ngIf="!isLoading"><mat-icon>search</mat-icon></button>
+                <input placeholder="Ingrese documentos o nombres" type="text" [formControl]="documento"
+                    class="input-with-icon" />
             </div>
 
 
@@ -29,11 +28,13 @@
 
     </div>
 
-    
+
     <div class="container__autocompletar">
         <ul class="auto__completar">
             <li *ngFor="let item of data$">
                 {{item.nombres}}
+                <button (click)="cliente = item;
+                this.documento.setValue(item.nombres ? item.nombres : this.documento.value)">select</button>
             </li>
         </ul>
     </div>
@@ -87,7 +88,7 @@
     <div class="container__total">
         <div class="container__clave">
             <span>Clave</span>
-            <input type="text">
+            <input placeholder="XXXX" type="text" maxlength="4">
         </div>
 
         <div class="container__costo">

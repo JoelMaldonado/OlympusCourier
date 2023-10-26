@@ -7,6 +7,7 @@ import { Cliente } from 'src/app/models/cliente';
 import { DialogAddClienteComponent } from 'src/app/shared/components/dialog-add-cliente/dialog-add-cliente.component';
 import { DialogAddItemRepartoComponent } from 'src/app/shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
+import Swal from 'sweetalert2';
 
 export interface ItemReparto {
   nGuia: string
@@ -39,23 +40,15 @@ export class AgregarRepartoComponent {
 
   router = inject(Router)
 
+  documento = new FormControl('')
+  data$: Cliente[] = [];
+  listClientes: Cliente[] = [];
+
   constructor(
     private clienteService: ClienteService,
     public dialog: MatDialog
   ) {
     this.listarClientes()
-
-    this.searchTerms
-    .pipe(
-      debounceTime(1000),
-      distinctUntilChanged()
-    )
-    .subscribe(async (searchTerm: string) => {
-      const results = await this.clienteService.searchCliente(searchTerm);
-      this.data$ = results;
-      console.log(results);
-    });
-
   }
 
 
@@ -97,10 +90,22 @@ export class AgregarRepartoComponent {
   }
 
   deleteItemReparto(item: ItemReparto) {
-    const index = this.listItemRepartos.indexOf(item);
-    if (index !== -1) {
-      this.listItemRepartos.splice(index, 1);
-    }
+    Swal.fire({
+      title: 'Eliminar Item',
+      text: '¿Estas seguro?',
+      icon: 'warning',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Eliminar',
+      showCancelButton: true,
+      confirmButtonColor: '#047CC4'
+    }).then((res)=>{
+      if(res.isConfirmed){
+        const index = this.listItemRepartos.indexOf(item);
+        if (index !== -1) {
+          this.listItemRepartos.splice(index, 1);
+        }
+      }
+    })
   }
 
   cliente: Cliente | undefined = undefined;
@@ -117,25 +122,20 @@ export class AgregarRepartoComponent {
     })
   }
 
-  back(){
-    this.router.navigate(['../'])
-  }
-
   /** Insertar Reparto **/
   submitForm() {
 
   }
+ 
+  isLoading = false;
 
-  documento = new FormControl('')
-  data$: Cliente[] = [];
-  listClientes: Cliente[] = [];
-
-  private searchTerms = new Subject<string>();
-  
   async search() {
     if (!this.documento.value) {
       return;
     }
-    this.searchTerms.next(this.documento.value); // Emitir el valor de búsqueda al observable
+    this.isLoading = true;
+    const results = await this.clienteService.searchCliente(this.documento.value);
+    this.data$ = results;
+    this.isLoading = false;
   }
 }
