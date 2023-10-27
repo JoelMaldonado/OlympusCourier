@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { Reparto } from 'src/app/models/reparto';
 import { RepartoService } from 'src/app/shared/services/reparto.service';
+import { ItemReparto } from '../agregar-reparto/agregar-reparto.component';
 
 @Component({
   selector: 'app-repartos',
@@ -35,20 +32,38 @@ export class RepartosComponent {
     this.router.navigateByUrl('/menu/agregar-reparto')
   }
 
-  formatFecha(fecha: Timestamp | undefined) {
+
+  getTotal(rep: Reparto): number {
+    if (rep.items != undefined) {
+      return rep.items?.reduce((acumulador, objeto) => acumulador + (objeto.cant * objeto.precio), 0);
+    } else {
+      return 0
+    }
+  }
+
+  formatFecha(fecha: Timestamp | undefined, pattern: string): string {
     if (fecha === undefined) {
       return "Sin fecha";
     } else {
-      const formattedDate = fecha.toDate().toLocaleDateString('es-ES', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric'
-      });
-  
-      return formattedDate.split('/').join('-'); // Reemplaza barras diagonales por guiones
+      const date = fecha.toDate();
+
+      if (pattern === "dd/MM/yyyy") {
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+      } else if (pattern === "HH:mm") {
+        const hours = date.getHours();
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const amOrPm = hours >= 12 ? "PM" : "AM";
+        const formattedHours = (hours % 12 || 12).toString().padStart(2, '0');
+        return `${formattedHours}:${minutes} ${amOrPm}`;
+      } else {
+        return "Formato no admitido";
+      }
     }
   }
-  
 
-  
+
+
 }

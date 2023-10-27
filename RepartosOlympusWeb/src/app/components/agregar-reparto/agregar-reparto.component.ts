@@ -1,12 +1,14 @@
 import { Component, inject, } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Cliente } from 'src/app/models/cliente';
+import { Reparto } from 'src/app/models/reparto';
 import { DialogAddClienteComponent } from 'src/app/shared/components/dialog-add-cliente/dialog-add-cliente.component';
 import { DialogAddItemRepartoComponent } from 'src/app/shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
+import { RepartoService } from 'src/app/shared/services/reparto.service';
 import Swal from 'sweetalert2';
 
 export interface ItemReparto {
@@ -23,6 +25,18 @@ export interface ItemReparto {
   styleUrls: ['./agregar-reparto.component.css']
 })
 export class AgregarRepartoComponent {
+
+
+  constructor(
+    public dialog: MatDialog
+  ) {
+    this.listarClientes()
+  }
+
+  clienteService = inject(ClienteService)
+  repartoService = inject(RepartoService)
+
+  clave = new FormControl('', Validators.maxLength(4))
 
   displayFn(option: any): string {
     return option && option.doc ? option.doc : '';
@@ -43,13 +57,6 @@ export class AgregarRepartoComponent {
   documento = new FormControl('')
   data$: Cliente[] = [];
   listClientes: Cliente[] = [];
-
-  constructor(
-    private clienteService: ClienteService,
-    public dialog: MatDialog
-  ) {
-    this.listarClientes()
-  }
 
   showSugerencias = false
 
@@ -148,7 +155,7 @@ export class AgregarRepartoComponent {
     })
   }
 
-  editCliente(){
+  editCliente() {
 
   }
 
@@ -168,5 +175,53 @@ export class AgregarRepartoComponent {
     const results = await this.clienteService.searchCliente(this.documento.value);
     this.data$ = results;
     this.isLoading = false;
+  }
+
+
+  getTotal() {
+    const sumaDeCostos = this.listItemRepartos.reduce((acumulador, objeto) => acumulador + (objeto.cant * objeto.precio), 0);
+    return sumaDeCostos
+  }
+
+  async guardarReparto() {
+    const toast = Swal.mixin({
+      toast: true,
+      position: 'bottom',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    if (this.cliente?.id != undefined) {
+      if(this.listItemRepartos.length >0 ){
+
+        const reparto: Reparto = {
+          anotacion: '',
+          clave: this.clave.value ? this.clave.value : '',
+          estado: 'Pendiente',
+          fecha: Timestamp.now(),
+          idCliente: this.cliente.id,
+          items: this.listItemRepartos,
+        }
+        const res = await this.repartoService.insert(reparto)
+        if(res){
+          this.router.navigate(['../'])
+        }
+      }else{
+        toast.fire({
+          icon: 'question',
+          title: 'Ingrese un item'
+        })
+      }
+    } else {
+
+      toast.fire({
+        icon: 'question',
+        title: 'Ingrese un cliente'
+      })
+    }
   }
 }

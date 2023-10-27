@@ -62,7 +62,7 @@
             <tr>
                 <th>Cliente</th>
                 <th>Fecha</th>
-                <th>E. Flete</th>
+                <th>Flete</th>
                 <th>Estado</th>
                 <th><mat-icon>menu</mat-icon></th>
             </tr>
@@ -70,8 +70,8 @@
         <tbody>
             <tr *ngFor="let element of listRepartos; let i = index">
                 <td>{{i+1}}. {{ element.cliente?.nombres }}</td>
-                <td>{{ formatFecha(element?.fecha) }}</td>
-                <td class="pago"> S/{{ element.total }}</td>
+                <td>{{ formatFecha(element?.fecha,'dd/MM/yyyy') }}<br>{{ formatFecha(element?.fecha, 'HH:mm') }} </td>
+                <td class="pago"> S/{{ getTotal(element)}}</td>
 
                 <td class="estado__pendiente">
                     <div class="estado-pendientes">{{element.estado}}</div>
@@ -83,7 +83,7 @@
                             <button class="btn__icon" mat-icon-button matTooltip="Ver más" [matMenuTriggerFor]="mas">
                                 <mat-icon class="icon__horizontal larger-icon">more_horiz</mat-icon>
                             </button>
-                            
+
                             <mat-menu #mas="matMenu">
                                 <button mat-menu-item>
                                     <mat-icon color="primary">visibility</mat-icon>
@@ -95,9 +95,9 @@
                                 </button>
                             </mat-menu>
                         </div>
-                        
+
                     </div>
-                </td>                
+                </td>
             </tr>
         </tbody>
     </table>

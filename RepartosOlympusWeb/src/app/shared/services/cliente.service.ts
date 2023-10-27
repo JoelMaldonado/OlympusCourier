@@ -99,6 +99,7 @@ export class ClienteService {
     const nameMatches: Cliente[] = [];
     nameResults.forEach((doc) => {
       const cliente = doc.data() as Cliente;
+      cliente.id = doc.id;
       nameMatches.push(cliente);
     });
 

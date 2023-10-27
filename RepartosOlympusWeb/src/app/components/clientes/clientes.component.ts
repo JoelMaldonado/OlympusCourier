@@ -29,7 +29,7 @@ export class ClientesComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     this.listClientes.paginator = this.paginator;
-    this.paginator._intl.itemsPerPageLabel = 'Clientes por página';
+    this.paginator._intl.itemsPerPageLabel = 'items por página';
   }
   
   constructor(

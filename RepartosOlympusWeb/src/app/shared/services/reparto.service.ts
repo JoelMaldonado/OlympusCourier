@@ -3,6 +3,7 @@ import { Firestore, addDoc, Timestamp, collection, getDocs, collectionData } fro
 import { Reparto } from 'src/app/models/reparto';
 import { ClienteService } from './cliente.service';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -11,59 +12,55 @@ export class RepartoService {
 
   constructor(
     private fb: Firestore,
-    private clienteService:ClienteService
+    private clienteService: ClienteService
   ) {
 
   }
 
-  getAll(): Observable<Reparto[]>{
-    const col = collection(this.fb, 'Reparto')
-    const list = collectionData(col)
-    return list
-  }
-
   async listarRepartos(): Promise<Reparto[]> {
-    const col = collection(this.fb, 'Reparto')
-    const allTodos = await getDocs(col);
-    const destinos: Reparto[] = [];
-
-    allTodos.docs.forEach(async doc => {
-      const data : any = doc.data();
-      const reparto : Reparto = {
-        cliente: await this.clienteService.getClienteById(data.idCliente),
-        total: data.total,
-        fecha: data.fecha,
-        estado: data.estado,
-        distrito: data.distrito,
-        direc: data.direc,
-        referencia: data.referencia,
-        clave: data.clave,
-        anotacion: data.anotacion,
-      }
-      destinos.push(reparto);
-    });
-    return destinos;
+    try {
+      const col = collection(this.fb, 'Reparto')
+      const allRepartos = await getDocs(col);
+      const destinos: Reparto[] = [];
+      allRepartos.docs.forEach(async doc => {
+        const data: any = doc.data();
+        const reparto: Reparto = {
+          cliente: await this.clienteService.getClienteById(data.idCliente),
+          fecha: data.fecha,
+          estado: data.estado,
+          clave: data.clave,
+          anotacion: data.anotacion,
+          items: data.items,
+        }
+        reparto.id = data.id
+        destinos.push(reparto);
+      });
+      return destinos;
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al obtener',
+        text: 'Hubo un problema al obtener los repartos. Por favor, inténtelo de nuevo más tarde.',
+      })
+      return []
+    }
   }
 
-  async insert(datos:any) {
-    const col = collection(this.fb, 'Reparto')
-    const reparto: Reparto = {
-      cliente: {
-        tipo: datos.tipo,
-        doc: datos.documento,
-        nombres: datos.nombres,
-        celular: datos.celular,
-        distrito: datos.distrito,
-        direc: datos.direc,
-        ref: datos.referencia,
-      },
-      total: parseInt(datos.total, 10) ?? 0,
-      fecha: Timestamp.now(),
-      estado: "Pendiente",
-      clave: datos.clave,
-      anotacion: datos.anotaciones,
+  async insert(item: Reparto): Promise<boolean> {
+    try {
+      const col = collection(this.fb, 'Reparto');
+      await addDoc(col, item);
+      return true;
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al insertar',
+        text: 'Hubo un problema al insertar el documento. Por favor, inténtelo de nuevo más tarde.',
+
+      })
+      return false;
     }
-    addDoc(col, reparto)
   }
 
 }

@@ -39,7 +39,6 @@
 
     <div class="container__completado">
         <div class="completado" *ngIf="cliente">
-
             <div class="span__completado">
                 <mat-icon>description</mat-icon><span class="title">Documento</span>
                 <span class="sub__title"> {{cliente.doc}} </span>
@@ -64,14 +63,6 @@
                 <mat-icon>person</mat-icon><span  class="title">Referencia</span>
                 <span class="sub__title"> {{cliente.ref}}</span>
             </div>
-
-        
-
-
-           
-           
-           
-      
         </div>
     </div>
 
@@ -117,17 +108,17 @@
     <div class="container__total">
         <div class="container__clave">
             <span>Clave</span>
-            <input placeholder="XXXX" type="text" maxlength="4">
+            <input placeholder="XXXX" type="text" maxlength="4" [formControl] = "clave">
         </div>
 
         <div class="container__costo">
             <span class="costo">Costo T.</span>
-            <span>42.00</span>
+            <span>S/{{getTotal()}}</span>
         </div>
 
     </div>
     <div class="container__btn">
-        <button mat-raised-button>Guardar</button>
+        <button mat-raised-button (click)="guardarReparto()">Guardar</button>
         <button mat-raised-button style="background-color: #E8E8E8; color: #808080;"
             (click)="cancel()">Cancelar</button>
     </div>

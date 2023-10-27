@@ -1,15 +1,14 @@
 import { Timestamp } from "@angular/fire/firestore";
 import { Cliente } from "./cliente";
+import { ItemReparto } from "../components/agregar-reparto/agregar-reparto.component";
 
 export interface Reparto {
-    id?:string;
-    cliente?:Cliente;
-    total?:number;
-    fecha?:Timestamp;
-    estado?:string;
-    distrito?:string;
-    direc?:string;
-    referencia?:string;
-    clave?:string;
-    anotacion?:string;
+    id?: string;
+    anotacion?: string;
+    clave?: string;
+    estado?: string;
+    fecha?: Timestamp;
+    idCliente?: string;
+    cliente?: Cliente;
+    items?: ItemReparto[]
 }

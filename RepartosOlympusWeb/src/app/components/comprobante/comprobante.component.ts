@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/shared/services/cliente.service';
 import { SunatService } from 'src/app/shared/services/sunat.service';
@@ -10,7 +12,24 @@ import { SunatService } from 'src/app/shared/services/sunat.service';
 })
 export class ComprobanteComponent {
 
-  listComprobantes: any[] = [];
+  listComprobantes = new MatTableDataSource<any>();
+
+  columnas: string[] = [
+    'num',
+    'tipo',
+    'cliente',
+    'total',
+    'fecha',
+    'estado',
+    'act',
+  ];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.listComprobantes.paginator = this.paginator;
+    this.paginator._intl.itemsPerPageLabel = 'items por página';
+  }
 
   constructor(
     private sunatService: SunatService
@@ -19,15 +38,15 @@ export class ComprobanteComponent {
   }
 
   async listarComprobantes() {
-    this.listComprobantes = await this.sunatService.listarDocumentos();
+    this.listComprobantes.data = await this.sunatService.listarDocumentos();
 
   }
 
   timestampAfechaActualFormateada(timestamp: any) {
     const milisegundos = timestamp * 1000;
     const fecha = new Date(milisegundos);
-    const dia = String(fecha.getDate()).padStart(2, '0'); // Agrega ceros iniciales si es necesario
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Suma 1 al mes ya que los meses comienzan desde 0
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
     const año = fecha.getFullYear();
 
     return `${dia}/${mes}/${año}`;
