@@ -13,7 +13,7 @@
 }
 
 .date-input {
-  margin-left: 27.5rem;
+  margin-left: 29.1rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -35,6 +35,7 @@
 
 .btn__navbar {
   margin-top: -18px;
+  margin-left: -25px;
 }
 
 .btn-add {

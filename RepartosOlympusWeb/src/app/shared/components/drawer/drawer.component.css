@@ -16,26 +16,60 @@
 .navigation.active .admin {
     display: block;
 }
+.container__logo{
+    display: flex;
+    align-items: center;
+    gap:25px;
+    font-family: metropolis;
+    font-weight: bold;
+    color: white;
+  
+}
+.container__logo .imagen{
+    width: 170px;
+    height: 25px;
+}
+
+.container__logo .icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ width: 50px;
+ height: 50px;
+ padding: 5px;
+  border-radius: 50%;
+ justify-content: center;
+    background-color: white;
+
+}
+
+img{
+    width: 40px;
+    height: 30px;
+}
 
 .closed {
     width: 300px;
     border-radius: 20px;
+    font-size: 1.27rem;
+    font-family: metropolis;
    
 }
 .container__admin{
     display: flex;
     position: absolute;
     flex-direction: row;
+    align-items: center;
     bottom: 50px;
-    right: 18px;
-    gap: 100px;
+    right: 20px;
+    gap: 75px;
 }
 
 .admin{
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 .admin__nombre{
     display: flex;
@@ -51,6 +85,11 @@
 color: white;
 font-size: 1.2rem;
  font-weight: 400;
+}
+
+.icon__user img{
+    width: 60px;
+    height: 50px;
 }
 
 
@@ -125,6 +164,7 @@ font-size: 1.2rem;
 
 .navigation ul li:not(:first-child):hover a {
     color: #047CC4;
+    font-weight: 700;
 }
 
 .navigation ul li a .icon{
@@ -147,3 +187,4 @@ font-size: 1.2rem;
     white-space: nowrap;
 
 }
+
