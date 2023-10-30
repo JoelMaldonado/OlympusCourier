@@ -1,87 +1,98 @@
-<div class="container__fecha">
+<div class="container">
 
-    <div class="btn__navbar">
-        <button mat-raised-button class="btn-add" style="background-color: #047CC4; color: white;">
-            <mat-icon>add</mat-icon>
-            Añadir Reparto
-        </button>
-    </div>
+    <div class="container__fecha">
+
+        <div class="date-input">
 
 
-    <div class="date-input">
+            <div class="container__1">
 
-        <div class="container__1">
-            <label for="">Fechas</label>
-            <div class="input-container">
-                <input type="text" id="from" placeholder="Desde" [matDatepicker]="picker1" (click)="picker1.open()"
-                    readonly>
-                <i class="material-icons" (click)="picker1.open()">calendar_today</i>
-                <mat-datepicker #picker1></mat-datepicker>
+                <div class="input__search">
+                    <label for="">Tipo Doc.</label>
+                    <div class="container__input">
+                        <select type="text" class="search-input" placeholder="Nombres, Razón social">
+                            <option value="">asdas</option>
+                            <option value="">asdas</option>
+                            <option value="">asdas</option>
+                        </select>
+                    </div>
+                </div>
+
+               
+
             </div>
 
-            <div class="input-container">
-                <input type="text" id="to" placeholder="Hasta" [matDatepicker]="picker2" (click)="picker2.open()"
-                    readonly>
-                <i class="material-icons" (click)="picker2.open()">calendar_today</i>
-                <mat-datepicker #picker2></mat-datepicker>
+            <div class="container__1">
+                <div class="input__search">
+                    <label for="" style="width: 85px;">N° Doc.</label>
+                    <div class="container__input">
+                        <input type="text" class="search-input">
+                    </div>
+                </div>
+                <button mat-icon-button class="icon_btn" matTooltip="Exportar">
+                    <mat-icon>save_alt</mat-icon>
+                </button>
+
+                <button mat-icon-button class="icon_btn" matTooltip="Perfil">
+                    <mat-icon>person_outline</mat-icon>
+                </button>
             </div>
-
-            <button mat-icon-button class="icon_btn" matTooltip="Exportar">
-                <mat-icon>save_alt</mat-icon>
-            </button>
-
-            <button mat-icon-button class="icon_btn" matTooltip="Perfil">
-                <mat-icon>person_outline</mat-icon>
-            </button>
 
         </div>
 
-        <div class="input__search">
-            <label for="">Buscar</label>
-            <div class="container__input">
-                <input type="text" class="search-input">
-                <span class="search-icon material-icons">search</span>
-            </div>
-        </div>
 
     </div>
+
+    <div class="input__search">
+        <label for="">Nombres</label>
+        <div style="display: flex; gap: 6px; align-items: center;" class="container__input">
+            <input type="text" class="input" placeholder="Ingrese nombre legal">
+            <div class="icon__search">
+                <a href="">
+                    <mat-icon class="search">search</mat-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+    <table mat-table [dataSource]="listClientes">
+
+        <ng-container matColumnDef="nombres">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="nombres">Nombres</th>
+            <td mat-cell *matCellDef="let item; let i = index" style="text-align: start;">{{i+1}}. {{item.nombres}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="tipo">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let item">{{item.tipo}}</td>
+        </ng-container>
+        <ng-container matColumnDef="documento">
+            <th mat-header-cell *matHeaderCellDef>Documento</th>
+            <td mat-cell *matCellDef="let item">{{item.doc}} </td>
+        </ng-container>
+        <ng-container matColumnDef="direc">
+            <th mat-header-cell *matHeaderCellDef>Dirección</th>
+            <td mat-cell *matCellDef="let item"> {{item.direc}} </td>
+        </ng-container>
+        <ng-container matColumnDef="telf">
+            <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+            <td mat-cell *matCellDef="let item"> {{item.celular}} </td>
+        </ng-container>
+        <ng-container matColumnDef="act">
+            <th mat-header-cell *matHeaderCellDef>
+                <button mat-mini-fab (click)="openDialog()" matTooltip="Agregar Cliente"
+                    style="background-color: var(--colorP1);"><mat-icon>person_add</mat-icon></button>
+            </th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button (click)="editCliente(item)"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button><mat-icon>delete</mat-icon></button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row = index; columns: columnas;"
+            [ngStyle]="{'background-color': row % 2 === 0 ? '#ffffff' : '#f8f8f8'}" style="height: 70px;"></tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+
 </div>
-<table mat-table [dataSource]="listClientes">
-
-    <ng-container matColumnDef="nombres">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header="nombres">Nombres</th>
-        <td mat-cell *matCellDef="let item; let i = index" style="text-align: start;">{{i+1}}. {{item.nombres}} </td>
-    </ng-container>
-    <ng-container matColumnDef="tipo">
-        <th mat-header-cell *matHeaderCellDef>Tipo</th>
-        <td mat-cell *matCellDef="let item">{{item.tipo}}</td>
-    </ng-container>
-    <ng-container matColumnDef="documento">
-        <th mat-header-cell *matHeaderCellDef>Documento</th>
-        <td mat-cell *matCellDef="let item">{{item.doc}} </td>
-    </ng-container>
-    <ng-container matColumnDef="direc">
-        <th mat-header-cell *matHeaderCellDef>Dirección</th>
-        <td mat-cell *matCellDef="let item"> {{item.direc}} </td>
-    </ng-container>
-    <ng-container matColumnDef="telf">
-        <th mat-header-cell *matHeaderCellDef>Teléfono</th>
-        <td mat-cell *matCellDef="let item"> {{item.celular}} </td>
-    </ng-container>
-    <ng-container matColumnDef="act">
-        <th mat-header-cell *matHeaderCellDef>
-            <button mat-mini-fab (click)="openDialog()" matTooltip="Agregar Cliente"
-                style="background-color: var(--colorP1);"><mat-icon>add</mat-icon></button>
-        </th>
-        <td mat-cell *matCellDef="let item">
-            <button mat-icon-button (click)="editCliente(item)"><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button><mat-icon>delete</mat-icon></button>
-        </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-    <tr mat-row *matRowDef="let row = index; columns: columnas;"
-        [ngStyle]="{'background-color': row % 2 === 0 ? '#ffffff' : '#f8f8f8'}" style="height: 70px;"></tr>
-
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
-</mat-paginator>

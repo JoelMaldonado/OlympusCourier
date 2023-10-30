@@ -1,23 +1,34 @@
 .container {
-  margin-left: 180px;
-  margin-top: 80px;
+  margin-left: 90px;
+  margin-top: 50px;
 
 }
 
 .container__fecha {
   display: flex;
-  flex-direction: row;
-  padding-left: 30px;
+  flex-direction: column;
   padding-right: 25px;
 
 }
 
-.date-input {
-  margin-left: 29.1rem;
+.btn__icon__user {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-direction: row; /* Mantén la disposición en fila */
+  margin-bottom: 40px;
+}
 
+.container__icon{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 1090px;
+}
+
+.input__clientes, .date-input{
+  display: flex;
+  flex-direction: row;
+  gap: 170px;
+  height: 50px;
 
 }
 
@@ -26,23 +37,38 @@
   flex-direction: row;
   align-items: center;
   gap: 13px;
+  margin-left: 17rem;
 
+}
+
+.input__search:nth-child(2){
+  margin-left: 17rem;
 }
 
 .input__search {
   position: relative;
 }
 
-.btn__navbar {
-  margin-top: -18px;
-  margin-left: -25px;
+.container__input__clientes{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
 }
 
+::placeholder {
+  color: #808080; /* Cambia #FF0000 al color que desees */
+  font-family: metropolis;
+}
+
+input{
+  color: #808080; /* Cambia #FF0000 al color que desees */
+  font-family: metropolis;
+}
 .btn-add {
   width: 200px;
   height: 40px;
-  background-color:
-    #047CC4;
+  background-color: #047CC4;
   color: white;
   border-radius: 20px;
   padding: 10px;
@@ -54,13 +80,13 @@ label {
   color: #808080;
   font-size: 17px;
   font-weight: 600;
+  width: 100px;
 }
 
 .search-input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
-  width: 200px;
   outline: none;
 }
 
@@ -93,9 +119,15 @@ label {
   align-items: center;
   gap: 13px;
 }
+.input__search input:focus{
+  outline: none;
+  border: 2px solid #047CC4;
+}
+
+
 
 .search-input {
-  width: 460px;
+  width: 340px;
   padding: 15px;
   border: none;
   background-color: #F1F1F1;
@@ -111,7 +143,23 @@ label {
   cursor: pointer;
 }
 
+.icon__search {
+  display: flex;
+  background-color: #047CC4;
+  border-radius: 13px;
+  width: 47px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+}
 
+.search{
+  font-size: 1.8rem;
+  color: white;
+  position: relative;
+  left: -1px;
+  top: 2px;
+}
 
 
 .input-container {
@@ -124,7 +172,7 @@ label {
   border: none;
   border-radius: 15px;
   background-color: #F1F1F1;
-  width: 160px;
+  width: 190px;
 
   /* Ajusta el ancho según tu preferencia */
 }
@@ -177,6 +225,25 @@ label {
   outline: none;
   box-shadow: none;
 }
+select{
+  padding-left: 1.25rem !important;
+padding-right: 1.25rem !important;
+width: 400px;
+height: 53px;
+background-color: #f4f4f5;
+border-radius: 15px;
+font-size: 1.1rem;
+color: #808080;
+font-family: 'Metropolis', sans-serif;
+border: none;
+}
+
+select:focus{
+  outline: none;
+  border: 2px solid #047CC4;
+}
+
+
 
 
 .input-container i:hover {
@@ -191,8 +258,8 @@ label {
 
 
 .table {
-  width: 1200px;
-  /* Centrar la tabla en la página */
+  width: 95%;
+  /* Centrar la tabla en la página 1400px*/
   border-collapse: collapse;
   margin-top: 70px;
   /* Espacio entre el botón y la tabla */
@@ -242,11 +309,7 @@ label {
 }
 
 
-.btn-add {
-  display: block;
-  margin: 20px auto;
-  /* Centrar el botón */
-}
+
 
 .table th:nth-child(2),
 .table td:nth-child(2) {
@@ -255,22 +318,6 @@ label {
   /* Ajusta el ancho según tu preferencia */
 }
 
-
-/*
-
-
-a {
-  text-decoration: none;
-  padding: 5px 12px 5px 12px;
-  font-size: 0.93rem;
-  background-color: #dcfce7;
-  color: #16a34a;
-
-  font-weight: 600;
-  border-radius: 20px;
-  /* Redondea todas las esquinas
-}
-*/
 .pagado {
   margin-right: 40px;
 }
@@ -310,7 +357,7 @@ th mat-icon {
 .estado-pendientes {
   width: 140px;
   height: 38px;
-  margin-left: 45px;
+  margin-left: 95px;
   font-size: 1.1rem;
   font-family: metropolis;
   background: #6ADB25;

@@ -111,6 +111,11 @@ select {
   font-family: 'Metropolis', sans-serif;
   border: none;
 }
+select:focus{
+  outline: none;
+  border: 2px solid #047CC4;
+}
+
 option{
   padding: 20px;
 }
@@ -124,11 +129,6 @@ option{
   transform: translateY(-50%);
   pointer-events: none;
   font-size: 16px;
-}
-
-
-select:focus {
-  border: 2px solid #047CC4;
 }
 
 label {

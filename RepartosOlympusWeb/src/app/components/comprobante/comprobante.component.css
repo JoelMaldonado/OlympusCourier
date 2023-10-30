@@ -1,5 +1,294 @@
+.container {
+    margin-left: 50px;
+    margin-top: 80px;
+    padding-right: 20px;
+
+}
+
+.date-input,
+.date-input2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+}
+
+.container__fecha {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.date-input3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    height: 65px;
+
+}
+
+.container__1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+
+}
+
+.container__2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.container__2 .container__input input {
+    width: 483px;
+
+}
+
+.container__3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 13px;
+}
+
+.container__3 .container__input select {
+    width: 200px;
+
+
+}
+
+.container__4 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 178px;
+
+}
+
+.container__4 .container__input select {
+    width: 200px;
+
+}
+
+.container__icon {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+}
+
+.btn__navbar {
+    margin-top: -18px;
+    margin-left: -25px;
+}
+
+label {
+    font-family: metropolis;
+    color: #808080;
+    font-size: 17px;
+    width: 120px;
+    font-weight: 600;
+}
+
+
+
+.input {
+    width: 408px;
+    padding: 15px;
+    border: none;
+    background-color: #F1F1F1;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+/* Estilo para el contenedor del select */
+.select-container {
+    position: relative;
+    width: 400px;
+    height: 53px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #f4f4f5;
+}
+
+/* Estilo para el select */
+select {
+    width: 100%;
+    border: none;
+    padding: 1.25rem;
+    background-color: transparent;
+    font-size: 1.1rem;
+    color: #808080;
+    font-family: 'Metropolis', sans-serif;
+    appearance: none;
+    cursor: pointer;
+}
+
+/* Estilo para las opciones del select */
+select option {
+    padding: 10px 0;
+    /* Ajusta el espaciado vertical según tus necesidades */
+}
+
+
+/* Estilo para el ícono de clase "arrow-more" */
+
+
+/* Estilo para el borde cuando el select está enfocado */
+select:focus {
+    outline: none;
+    border: 2px solid #047CC4;
+}
+
+
+
+.input__search input:focus {
+    outline: none;
+    border: 2px solid #047CC4;
+}
+
+/* Estilos para el ícono de la lupa */
+
+.input__search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+}
+
+.search-input {
+    width: 460px;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #F1F1F1;
+    font-size: 16px;
+}
+
+.icon__search {
+    display: flex;
+    background-color: #047CC4;
+    border-radius: 13px;
+    width: 47px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon__cliente {
+    display: flex;
+    background-color: #047CC4;
+    border-radius: 13px;
+    width: 37px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.search {
+    font-size: 1.8rem;
+    color: white;
+    position: relative;
+    left: -1px;
+    top: 2px;
+}
+
+
+
+
+
+.container__input input[type="text"] {
+    font-size: 16px;
+    /* Tamaño de fuente */
+    color: #3f3f46;
+    /* Color del texto */
+
+
+
+}
+
+.container__input input::placeholder {
+    color: #808080;
+    font-family: metropolis;
+    font-size: 16px;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container input {
+    cursor: pointer;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    background-color: #F1F1F1;
+    width: 225px;
+
+    /* Ajusta el ancho según tu preferencia */
+}
+
+.input-container input[type="text"] {
+    font-size: 16px;
+    /* Tamaño de fuente */
+    color: #3f3f46;
+    /* Color del texto */
+
+
+
+}
+
+.input-container input::placeholder {
+    color: #808080;
+    font-family: metropolis;
+    font-size: 16px;
+}
+
+.input-container input:hover {
+    background-color: rgba(218, 218, 218, 0.6);
+}
+
+.input-container i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #777;
+    /* Cambia el color del ícono según tu preferencia */
+}
+
+/* Aplica espaciado de letras solo a las fechas ingresadas, no al placeholder */
+.input-container input::placeholder {
+    letter-spacing: 0;
+    /* Restablece el espaciado del placeholder a cero */
+}
+
+.input-container input:not(:placeholder-shown) {
+    letter-spacing: 2px;
+    /* Ajusta el espaciado entre caracteres según tu preferencia */
+}
+
+/* Estilos adicionales para dar una apariencia más atractiva */
+.input-container input:focus {
+
+    outline: none;
+    box-shadow: none;
+}
+
+
 table {
-    padding: 20px;
+    border-top: 1px solid #D9D9D9;
+    margin-top: 50px;
 }
 
 table th {
@@ -13,4 +302,11 @@ table td {
     color: #808080;
     font-size: 1rem;
     text-align: center;
+}
+
+
+
+.icon_btn {
+    background-color: #f8f8f8;
+    color: var(--colorP1);
 }
