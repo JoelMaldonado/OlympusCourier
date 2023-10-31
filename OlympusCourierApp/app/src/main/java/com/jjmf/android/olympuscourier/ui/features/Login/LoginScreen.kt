@@ -28,6 +28,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -60,6 +61,13 @@ fun LoginScreen(
     val context = LocalContext.current
 
     val focus = LocalFocusManager.current
+
+    if(viewModel.toMenu){
+        LaunchedEffect(key1 = Unit){
+            viewModel.toMenu = false
+            toMenu()
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -140,21 +148,25 @@ fun LoginScreen(
             )
             RecordarUsuario()
             Spacer(modifier = Modifier.height(5.dp))
-            Button(
-                onClick = toMenu,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = ColorP1,
-                    contentColor = Color.White,
-                    disabledContainerColor = ColorP1
-                ),
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(10.dp),
-                contentPadding = PaddingValues(15.dp),
-                enabled = !viewModel.loader
-            ) {
-                if (viewModel.loader) {
-                    CircularProgressIndicator(color = Color.White, modifier = Modifier.size(25.dp))
-                } else {
+
+            if (viewModel.loader){
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            }else{
+                Button(
+                    onClick = {
+                        viewModel.login()
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = ColorP1,
+                        contentColor = Color.White,
+                        disabledContainerColor = ColorP1
+                    ),
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(10.dp),
+                    contentPadding = PaddingValues(15.dp)
+                ) {
                     Text(text = "Ingresar", fontWeight = FontWeight.Medium)
                 }
             }

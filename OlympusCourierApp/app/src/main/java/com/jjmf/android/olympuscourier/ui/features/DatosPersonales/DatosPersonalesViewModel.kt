@@ -1,4 +1,4 @@
-package com.jjmf.android.olympuscourier.ui.features.Menu
+package com.jjmf.android.olympuscourier.ui.features.DatosPersonales
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,24 +9,23 @@ import com.jjmf.android.olympuscourier.app.BaseApp.Companion.prefs
 import com.jjmf.android.olympuscourier.data.repository.UsuarioRepository
 import com.jjmf.android.olympuscourier.domain.model.Usuario
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MenuViewModel @Inject constructor(
-    private val repository: UsuarioRepository
+class DatosPersonalesViewModel @Inject constructor(
+    private val repository: UsuarioRepository,
 ) : ViewModel() {
-
-    var usuario by mutableStateOf<Usuario?>(null)
-
     fun init() {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch {
             try {
-                usuario = repository.getList().find { it.id == prefs.getUserId() }
+                user = repository.getList().find { it.id == prefs.getUserId() }
             }catch (e:Exception){
 
             }
         }
     }
+
+    var user by mutableStateOf<Usuario?>(null)
+    var loader by mutableStateOf(false)
 }

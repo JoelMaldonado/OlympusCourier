@@ -30,6 +30,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { DialogDetalleRepartoComponent } from './shared/components/dialog-detalle-reparto/dialog-detalle-reparto.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     CajaTextoComponent,
     DialogAddItemRepartoComponent,
     NavbarComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    DialogDetalleRepartoComponent
   ],
   imports: [
     BrowserModule,

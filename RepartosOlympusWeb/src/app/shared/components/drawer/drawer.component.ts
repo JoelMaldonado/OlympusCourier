@@ -31,4 +31,11 @@ export class DrawerComponent {
     this.router.navigate(['/login']);
     localStorage.removeItem('token');
   }
+
+  selected = 'repartos'
+
+  navegar(url: string) {
+    this.router.navigate(['/menu', url]);
+    this.selected = url;
+  }
 }

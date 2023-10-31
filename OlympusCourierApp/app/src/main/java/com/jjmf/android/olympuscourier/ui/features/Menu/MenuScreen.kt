@@ -19,12 +19,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.jjmf.android.olympuscourier.R
+import com.jjmf.android.olympuscourier.app.BaseApp.Companion.prefs
 import com.jjmf.android.olympuscourier.ui.components.FondoBlanco
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
 import com.jjmf.android.olympuscourier.ui.theme.ColorP2
@@ -43,11 +46,24 @@ import com.jjmf.android.olympuscourier.ui.theme.ColorS1
 
 @Composable
 fun MenuScreen(
-    toVerRepartos:()->Unit,
+    toVerRepartos: () -> Unit,
+    toDatosPersonales: () -> Unit,
     viewModel: MenuViewModel = hiltViewModel(),
 ) {
 
+    LaunchedEffect(key1 = Unit) {
+        viewModel.init()
+    }
+
     val context = LocalContext.current
+
+    if (viewModel.usuario == null) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+    }
+
+    val usuario = viewModel.usuario ?: return
 
     Box(modifier = Modifier.fillMaxSize()) {
         FondoBlanco()
@@ -64,7 +80,7 @@ fun MenuScreen(
             )
             Spacer(modifier = Modifier.height(50.dp))
             Text(
-                text = "Hola Joel Maldonado",
+                text = "Hola ${usuario.nombres}",
                 color = ColorP1,
                 fontWeight = FontWeight.SemiBold
             )
@@ -107,7 +123,7 @@ fun MenuScreen(
                     modifier = Modifier.weight(1f),
                     res = R.drawable.ic_perfil,
                     text = "Datos\nPersonales",
-                    click = {}
+                    click = toDatosPersonales
                 )
             }
         }
@@ -181,7 +197,7 @@ fun CardHome(
     modifier: Modifier,
     @DrawableRes res: Int,
     text: String,
-    click: () -> Unit
+    click: () -> Unit,
 ) {
     val context = LocalContext.current
     Card(

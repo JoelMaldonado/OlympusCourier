@@ -8,5 +8,6 @@ interface RepartoRepository {
 
     suspend fun getAll() : Flow<List<RepartoDto>>
     suspend fun get(idReparto:String) : Reparto?
+    suspend fun update(idReparto:String)
 
 }

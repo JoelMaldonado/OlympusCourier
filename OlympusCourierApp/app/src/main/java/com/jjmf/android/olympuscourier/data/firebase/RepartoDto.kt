@@ -7,14 +7,11 @@ import com.jjmf.android.olympuscourier.domain.model.Reparto
 data class RepartoDto(
     var id: String? = null,
     val idCliente: String? = null,
-    val distrito: String? = null,
-    val direc: String? = null,
-    val referencia: String? = null,
     val estado: String? = null,
-    val total: Double? = null,
     val fecha: Timestamp? = null,
-    val clave:String? = null,
-    val anotacion:String? = null,
+    val clave: String? = null,
+    val anotacion: String? = null,
+    val items: List<ItemRepartoDto>? = null,
 ) {
     fun toDomain(
         cliente: Cliente?,
@@ -23,19 +20,18 @@ data class RepartoDto(
             id = id ?: "Sin Valor",
             cliente = cliente ?: Cliente(
                 id = "Sin Valor",
-                documento = "Sin Valor",
+                doc = "Sin Valor",
                 nombres = "Sin Valor",
-                apellidos = "Sin Valor",
-                celular = "Sin Valor"
+                celular = "Sin Valor",
+                distrito = "Sin Valor",
+                direc = "Sin Valor",
+                referencia = "Sin Valor",
             ),
-            distrito = distrito ?: "Sin Valor",
-            direc = direc ?: "Sin Valor",
-            referencia = referencia ?: "Sin Valor",
             estado = estado ?: "Sin Valor",
-            total = total ?: 0.0,
             fecha = fecha ?: Timestamp.now(),
             clave = clave ?: "Sin Valor",
-            anotacion = anotacion ?: "Sin Valor"
+            anotacion = anotacion ?: "Sin Valor",
+            items = items?.map { it.toDomain() } ?: emptyList()
         )
     }
 }

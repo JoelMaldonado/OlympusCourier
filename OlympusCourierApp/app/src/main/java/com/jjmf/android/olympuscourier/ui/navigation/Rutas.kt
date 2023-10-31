@@ -7,4 +7,6 @@ sealed class Rutas(val url:String){
     object DetailReparto:Rutas(url = "detail_reparto?{id}"){
         fun sendId(id:String) = "detail_reparto?$id"
     }
+
+    object DatosPersonales:Rutas(url = "datos_personales")
 }

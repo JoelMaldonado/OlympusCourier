@@ -42,15 +42,7 @@ export class AgregarRepartoComponent {
     return option && option.doc ? option.doc : '';
   }
 
-  listItemRepartos: ItemReparto[] = [
-    {
-      nGuia: '001-000001',
-      cat: 'Caja',
-      descrip: 'Marron',
-      precio: 20,
-      cant: 2,
-    }
-  ];
+  listItemRepartos: ItemReparto[] = [];
 
   router = inject(Router)
 
@@ -201,7 +193,7 @@ export class AgregarRepartoComponent {
         const reparto: Reparto = {
           anotacion: '',
           clave: this.clave.value ? this.clave.value : '',
-          estado: 'Pendiente',
+          estado: 'P',
           fecha: Timestamp.now(),
           idCliente: this.cliente.id,
           items: this.listItemRepartos,

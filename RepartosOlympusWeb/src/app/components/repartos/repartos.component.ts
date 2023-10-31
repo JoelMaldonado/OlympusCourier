@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Reparto } from 'src/app/models/reparto';
 import { RepartoService } from 'src/app/shared/services/reparto.service';
 import { ItemReparto } from '../agregar-reparto/agregar-reparto.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogDetalleRepartoComponent } from 'src/app/shared/components/dialog-detalle-reparto/dialog-detalle-reparto.component';
 
 @Component({
   selector: 'app-repartos',
@@ -41,12 +43,23 @@ export class RepartosComponent {
     }
   }
 
+  dialog = inject(MatDialog)
+
+  openDetalle() {
+
+    const dialogRef = this.dialog.open(DialogDetalleRepartoComponent, {
+      width: "950px"
+    })
+
+    dialogRef.afterClosed().subscribe(data => {
+    })
+  }
+
   formatFecha(fecha: Timestamp | undefined, pattern: string): string {
     if (fecha === undefined) {
       return "Sin fecha";
     } else {
       const date = fecha.toDate();
-
       if (pattern === "dd/MM/yyyy") {
         const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');

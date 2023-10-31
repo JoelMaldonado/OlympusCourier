@@ -25,7 +25,7 @@ class VerRepartosViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 getAllRepartosUseCase().collect { list ->
-                    listRepartos = list
+                    listRepartos = list.filter { it.estado == "P" }
                 }
             } catch (e: Exception) {
 

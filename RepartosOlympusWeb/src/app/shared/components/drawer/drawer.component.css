@@ -115,8 +115,12 @@ font-size: 1.2rem;
 }
 .navigation ul li:hover {
     background: white;
-
 }
+
+.focus-menu{
+    background-color: rebeccapurple;
+}
+
 .navigation ul li:nth-child(1) {
     top: 20px;
     left: 22px;

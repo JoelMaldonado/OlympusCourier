@@ -34,4 +34,14 @@ class FirebaseModule {
     @Retention(AnnotationRetention.BINARY)
     annotation class RepartoCollection
 
+
+    @UsuarioCollection
+    @Provides
+    @Singleton
+    fun provideUsuario() = provideFirebase().collection("Usuario")
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class UsuarioCollection
+
 }

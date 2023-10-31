@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.jjmf.android.olympuscourier.ui.features.DatosPersonales.DatosPersonalesScreen
 import com.jjmf.android.olympuscourier.ui.features.DetalleReparto.DetailRepartoScreen
 import com.jjmf.android.olympuscourier.ui.features.Login.LoginScreen
 import com.jjmf.android.olympuscourier.ui.features.Menu.MenuScreen
@@ -24,6 +25,9 @@ fun NavegacionPrincipal() {
             MenuScreen(
                 toVerRepartos = {
                     navController.navigate(Rutas.VerRepartos.url)
+                },
+                toDatosPersonales = {
+                    navController.navigate(Rutas.DatosPersonales.url)
                 }
             )
         }
@@ -43,6 +47,9 @@ fun NavegacionPrincipal() {
                     }
                 )
             }
+        }
+        composable(Rutas.DatosPersonales.url){
+            DatosPersonalesScreen()
         }
     }
 }

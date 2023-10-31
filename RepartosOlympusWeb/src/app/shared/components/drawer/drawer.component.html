@@ -7,25 +7,25 @@
             <span ><img  class="imagen" src="../../../../assets/titulo.png" alt=""></span>
         </li>
         <li style="margin-top: 60px;">
-            <a routerLink="/menu/repartos">
+            <a (click)="navegar('repartos')" [ngClass]="{'focus-menu': selected == 'repartos'}">
                 <span class="icon"><mat-icon>local_shipping</mat-icon></span>
                 <span class="title">Repartos</span>
             </a>
         </li>
         <li>
-            <a routerLink="/menu/clientes">
+            <a (click)="navegar('clientes')" [ngClass]="{'focus-menu': selected == 'clientes'}">
                 <span class="icon"><mat-icon>group</mat-icon></span>
                 <span class="title">Clientes</span>
             </a>
         </li>
         <li>
-            <a routerLink="/menu/comprobantes">
+            <a (click)="navegar('comprobantes')" [ngClass]="{'focus-menu': selected == 'comprobantes'}">
                 <span class="icon"><mat-icon>description</mat-icon></span>
                 <span class="title">Comprobantes</span>
             </a>
         </li>
         <li>
-            <a routerLink="/menu/usuarios">
+            <a (click)="navegar('usuarios')" [ngClass]="{'focus-menu': selected == 'usuarios'}">
                 <span class="icon"><mat-icon>admin_panel_settings</mat-icon></span>
                 <span class="title">Usuarios</span>
             </a>

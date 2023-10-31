@@ -41,11 +41,11 @@ export class DialogAddItemRepartoComponent {
 
   onAceptar() {
     const itemReparto: ItemReparto = {
-      nGuia: String(this.nGuia.value),
-      cat: String(this.cat.value),
-      descrip: String(this.descrip.value),
-      precio: Number(this.precio.value),
-      cant: Number(this.cant.value),
+      nGuia: this.nGuia.value ? this.nGuia.value : 'Sin Guia',
+      cat: this.cat.value ? this.cat.value : '',
+      descrip: this.descrip.value ? this.descrip.value : 'Sin Descripción',
+      precio: this.precio.value ? this.precio.value : 0.0,
+      cant: this.cant.value ? this.cant.value : 0,
     }
     this.dialogRef.close(itemReparto)
   }
