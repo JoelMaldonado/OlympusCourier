@@ -350,19 +350,26 @@ th mat-icon {
   margin-top: 5px;
 }
 
+.estado__pendiente {
+  position: relative;
+}
+
 .estado-pendientes {
   width: 140px;
   height: 38px;
-  margin-left: 95px;
   font-size: 1.1rem;
   font-family: metropolis;
   background: #6ADB25;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-weight: 400;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 

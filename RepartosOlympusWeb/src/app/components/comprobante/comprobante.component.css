@@ -1,6 +1,6 @@
 .container {
     margin-left: 50px;
-    margin-top: 80px;
+    margin-top: 50px;
     padding-right: 20px;
 
 }
@@ -47,7 +47,7 @@
 }
 
 .container__2 .container__input input {
-    width: 483px;
+    width: 460px;
 
 }
 
@@ -59,7 +59,7 @@
 }
 
 .container__3 .container__input select {
-    width: 200px;
+    width: 170px;
 
 
 }
@@ -79,10 +79,29 @@
 
 .container__icon {
     display: flex;
-    flex-direction: row;
-    gap: 8px;
+    justify-content: end;
+    gap: 10px;
 
 }
+
+.input__icon1 {
+    width: 50px;
+    /* Ajusta el ancho y alto del contenedor según tus preferencias */
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F1F1F1;
+  }
+  
+  .input__icon1 i {
+    font-size: 29px;
+    /* Ajusta el tamaño del icono según tus preferencias */
+    color:
+      #047CC4;
+    /* Cambia el color del icono si es necesario */
+  }
 
 .btn__navbar {
     margin-top: -18px;
@@ -99,14 +118,7 @@ label {
 
 
 
-.input {
-    width: 408px;
-    padding: 15px;
-    border: none;
-    background-color: #F1F1F1;
-    font-size: 16px;
-    border-radius: 20px;
-}
+
 
 /* Estilo para el contenedor del select */
 .select-container {
@@ -231,7 +243,7 @@ select:focus {
     border: none;
     border-radius: 15px;
     background-color: #F1F1F1;
-    width: 225px;
+    width: 240px;
 
     /* Ajusta el ancho según tu preferencia */
 }

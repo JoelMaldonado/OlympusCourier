@@ -1,4 +1,6 @@
+<!--
   <mat-stepper orientation="vertical" linear="true" #stepper>
+  
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill out your name</ng-template>
@@ -39,3 +41,46 @@
       </div>
     </mat-step>
   </mat-stepper>
+
+-->
+
+<div class="container">
+  <div class="usuarios__container">
+    <span class="title">Bienvenido, Pier!</span>
+    <span class="pregunta">¿Qué vamos a hacer hoy?</span>
+
+    <div class="card__container">
+
+      <div class="card">
+        <div class="texto__card">
+          <mat-icon>group_add</mat-icon>
+          <div class="texto">
+            <span>Agregar </span>
+            <span>Usuarios</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="texto__card">
+          <mat-icon>add_location_alt</mat-icon>
+          <div class="texto">
+            <span>Agregar</span>
+            <span> Destinos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="texto__card">
+          <mat-icon>add_card</mat-icon>
+          <div class="texto">
+            <span>Agregar </span>
+            <span>Tarifas</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

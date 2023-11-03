@@ -3,6 +3,21 @@
 
     <div class="container__fecha">
 
+
+        <div class="container__icon">
+            <div class="input__icon1">
+                <button mat-icon-button class="icon_btn" matTooltip="Exportar">
+                    <mat-icon style="color: #047CC4;">save_alt</mat-icon>
+                </button>
+            </div>
+
+            <div class="input__icon1">
+                <button mat-icon-button class="icon_btn" matTooltip="Perfil">
+                    <mat-icon>person_outline</mat-icon>
+                </button>
+            </div>
+        </div>
+
         <div class="date-input">
 
             <div class="container__1">
@@ -13,20 +28,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <div class="container__2">
-                <div class="input__search">
-                    <label for="" style="width: 120px;">Cliente</label>
-                    <div class="container__input">
-                        <input type="text" class="search-input" placeholder="Nombres, Razón Social">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="date-input2">
 
             <div class="container__1">
                 <label for="">Fechas</label>
@@ -43,16 +44,22 @@
                     <mat-datepicker #picker2></mat-datepicker>
                 </div>
             </div>
+            
+        </div>
+
+
+        <div class="date-input2">
+
+            <div class="container__2">
+                <div class="input__search">
+                    <label for="" >Cliente</label>
+                    <div class="container__input">
+                        <input type="text" class="search-input" placeholder="Nombres, Razón Social">
+                    </div>
+                </div>
+            </div>
 
             <div class="container__3">
-                <div style="display: flex; align-items: center;" class="container__input">
-                    <label style="width: 120px;" for="">Tipo Comp.</label>
-                    <select type="text" class="search-input">
-                        <option value="">Todos</option>
-                        <option value="">ejm</option>
-                        <option value="">ejm</option>
-                    </select>
-                </div>
 
                 <div style="display: flex; align-items: center;" class="container__input">
                     <label style="width: 70px;" for="">Estado</label>
@@ -62,41 +69,28 @@
                         <option value="">ejm</option>
                     </select>
                 </div>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="date-input3">
-            <div class="container__4">
-
-                <div style="display: flex; align-items: center" class="container__input">
+                <div style="display: flex; align-items: center;" class="container__input">
                     <label style="width: 120px;" for="">Tipo Comp.</label>
                     <select type="text" class="search-input">
                         <option value="">Todos</option>
                         <option value="">ejm</option>
                         <option value="">ejm</option>
                     </select>
-                </div>
-                <div class="container__icon">
-                    <div class="input__icon1">
-                        <button mat-icon-button class="icon_btn" matTooltip="Exportar">
-                            <mat-icon>save_alt</mat-icon>
-                        </button>
-                    </div>
 
                     <div class="icon__search">
                         <a style="cursor: pointer;" href="">
                             <mat-icon class="search">search</mat-icon>
                         </a>
                     </div>
-
                 </div>
-                
+
+              
+
             </div>
+
+
         </div>
+
     </div>
 
 
