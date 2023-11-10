@@ -36,6 +36,7 @@ export class DialogAddClienteComponent {
       distrito: [data?.distrito, [Validators.required]],
       direc: [data?.direc, [Validators.required, Validators.maxLength(100)]],
       ref: [data?.ref],
+      maps: [data?.maps],
     })
   }
 

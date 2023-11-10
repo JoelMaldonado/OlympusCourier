@@ -171,7 +171,7 @@ export class AgregarRepartoComponent {
 
 
   getTotal() {
-    const sumaDeCostos = this.listItemRepartos.reduce((acumulador, objeto) => acumulador + (objeto.cant * objeto.precio), 0);
+    const sumaDeCostos = this.listItemRepartos.reduce((total, item) => total + item.precio, 0);
     return sumaDeCostos
   }
 
@@ -188,7 +188,7 @@ export class AgregarRepartoComponent {
       }
     })
     if (this.cliente?.id != undefined) {
-      if(this.listItemRepartos.length >0 ){
+      if (this.listItemRepartos.length > 0) {
 
         const reparto: Reparto = {
           anotacion: '',
@@ -199,10 +199,10 @@ export class AgregarRepartoComponent {
           items: this.listItemRepartos,
         }
         const res = await this.repartoService.insert(reparto)
-        if(res){
+        if (res) {
           this.router.navigate(['../'])
         }
-      }else{
+      } else {
         toast.fire({
           icon: 'question',
           title: 'Ingrese un item'

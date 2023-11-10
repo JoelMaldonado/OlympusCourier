@@ -9,4 +9,5 @@ export interface Cliente {
     distrito?: string;
     direc?: string;
     ref?: string;
+    maps?: string;
 }

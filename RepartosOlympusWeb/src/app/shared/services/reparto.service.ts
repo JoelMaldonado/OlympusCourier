@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, Timestamp, collection, getDocs, collectionData } from '@angular/fire/firestore';
+import { Firestore, addDoc, Timestamp, collection, getDocs } from '@angular/fire/firestore';
 import { Reparto } from 'src/app/models/reparto';
 import { ClienteService } from './cliente.service';
-import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Injectable({

@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
   ],
   exports: [
     MatButtonModule,
@@ -59,7 +61,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule { }

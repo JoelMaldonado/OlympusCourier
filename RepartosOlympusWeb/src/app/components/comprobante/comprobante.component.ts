@@ -1,9 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Cliente } from 'src/app/models/cliente';
-import { ClienteService } from 'src/app/shared/services/cliente.service';
-import { SunatService } from 'src/app/shared/services/sunat.service';
 
 @Component({
   selector: 'app-comprobante',
@@ -32,13 +29,11 @@ export class ComprobanteComponent {
   }
 
   constructor(
-    private sunatService: SunatService
   ) {
     this.listarComprobantes()
   }
 
   async listarComprobantes() {
-    this.listComprobantes.data = await this.sunatService.listarDocumentos();
 
   }
 
@@ -53,7 +48,7 @@ export class ComprobanteComponent {
   }
 
   verPdf(id: any, tipo: string, fileName: string) {
-    this.sunatService.getPdf(id, tipo, fileName)
+    
   }
 
 }

@@ -31,6 +31,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { DialogDetalleRepartoComponent } from './shared/components/dialog-detalle-reparto/dialog-detalle-reparto.component';
+import { DialogGenerarComprobanteComponent } from './shared/components/dialog-generar-comprobante/dialog-generar-comprobante.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { DialogDetalleRepartoComponent } from './shared/components/dialog-detall
     DialogAddItemRepartoComponent,
     NavbarComponent,
     UsuariosComponent,
-    DialogDetalleRepartoComponent
+    DialogDetalleRepartoComponent,
+    DialogGenerarComprobanteComponent
   ],
   imports: [
     BrowserModule,

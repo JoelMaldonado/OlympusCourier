@@ -6,6 +6,7 @@ import { RepartoService } from 'src/app/shared/services/reparto.service';
 import { ItemReparto } from '../agregar-reparto/agregar-reparto.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDetalleRepartoComponent } from 'src/app/shared/components/dialog-detalle-reparto/dialog-detalle-reparto.component';
+import { DialogGenerarComprobanteComponent } from 'src/app/shared/components/dialog-generar-comprobante/dialog-generar-comprobante.component';
 
 @Component({
   selector: 'app-repartos',
@@ -77,6 +78,10 @@ export class RepartosComponent {
     }
   }
 
-
+  generarComprobante() {
+    this.dialog.open(DialogGenerarComprobanteComponent, {
+      width: "950px"
+    })
+  }
 
 }
