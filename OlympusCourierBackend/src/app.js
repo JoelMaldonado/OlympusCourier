@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const db = require('./mysql.js');
+const { db } = require('./mysql.js');
 const dotenv = require('dotenv');
 
 const destinoRoutes = require('./routes/destino.routes.js');
