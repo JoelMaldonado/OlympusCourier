@@ -1,14 +1,11 @@
-import express from 'express';
-import { getAllDestinos, insertDestino, updateDestino, deleteDestino } from '../controllers/destino.controllers.js';
+const express = require('express');
+const destinoControllers = require('../controllers/destino.controllers.js');
 
 const router = express.Router();
 
-router.get('/destinos', getAllDestinos);
+router.get('/destinos', destinoControllers.getAllDestinos);
+router.post('/destinos', destinoControllers.insertDestino);
+router.put('/destinos/:id', destinoControllers.updateDestino);
+router.delete('/destinos/:id', destinoControllers.deleteDestino);
 
-router.post('/destinos', insertDestino);
-
-router.put('/destinos/:id', updateDestino);
-
-router.delete('/destinos/:id', deleteDestino);
-
-export default router;
+module.exports = router;

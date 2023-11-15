@@ -1,5 +1,4 @@
-
-import axios from 'axios';
+const axios = require("axios");
 
 const consultarDoc = async (req, res) => {
     try {
@@ -26,4 +25,4 @@ const consultarDoc = async (req, res) => {
         res.status(500).json({ error: 'Ocurrió un error al realizar la solicitud a la API' });
     }
 };
-export { consultarDoc }
+module.exports =  { consultarDoc }

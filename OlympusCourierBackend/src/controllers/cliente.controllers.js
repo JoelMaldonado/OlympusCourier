@@ -1,4 +1,4 @@
-import { db } from '../mysql.js'
+const { db } = require('../mysql.js');
 
 const getAllClientes = async (req, res) => {
     try {
@@ -66,5 +66,4 @@ const deleteCliente = async (req, res) => {
     }
 }
 
-
-export { getAllClientes, insertCliente, updateCliente, deleteCliente }
+module.exports = { getAllClientes, insertCliente, updateCliente, deleteCliente };

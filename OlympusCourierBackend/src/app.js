@@ -1,15 +1,15 @@
-import express from "express";
-import cors from "cors";
-import { db } from './mysql.js'
-import dotenv from "dotenv"
+const express = require("express");
+const cors = require("cors");
+const db = require('./mysql.js');
+const dotenv = require('dotenv');
 
-import destinoRoutes from './routes/destino.routes.js';
-import clienteRoutes from './routes/cliente.routes.js';
-import usuarioRoutes from './routes/usuarios.routes.js';
-import tipoPaquetesRoutes from './routes/tipo_paquetes.routes.js';
-import repartoRoutes from './routes/repartos.routes.js';
-import comprobantesRoutes from './routes/comprobantes.routes.js';
-import consultasRoutes from './routes/consultas.routes.js';
+const destinoRoutes = require('./routes/destino.routes.js');
+const clienteRoutes = require('./routes/cliente.routes.js');
+const usuarioRoutes = require('./routes/usuarios.routes.js');
+const tipoPaquetesRoutes = require('./routes/tipo_paquetes.routes.js');
+const repartoRoutes = require('./routes/repartos.routes.js');
+const comprobantesRoutes = require('./routes/comprobantes.routes.js');
+const consultasRoutes = require('./routes/consultas.routes.js');
 
 dotenv.config()
 

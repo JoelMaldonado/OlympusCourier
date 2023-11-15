@@ -1,5 +1,5 @@
-import { db } from '../mysql.js'
-import axios from 'axios';
+const { db } = require('../mysql.js');
+const axios = require("axios");
 
 const listarTodos = (req, res) => {
 
@@ -126,7 +126,7 @@ const eliminar = (req, res) => {
 
 };
 
-export {
+module.exports =  {
     listarTodos,
     insertar,
     actualizar,

@@ -1,4 +1,4 @@
-import { db } from '../mysql.js'
+const { db } = require('../mysql.js');
 
 const listarTodos = async (req, res) => {
     try {
@@ -67,4 +67,4 @@ const eliminar = async (req, res) => {
 }
 
 
-export { listarTodos, insertar, actualizar, eliminar }
+module.exports =  { listarTodos, insertar, actualizar, eliminar }

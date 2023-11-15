@@ -1,11 +1,11 @@
-import express from 'express';
-import { listarTodos, insertar, actualizar, eliminar } from '../controllers/comprobantes.controllers.js';
+const express = require('express');
+const comprobantesControllers = require('../controllers/comprobantes.controllers.js');
 
 const router = express.Router();
 
-router.get('/comprobantes', listarTodos);
-router.post('/comprobantes', insertar);
-router.put('/comprobantes/:id', actualizar);
-router.delete('/comprobantes/:id', eliminar);
+router.get('/comprobantes', comprobantesControllers.listarTodos);
+router.post('/comprobantes', comprobantesControllers.insertar);
+router.put('/comprobantes/:id', comprobantesControllers.actualizar);
+router.delete('/comprobantes/:id', comprobantesControllers.eliminar);
 
-export default router;
+module.exports = router;

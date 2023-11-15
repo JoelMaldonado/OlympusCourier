@@ -1,14 +1,11 @@
-import express from 'express';
-import { listarTodos, insertar, actualizar, eliminar } from '../controllers/tipo_paquetes.controllers.js';
+const express = require('express');
+const tipoPaquetesControllers = require('../controllers/tipo_paquetes.controllers.js');
 
 const router = express.Router();
 
-router.get('/paquetes', listarTodos);
+router.get('/paquetes', tipoPaquetesControllers.listarTodos);
+router.post('/paquetes', tipoPaquetesControllers.insertar);
+router.put('/paquetes/:id', tipoPaquetesControllers.actualizar);
+router.delete('/paquetes/:id', tipoPaquetesControllers.eliminar);
 
-router.post('/paquetes', insertar);
-
-router.put('/paquetes/:id', actualizar);
-
-router.delete('/paquetes/:id', eliminar);
-
-export default router;
+module.exports = router;

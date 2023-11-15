@@ -1,4 +1,4 @@
-import { db } from '../mysql.js'
+const { db } = require('../mysql.js');
 
 const listarTodos = async (req, res) => {
     try {
@@ -116,4 +116,4 @@ const eliminar = async (req, res) => {
         res.status(500).json({ error: 'Ocurrió un error al intentar eliminar el reparto y sus elementos relacionados' });
     }
 };
-export { listarTodos, insertar, actualizar, eliminar }
+module.exports =  { listarTodos, insertar, actualizar, eliminar }

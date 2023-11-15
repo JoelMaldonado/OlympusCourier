@@ -1,8 +1,8 @@
-import express from 'express';
-import { consultarDoc } from '../controllers/consultas.controller.js';
+const express = require('express');
+const consultasController = require('../controllers/consultas.controller.js');
 
 const router = express.Router();
 
-router.post('/consultas', consultarDoc);
+router.post('/consultas', consultasController.consultarDoc);
 
-export default router;
+module.exports = router;

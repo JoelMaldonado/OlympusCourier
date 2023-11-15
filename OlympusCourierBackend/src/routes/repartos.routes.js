@@ -1,14 +1,11 @@
-import express from 'express';
-import { listarTodos, insertar, actualizar, eliminar } from '../controllers/repartos.controllers.js';
+const express = require('express');
+const repartosControllers = require('../controllers/repartos.controllers.js');
 
 const router = express.Router();
 
-router.get('/repartos', listarTodos);
+router.get('/repartos', repartosControllers.listarTodos);
+router.post('/repartos', repartosControllers.insertar);
+router.put('/repartos/:id', repartosControllers.actualizar);
+router.delete('/repartos/:id', repartosControllers.eliminar);
 
-router.post('/repartos', insertar);
-
-router.put('/repartos/:id', actualizar);
-
-router.delete('/repartos/:id', eliminar);
-
-export default router;
+module.exports = router;
