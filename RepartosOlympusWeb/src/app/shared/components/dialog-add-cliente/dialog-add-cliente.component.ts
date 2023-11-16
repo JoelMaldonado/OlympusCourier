@@ -1,6 +1,6 @@
 import { Component, Inject, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from 'src/app/models/cliente';
 import Swal from 'sweetalert2';
 import { DestinosService } from '../../services/destinos.service';
@@ -40,8 +40,18 @@ export class DialogAddClienteComponent {
     })
   }
 
-  async listarDestinos() {
-    this.listDistritos = await this.destinoservice.listarDestinos()
+  listarDestinos() {
+    this.destinoservice.listarDestinos().subscribe({
+      next: data => this.listDistritos = data,
+      error: error => {
+        console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al obtener',
+          text: 'Hubo un problema al obtener los destinos. Por favor, inténtelo de nuevo más tarde.',
+        })
+      }
+    });
   }
 
   async guardar() {

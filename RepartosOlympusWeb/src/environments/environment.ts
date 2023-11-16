@@ -9,6 +9,6 @@ export const environment = {
     messagingSenderId: '328413354532',
     measurementId: 'G-VPCC7VJS56',
   },
-  baseUrl: 'https://back.apisunat.com/',
+  baseUrl: 'http://sv-YaAUgKfBpu.cloud.elastika.pe:6081',
   token: ''
 };

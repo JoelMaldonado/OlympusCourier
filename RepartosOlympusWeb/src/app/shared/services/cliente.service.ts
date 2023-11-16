@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Firestore, collection, getDocs, getDoc, doc, query, where, addDoc, setDoc } from '@angular/fire/firestore';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Cliente } from 'src/app/models/cliente';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -68,16 +71,11 @@ export class ClienteService {
     return (await getDoc(document)).data() as Cliente
   }
 
-  async listarClientes(): Promise<Cliente[]> {
-    const col = collection(this.fb, 'Cliente');
-    const allTodos = await getDocs(col);
-    const list: Cliente[] = [];
+  http = inject(HttpClient)
 
-    allTodos.docs.forEach((doc) => {
-      const data = doc.data() as Cliente;
-      list.push(data);
-    });
-    return list;
+  listarClientes(): Observable<Cliente[]> {
+    const url = `${environment.baseUrl}/api/clientes`;
+    return this.http.get<any>(url);
   }
 
   async searchCliente(data: string): Promise<Cliente[]> {

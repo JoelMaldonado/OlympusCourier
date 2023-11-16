@@ -60,7 +60,9 @@ export class AgregarRepartoComponent {
 
 
   async listarClientes() {
-    this.listClientes = await this.clienteService.listarClientes()
+    this.clienteService.listarClientes().subscribe(data=>{
+      this.listClientes = data;
+    })
   }
 
   remove(itemEliminar: any) {
@@ -92,7 +94,7 @@ export class AgregarRepartoComponent {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(['../'])
+        this.router.navigate(['../']);
       }
     });
   }

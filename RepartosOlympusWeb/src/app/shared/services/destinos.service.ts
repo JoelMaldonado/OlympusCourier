@@ -1,41 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Destino } from 'src/app/models/destino';
-import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DestinosService {
 
-  constructor(
-    private fb: Firestore
-  ) {
+  http = inject(HttpClient);
 
+  listarDestinos(): Observable<Destino[]> {
+    const url = `${environment.baseUrl}/api/destinos`;
+    return this.http.get<any>(url);
   }
-  
-  async listarDestinos(): Promise<Destino[]> {
-    try {
-    
-    const col = collection(this.fb, 'Destino');
-    const allTodos = await getDocs(col);
-    const destinos: Destino[] = [];
-  
-    allTodos.docs.forEach((doc) => {
-      const data = doc.data() as Destino;
-      destinos.push(data);
-    });
-    return destinos;
-    } catch (error) {
-      console.log(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error al obtener',
-        text: 'Hubo un problema al obtener los destinos. Por favor, inténtelo de nuevo más tarde.',
-      })
-      return [];
-    }
-  }
-
-
 }

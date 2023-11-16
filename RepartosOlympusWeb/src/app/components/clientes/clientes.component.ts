@@ -11,7 +11,7 @@ import { ClienteService } from 'src/app/shared/services/cliente.service';
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.css']
 })
-export class ClientesComponent implements AfterViewInit{
+export class ClientesComponent implements AfterViewInit {
   animal: string = "";
   name: string = "Joel";
 
@@ -31,7 +31,7 @@ export class ClientesComponent implements AfterViewInit{
     this.listClientes.paginator = this.paginator;
     this.paginator._intl.itemsPerPageLabel = 'items por página';
   }
-  
+
   constructor(
     private clienteService: ClienteService,
     public dialog: MatDialog
@@ -40,12 +40,17 @@ export class ClientesComponent implements AfterViewInit{
   }
 
   async listarClientes() {
-    this.listClientes.data = await this.clienteService.listarClientes();
+    this.clienteService.listarClientes().subscribe({
+      next: data => {
+        this.listClientes.data = data;
+      },
+      error: error => console.log(error)
+    });
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddClienteComponent, {
-      data: {name: this.name, animal: this.animal},
+      data: { name: this.name, animal: this.animal },
       width: "950px"
     });
 
@@ -54,7 +59,7 @@ export class ClientesComponent implements AfterViewInit{
     });
   }
 
-  editCliente(item:Cliente){
+  editCliente(item: Cliente) {
     const dialogRef = this.dialog.open(DialogAddClienteComponent, {
       data: item,
       width: "950px"
@@ -64,8 +69,8 @@ export class ClientesComponent implements AfterViewInit{
       if (data) {
       }
     });
-    
+
   }
 
-  
+
 }

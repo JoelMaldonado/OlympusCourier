@@ -17,11 +17,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 /**Modulos**/
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/modules/material.module';
 
 /**Firebase**/
@@ -32,6 +29,9 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { DialogDetalleRepartoComponent } from './shared/components/dialog-detalle-reparto/dialog-detalle-reparto.component';
 import { DialogGenerarComprobanteComponent } from './shared/components/dialog-generar-comprobante/dialog-generar-comprobante.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -53,16 +53,16 @@ import { DialogGenerarComprobanteComponent } from './shared/components/dialog-ge
     DialogGenerarComprobanteComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
