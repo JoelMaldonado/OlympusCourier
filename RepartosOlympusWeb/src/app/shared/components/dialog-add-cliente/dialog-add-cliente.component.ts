@@ -36,7 +36,7 @@ export class DialogAddClienteComponent {
       distrito: [data?.distrito_id, [Validators.required]],
       direc: [data?.direc, [Validators.required, Validators.maxLength(100)]],
       ref: [data?.referencia],
-      maps: [data?.maps],
+      maps: [data?.url_maps],
     })
   }
 
@@ -57,7 +57,6 @@ export class DialogAddClienteComponent {
   async guardar() {
     if (this.form.valid) {
       if (this.data == undefined) {
-
         const clienteData: Cliente = {
           tipo_doc: this.form.get('tipo')?.value,
           documento: this.form.get('doc')?.value,
@@ -68,13 +67,17 @@ export class DialogAddClienteComponent {
           distrito_id: this.form.get('distrito')?.value,
           direc: this.form.get('direc')?.value,
           referencia: this.form.get('ref')?.value,
+          url_maps: this.form.get('maps')?.value,
         };
-        const res = await this.clienteService.addCliente(clienteData)
-        if (res !== false) {
-          //clienteData.id = res as string;
-          this.dialogRef.close(clienteData);
-        }
+        this.clienteService.addCliente1(clienteData).subscribe({
+          next: data => {
+            console.log(data);
+            this.dialogRef.close(clienteData);
+          },
+          error: err => console.log(err)
+        });
       } else {
+        console.log(this.data);
         this.dialogRef.close();
       }
     } else {

@@ -9,10 +9,10 @@
     </div>
 
     <select formControlName="tipo">
-      <option>Dni</option>
-      <option>Ruc</option>
-      <option>Carnet Extranjeria</option>
-      <option>Otros</option>
+      <option value="D">Dni</option>
+      <option value="R">Ruc</option>
+      <option value="C">Carnet Extranjeria</option>
+      <option value="O">Otros</option>
     </select>
     
     <div class="campo__form">
@@ -33,9 +33,9 @@
     <div class="campo__form">
       <label>Genero</label>
       <select formControlName="genero">
-        <option>Sin especificar</option>
-        <option>Hombre</option>
-        <option>Mujer</option>
+        <option value="S" >Sin especificar</option>
+        <option value="M" >Hombre</option>
+        <option value="F" >Mujer</option>
       </select>
     </div>
 
@@ -54,7 +54,7 @@
       <div class="form__dir">
         <label  style="position: relative; left: -90px; width: 70px;" for="">Distrito</label>
         <select formControlName="distrito">
-          <option *ngFor="let item of listDistritos" [value]="item.nombre" selected>{{item.nombre}}</option>
+          <option *ngFor="let item of listDistritos" [value]="item.id" selected>{{item.nombre}}</option>
         </select><br>
       </div>
 

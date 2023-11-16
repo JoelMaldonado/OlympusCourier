@@ -9,5 +9,5 @@ export interface Cliente {
     distrito_id?: string;
     direc?: string;
     referencia?: string;
-    maps?: string;
+    url_maps?: string;
 }

@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild, inject } from '@angular/core';
 import { ItemReparto } from '../../agregar-reparto.component';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddItemRepartoComponent } from 'src/app/shared/components/dialog-add-item-reparto/dialog-add-item-reparto.component';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-tabla-items-reparto',
@@ -10,7 +11,7 @@ import { DialogAddItemRepartoComponent } from 'src/app/shared/components/dialog-
   styleUrls: ['./tabla-items-reparto.component.css']
 })
 export class TablaItemsRepartoComponent {
-  
+
   columnas: string[] = [
     'guia',
     'tipo',
@@ -21,6 +22,9 @@ export class TablaItemsRepartoComponent {
   ];
 
   listItemRepartos: ItemReparto[] = [];
+  @Output() listEmit = new EventEmitter<ItemReparto[]>();
+
+  @ViewChild(MatTable) table!: MatTable<ItemReparto>;
 
 
   /** Añadir Item Reparto*/
@@ -32,6 +36,8 @@ export class TablaItemsRepartoComponent {
     dialogRef.afterClosed().subscribe((data: ItemReparto) => {
       if (data) {
         this.listItemRepartos.push(data)
+        this.table.renderRows();
+        this.listEmit.emit(this.listItemRepartos)
       }
     });
   }
@@ -50,6 +56,8 @@ export class TablaItemsRepartoComponent {
         const index = this.listItemRepartos.findIndex((element) => element === item);
         if (index !== -1) {
           this.listItemRepartos[index] = data;
+          this.table.renderRows();
+          this.listEmit.emit(this.listItemRepartos)
         }
       }
     });
@@ -69,6 +77,8 @@ export class TablaItemsRepartoComponent {
         const index = this.listItemRepartos.indexOf(item);
         if (index !== -1) {
           this.listItemRepartos.splice(index, 1);
+          this.table.renderRows();
+          this.listEmit.emit(this.listItemRepartos)
         }
       }
     })

@@ -26,16 +26,16 @@
     </ng-container>
     <ng-container matColumnDef="act">
         <th mat-header-cell *matHeaderCellDef>
-            <button style="margin-left: 17px;" class="btn__item centered-button" (click)="openDialogAddItemReparto()"
-                matTooltip="Agregar Item">
+            <button mat-mini-fab style="background-color: var(--colorP1);" matTooltip="Agregar Item"
+                (click)="openDialogAddItemReparto()">
                 <mat-icon>add</mat-icon>
             </button>
         </th>
         <td mat-cell *matCellDef="let item">
-            <button matTooltip="Editar" (click)="editItemReparto(item)">
+            <button mat-icon-button matTooltip="Editar" (click)="editItemReparto(item)">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button matTooltip="Eliminar" (click)="deleteItemReparto(item)">
+            <button mat-icon-button matTooltip="Eliminar" (click)="deleteItemReparto(item)">
                 <mat-icon>delete</mat-icon>
             </button>
         </td>
@@ -45,3 +45,6 @@
         [ngStyle]="{'background-color': row % 2 === 0 ? '#ffffff' : '#f8f8f8'}" style="height: 70px;"></tr>
 
 </table>
+<div *ngIf="listItemRepartos.length == 0">
+    Sin Items Agregados
+</div>

@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BuscarClienteRepartoComponent } from './components/agregar-reparto/components/buscar-cliente-reparto/buscar-cliente-reparto.component';
 import { TablaItemsRepartoComponent } from './components/agregar-reparto/components/tabla-items-reparto/tabla-items-reparto.component';
+import { TablaClientesComponent } from './components/clientes/tabla-clientes/tabla-clientes.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { TablaItemsRepartoComponent } from './components/agregar-reparto/compone
     DialogDetalleRepartoComponent,
     DialogGenerarComprobanteComponent,
     BuscarClienteRepartoComponent,
-    TablaItemsRepartoComponent
+    TablaItemsRepartoComponent,
+    TablaClientesComponent
   ],
   imports: [
     AppRoutingModule,

@@ -13,27 +13,30 @@ import { ClienteService } from 'src/app/shared/services/cliente.service';
 })
 export class BuscarClienteRepartoComponent {
 
-  @Output() actClienteHijo = new EventEmitter<Cliente>();
-  cliente : Cliente | undefined;
+  @Output() clienteEmit = new EventEmitter<Cliente | undefined>();
+  cliente: Cliente | undefined;
 
   documento = new FormControl('')
   data$: Cliente[] = [];
   showSugerencias = false;
   isLoading = false;
 
-  constructor(){
+  constructor() {
     this.documento.valueChanges.pipe(
       debounceTime(1000)
     ).subscribe(() => {
-      this.miFuncion();
+      this.buscarCliente();
     });
   }
 
   clienteService = inject(ClienteService)
   dialog = inject(MatDialog)
-  
-  miFuncion() {
+
+  buscarCliente() {
     if (!this.documento.value) {
+      return;
+    }
+    if(this.cliente){
       return;
     }
     this.isLoading = true;
@@ -50,7 +53,12 @@ export class BuscarClienteRepartoComponent {
     });
   }
 
-  
+  borrarCliente() {
+    this.cliente = undefined;
+    this.documento.setValue('');
+    this.clienteEmit.emit(undefined);
+  }
+
   openDialogCliente() {
     const dialogRef = this.dialog.open(DialogAddClienteComponent, {
       width: "950px",
@@ -69,6 +77,6 @@ export class BuscarClienteRepartoComponent {
     this.documento.setValue(item.nombres ? item.nombres : this.documento.value)
     this.showSugerencias = false
     this.data$ = []
-    this.actClienteHijo.emit(item);
+    this.clienteEmit.emit(item);
   }
 }

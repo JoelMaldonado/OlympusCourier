@@ -4,9 +4,9 @@
         <span>Nuevo Reparto</span>
     </div>
 
-    <app-buscar-cliente-reparto (actClienteHijo)="actCliente($event)"></app-buscar-cliente-reparto>
+    <app-buscar-cliente-reparto (clienteEmit)="clienteEmit($event)"></app-buscar-cliente-reparto>
 
-    <app-tabla-items-reparto></app-tabla-items-reparto>
+    <app-tabla-items-reparto  (listEmit)="listEmit($event)"></app-tabla-items-reparto>
 
     <div class="container__total">
         <div class="container__clave">

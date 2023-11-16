@@ -76,3 +76,34 @@
         #808080;
     font-size: 20px;
 }
+
+/**Lista de Clientes Encontrados**/
+.sugerencias {
+    margin-top: 3px;
+    position: absolute;
+    top: 100%;
+    left: 81px;
+    background-color: white;
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 500px;
+  }
+
+  .sugerencias .auto__completar li {
+    font-size: 1.3rem;
+    color: #ffffff;
+    border-radius: 10px;
+    font-family: metropolis;
+    background-color: gray;
+    padding-top: 10px;
+    padding-left: 15px;
+    margin-bottom: 1px;
+    padding-bottom: 10px;
+    z-index: 2;
+  }
+
+  .sugerencias .auto__completar li:hover {
+    background-color: #0467a5;
+    cursor: pointer;
+  }

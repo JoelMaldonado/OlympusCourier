@@ -32,7 +32,7 @@ export class DialogGenerarComprobanteComponent {
 
   generar() {
     if (this.form) {
-      console.log(this.form.value);
+      this.comprobantesService.generarComprobante(this.form.value)
       this.nubefactService.generarComprobante(this.form.value).subscribe((data: any) => {
         if (data.aceptada_por_sunat) {
           this.comprobantesService.saveComprobante(data)
