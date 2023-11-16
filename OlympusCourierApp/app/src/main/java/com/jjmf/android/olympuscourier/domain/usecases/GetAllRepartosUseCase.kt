@@ -14,8 +14,7 @@ class GetAllRepartosUseCase @Inject constructor(
     suspend operator fun invoke(): Flow<List<Reparto>> {
         return repository.getAll().map { listDto ->
             listDto.map { dto ->
-                val cliente = repoCliente.getById(dto.idCliente ?: "")
-                dto.toDomain(cliente?.toDomain())
+                dto.toDomain()
             }
         }
     }

@@ -1,24 +1,27 @@
 package com.jjmf.android.olympuscourier.domain.model
 
-import com.google.firebase.Timestamp
-import com.jjmf.android.olympuscourier.data.firebase.ItemRepartoDto
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.jjmf.android.olympuscourier.data.server.dto.ItemRepartoDto
 
 data class Reparto(
-    var id: String,
-    val cliente: Cliente,
+    val id: Int,
+    val anotacion: String,
+    val clave: String,
     val estado: String,
-    val fecha: Timestamp,
-    val clave:String,
-    val anotacion:String,
-    val items: List<ItemReparto>
+    val fecha_creacion: String,
+    val fecha_entrega: String,
+    val id_cliente: Int,
+    val cliente: Cliente?,
+    val id_usuario: Int,
+    val usuario: Usuario?,
+    val id_repartidor: Int,
+    val items: List<ItemRepartoDto>,
+    val total: Double,
 ){
     fun formatFecha(pattern:String = "dd/MM/yyyy") : String{
-        return SimpleDateFormat(pattern, Locale.getDefault()).format(fecha.toDate())
+        return fecha_creacion//SimpleDateFormat(pattern, Locale.getDefault()).format(fecha.toDate())
     }
 
     fun total(): Double {
-        return items.sumOf { it.cant * it.precio }
+        return items.sumOf { it.precio?.toDoubleOrNull() ?: 0.0 }
     }
 }

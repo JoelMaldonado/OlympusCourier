@@ -3,12 +3,18 @@ import { Cliente } from "./cliente";
 import { ItemReparto } from "../components/agregar-reparto/agregar-reparto.component";
 
 export interface Reparto {
-    id?: string;
+    id?: number;
     anotacion?: string;
     clave?: string;
     estado?: string;
-    fecha?: Timestamp;
-    idCliente?: string;
+    fecha_creacion?: string;
+    fecha_entrega?: string;
+    id_cliente?: number;
     cliente?: Cliente;
-    items?: ItemReparto[]
+    id_usuario?: number;
+    usuario?: any;
+    id_repartidor?: number;
+    repartidor?: any;
+    items?: ItemReparto[];
+    total?: number;
 }

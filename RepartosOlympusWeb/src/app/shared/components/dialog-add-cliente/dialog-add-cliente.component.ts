@@ -27,15 +27,15 @@ export class DialogAddClienteComponent {
 
     this.listarDestinos()
     this.form = this.fb.group({
-      tipo: [data?.tipo ? data.tipo : 'Dni', [Validators.required]],
-      doc: [data?.doc, [Validators.required, Validators.minLength(8)]],
+      tipo: [data?.tipo_doc ? data.tipo_doc : 'Dni', [Validators.required]],
+      doc: [data?.documento, [Validators.required, Validators.minLength(8)]],
       nombres: [data?.nombres, [Validators.required, Validators.maxLength(100)]],
-      cel: [data?.celular, [Validators.required, Validators.minLength(9)]],
+      cel: [data?.telefono, [Validators.required, Validators.minLength(9)]],
       genero: [data?.genero ? data.genero : 'Sin especificar'],
       correo: [data?.correo, Validators.email],
-      distrito: [data?.distrito, [Validators.required]],
+      distrito: [data?.distrito_id, [Validators.required]],
       direc: [data?.direc, [Validators.required, Validators.maxLength(100)]],
-      ref: [data?.ref],
+      ref: [data?.referencia],
       maps: [data?.maps],
     })
   }
@@ -59,19 +59,19 @@ export class DialogAddClienteComponent {
       if (this.data == undefined) {
 
         const clienteData: Cliente = {
-          tipo: this.form.get('tipo')?.value,
-          doc: this.form.get('doc')?.value,
+          tipo_doc: this.form.get('tipo')?.value,
+          documento: this.form.get('doc')?.value,
           nombres: this.form.get('nombres')?.value,
-          celular: this.form.get('cel')?.value,
+          telefono: this.form.get('cel')?.value,
           genero: this.form.get('genero')?.value,
           correo: this.form.get('correo')?.value,
-          distrito: this.form.get('distrito')?.value,
+          distrito_id: this.form.get('distrito')?.value,
           direc: this.form.get('direc')?.value,
-          ref: this.form.get('ref')?.value,
+          referencia: this.form.get('ref')?.value,
         };
         const res = await this.clienteService.addCliente(clienteData)
         if (res !== false) {
-          clienteData.id = res as string;
+          //clienteData.id = res as string;
           this.dialogRef.close(clienteData);
         }
       } else {

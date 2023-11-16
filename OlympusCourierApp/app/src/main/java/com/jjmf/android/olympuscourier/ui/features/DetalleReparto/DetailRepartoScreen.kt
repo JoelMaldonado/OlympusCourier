@@ -39,7 +39,7 @@ import com.jjmf.android.olympuscourier.util.show
 
 @Composable
 fun DetailRepartoScreen(
-    idReparto: String,
+    idReparto: Int,
     back: () -> Unit,
     viewModel: DetailRepartoViewModel = hiltViewModel(),
 ) {
@@ -109,12 +109,12 @@ fun DetailRepartoScreen(
                     fontSize = 22.sp
                 )
             }
-            DetalleItem(titulo = "Documento", descrip = reparto.cliente.doc)
+            /*DetalleItem(titulo = "Documento", descrip = reparto.cliente)
             DetalleItem(titulo = "Cliente", descrip = reparto.cliente.nombres)
             DetalleItem(titulo = "Celular", descrip = reparto.cliente.celular)
             DetalleItem(titulo = "Distrito", descrip = reparto.cliente.distrito)
             DetalleItem(titulo = "Dirección", descrip = reparto.cliente.direc)
-            DetalleItem(titulo = "Referencia", descrip = reparto.cliente.referencia)
+            DetalleItem(titulo = "Referencia", descrip = reparto.cliente.referencia)*/
             DetalleItem(titulo = "Fecha", descrip = reparto.formatFecha())
             DetalleItem(titulo = "Total", descrip = "S/${reparto.total()}")
             DetalleItem(titulo = "Estado", descrip = reparto.estado)
@@ -122,7 +122,7 @@ fun DetailRepartoScreen(
 
             LazyColumn(modifier = Modifier.weight(1f)){
                 items(reparto.items){
-                    Text(text = it.descrip)
+                    Text(text = it.detalle ?: "")
                 }
             }
 

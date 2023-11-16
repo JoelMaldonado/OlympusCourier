@@ -1,8 +1,7 @@
 package com.jjmf.android.olympuscourier.domain.repository
 
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.ktx.toObject
-import com.jjmf.android.olympuscourier.data.firebase.UsuarioDto
+import com.jjmf.android.olympuscourier.data.server.dto.UsuarioDto
 import com.jjmf.android.olympuscourier.data.module.FirebaseModule
 import com.jjmf.android.olympuscourier.data.repository.UsuarioRepository
 import com.jjmf.android.olympuscourier.domain.model.Usuario
@@ -17,7 +16,7 @@ class UsuarioRepositoryImpl @Inject constructor(
         val list = mutableListOf<Usuario>()
         call.documents.forEach {
             val obj = it.toObject(UsuarioDto::class.java)
-            obj?.id = it.id
+            //obj?.id = it.id
             obj?.let { dto->
                 list.add(dto.toDomain())
             }

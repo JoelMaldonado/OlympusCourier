@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
@@ -26,6 +28,9 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchColors
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,49 +55,53 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jjmf.android.olympuscourier.R
 import com.jjmf.android.olympuscourier.ui.components.CajaTexto
+import com.jjmf.android.olympuscourier.ui.components.CajaTextoLogin
+import com.jjmf.android.olympuscourier.ui.theme.ColorFondo
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
+import com.jjmf.android.olympuscourier.ui.theme.ColorTextoLabel
 
 @Composable
 fun LoginScreen(
     toMenu: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
-    val isVisible = remember { mutableStateOf(false) }
     val context = LocalContext.current
 
     val focus = LocalFocusManager.current
 
-    if(viewModel.toMenu){
-        LaunchedEffect(key1 = Unit){
+    if (viewModel.toMenu) {
+        LaunchedEffect(key1 = Unit) {
             viewModel.toMenu = false
             toMenu()
         }
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize()
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(ColorFondo),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.fondo_login),
             contentDescription = null,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp),
             contentScale = ContentScale.FillWidth
         )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .clip(RoundedCornerShape(topStart = 50.dp, topEnd = 50.dp))
-                .background(Color.White)
-                .padding(horizontal = 30.dp)
-                .padding(top = 30.dp, bottom = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+                .weight(1f)
+                .padding(25.dp),
+            verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             Text(
                 text = "Bienvenido",
                 color = ColorP1,
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Light
             )
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_large),
@@ -100,14 +109,12 @@ fun LoginScreen(
                 modifier = Modifier.width(250.dp)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            CajaTexto(
+            CajaTextoLogin(
                 valor = viewModel.documento,
                 newValor = {
-                    if (it.length < 10) {
-                        viewModel.documento = it
-                    }
+                    viewModel.documento = it
                 },
-                titulo = "Usuario",
+                ic = Icons.Default.Person,
                 label = "Ingrese su documento",
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next,
@@ -117,46 +124,36 @@ fun LoginScreen(
                     }
                 )
             )
-            CajaTexto(
+            CajaTextoLogin(
                 valor = viewModel.clave,
                 newValor = {
                     if (it.length < 9) {
                         viewModel.clave = it
                     }
                 },
-                titulo = "Contraseña",
                 label = "Ingrese su contraseña",
                 keyboardType = KeyboardType.Number,
-                trailingIcon = {
-                    val icon =
-                        if (isVisible.value) Icons.Default.VisibilityOff else Icons.Default.Visibility
-                    IconButton(
-                        onClick = {
-                            isVisible.value = !isVisible.value
-                        }
-                    ) {
-                        Icon(imageVector = icon, contentDescription = null, tint = ColorP1)
-                    }
-                },
-                visualTransformation = if (isVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
+                ic = Icons.Default.Lock,
                 imeAction = ImeAction.Done,
                 keyboardActions = KeyboardActions(
                     onDone = {
                         focus.clearFocus()
                     }
-                )
+                ),
+                visualTransformation = PasswordVisualTransformation()
             )
             RecordarUsuario()
             Spacer(modifier = Modifier.height(5.dp))
 
-            if (viewModel.loader){
+            if (viewModel.loader) {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
-            }else{
+            } else {
                 Button(
                     onClick = {
-                        viewModel.login()
+                        toMenu()
+                        //viewModel.login()
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = ColorP1,
@@ -178,13 +175,19 @@ fun LoginScreen(
 @Composable
 fun RecordarUsuario(viewModel: LoginViewModel = hiltViewModel()) {
     Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(
+        Text(text = "Recordar usuario")
+        Spacer(modifier = Modifier.width(10.dp))
+        Switch(
             checked = viewModel.check,
             onCheckedChange = { viewModel.check = it },
-            colors = CheckboxDefaults.colors(checkedColor = ColorP1, checkmarkColor = Color.White)
+            colors = SwitchDefaults.colors(
+                uncheckedThumbColor = ColorTextoLabel,
+                uncheckedTrackColor = Color.White
+            )
         )
-        Text(text = "Recordar usuario", fontSize = 14.sp)
     }
 }

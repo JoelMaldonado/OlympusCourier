@@ -39,15 +39,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             OlympusCourierAppTheme {
-                //NavegacionPrincipal()
+                NavegacionPrincipal()
                 //CamaraScreen()
-
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_logout),
-                    contentDescription = null,
-                    tint = Color.Black,
-                    modifier = Modifier.size(400.dp).padding(15.dp)
-                )
             }
         }
     }

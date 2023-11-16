@@ -55,7 +55,7 @@ fun CajaTexto(
                 unfocusedBorderColor = color,
                 focusedBorderColor = color,
                 cursorColor = color,
-                placeholderColor = Color.Gray.copy(0.5f)
+                focusedPlaceholderColor = Color.Gray.copy(0.5f)
             ),
             shape = RoundedCornerShape(10.dp),
             placeholder = {

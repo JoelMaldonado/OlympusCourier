@@ -257,81 +257,6 @@ select:focus{
 
 
 
-.table {
-  width: 95%;
-  /* Centrar la tabla en la página 1400px*/
-  border-collapse: collapse;
-  margin-top: 70px;
-  /* Espacio entre el botón y la tabla */
-  font-family: metropolis;
-  border: none;
-
-
-}
-
-.table th,
-.table td {
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-  margin-bottom: -1px;
-  min-width: 100px;
-  padding: 13px;
-  /* Establece un ancho mínimo para las celdas */
-  text-align: center;
-
-}
-
-.table td {
-  font-size: 1rem;
-  color:
-    #808080;
-
-  font-weight: 400;
-  font-size: 1.1rem;
-}
-
-.table th {
-  background-color: white;
-  font-size: 1rem;
-  color:
-
-    #6d6d6d;
-  font-weight: 700;
-  font-size: 1.05rem;
-}
-
-.table tbody tr:nth-child(even) {
-  background-color: #f7f7f8;
-}
-
-.table tbody tr {
-  background-color: white;
-}
-
-
-
-
-.table th:nth-child(2),
-.table td:nth-child(2) {
-
-  width: 350px;
-  /* Ajusta el ancho según tu preferencia */
-}
-
-.pagado {
-  margin-right: 40px;
-}
-
-.estado-content {
-  display: flex;
-  justify-content: center;
-
-}
-
-th mat-icon {
-  transform: scale(1.2);
-  margin-right: 3px;
-}
 
 .icon {
   position: relative;
@@ -372,6 +297,12 @@ th mat-icon {
   transform: translate(-50%, -50%);
 }
 
+.item__estado{
+  padding: 5px 30px;
+  border-radius: 15px;
+  color: white;
+}
+
 
 
 .larger-icon {
@@ -380,4 +311,22 @@ th mat-icon {
 }
 .larger-icon:hover {
   transform: scale(1.8); /* Cambia el tamaño del ícono al pasar el mouse */
+}
+
+table{
+  border-top: 1px solid #D9D9D9;
+  margin-top: 50px;
+}
+
+table th {
+  color: #808080;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+table td {
+  color: #808080;
+  font-size: 1rem;
+  text-align: center;
 }

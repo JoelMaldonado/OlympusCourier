@@ -11,18 +11,14 @@ import Swal from 'sweetalert2';
 })
 export class ClienteService {
 
-
-  /**
-   * getDocs() => Obtiene la información una sola vez
-   * collectionData() => Obtiene la información en tiempo real
-   * **/
-
   fb = inject(Firestore)
+  http = inject(HttpClient)
+  url = `${environment.baseUrl}/api/clientes`;
 
   async addCliente(cliente: Cliente): Promise<string | boolean> {
     try {
       const col = collection(this.fb, 'Cliente')
-      const q = query(col, where('doc', '==', cliente.doc));
+      const q = query(col, where('doc', '==', cliente.documento));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {
@@ -50,18 +46,6 @@ export class ClienteService {
     }
   }
 
-  async editCliente(cliente: Cliente): Promise<boolean> {
-    try {
-      const col = collection(this.fb, 'Cliente');
-      const clienteDoc = doc(col, cliente.id);
-      await setDoc(clienteDoc, cliente);
-      return true;
-    } catch (error) {
-      console.error('Error al editar el cliente:', error);
-      return false;
-    }
-  }
-
   isLogged(): boolean {
     return localStorage.getItem('token') ? true : false;
   }
@@ -71,43 +55,12 @@ export class ClienteService {
     return (await getDoc(document)).data() as Cliente
   }
 
-  http = inject(HttpClient)
-
   listarClientes(): Observable<Cliente[]> {
-    const url = `${environment.baseUrl}/api/clientes`;
-    return this.http.get<any>(url);
+    return this.http.get<any>(this.url);
   }
 
-  async searchCliente(data: string): Promise<Cliente[]> {
-    const col = collection(this.fb, 'Cliente');
-    const nameQuery = query(
-      col,
-      where('nombres', '>=', data),
-      where('nombres', '<', data + '\uf8ff')
-    );
-
-    const docNumberQuery = query(
-      col,
-      where('doc', '>=', data),
-      where('doc', '<', data + '\uf8ff')
-    );
-
-    const [nameResults, docNumberResults] = await Promise.all([getDocs(nameQuery), getDocs(docNumberQuery)]);
-
-    const nameMatches: Cliente[] = [];
-    nameResults.forEach((doc) => {
-      const cliente = doc.data() as Cliente;
-      cliente.id = doc.id;
-      nameMatches.push(cliente);
-    });
-
-    const docNumberMatches: Cliente[] = [];
-    docNumberResults.forEach((doc) => {
-      const cliente = doc.data() as Cliente;
-      docNumberMatches.push(cliente);
-    });
-    const combinedResults = [...new Set([...nameMatches, ...docNumberMatches])];
-
-    return combinedResults;
+  searchCliente(data: string): Observable<Cliente[]> {
+    return this.http.get<any>(`${this.url}/search/${data}`)
   }
+
 }

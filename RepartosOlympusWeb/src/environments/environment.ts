@@ -9,6 +9,9 @@ export const environment = {
     messagingSenderId: '328413354532',
     measurementId: 'G-VPCC7VJS56',
   },
-  baseUrl: 'http://sv-YaAUgKfBpu.cloud.elastika.pe:6081',
+  baseUrl: 'http://192.168.0.215:3030',
   token: ''
 };
+
+// url = 'http://sv-YaAUgKfBpu.cloud.elastika.pe:6081';
+// local = 'http://192.168.0.215:3030';

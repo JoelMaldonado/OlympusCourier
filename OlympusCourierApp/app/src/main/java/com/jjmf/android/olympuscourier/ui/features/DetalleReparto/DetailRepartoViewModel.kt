@@ -24,7 +24,7 @@ class DetailRepartoViewModel @Inject constructor(
 
     var reparto by mutableStateOf<Reparto?>(null)
 
-    fun getReparto(idReparto: String) {
+    fun getReparto(idReparto: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 reparto = repository.get(idReparto)
@@ -37,8 +37,6 @@ class DetailRepartoViewModel @Inject constructor(
     fun darConformidad(reparto: Reparto) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                Log.d("tagito", reparto.id)
-                repository.update(reparto.id)
                 back = true
             } catch (e: Exception) {
                 error = e.message

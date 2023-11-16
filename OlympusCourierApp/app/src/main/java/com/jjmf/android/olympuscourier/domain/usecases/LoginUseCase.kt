@@ -8,9 +8,9 @@ class LoginUseCase @Inject constructor(
     private val repository: UsuarioRepository,
 ) {
     suspend operator fun invoke(doc: String, clave: String): Boolean {
-        return repository.getList().find { it.doc == doc && it.clave == clave }.also {
+        return repository.getList().find { it.documento == doc}.also {
             if (it != null) {
-                prefs.saveUserId(it.id)
+                prefs.saveUserId("1")
             }
         } != null
     }

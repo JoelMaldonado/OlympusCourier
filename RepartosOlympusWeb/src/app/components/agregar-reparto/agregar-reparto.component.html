@@ -4,109 +4,14 @@
         <span>Nuevo Reparto</span>
     </div>
 
-    <div class="buscar__container">
-        <span>Cliente</span>
-        <div class="buscar">
-            <div class="input-container">
-                <mat-spinner class="icon" [diameter]="30" color="#047CC4" *ngIf="isLoading"></mat-spinner>
-                <button class="icon" mat-icon-button (click)="search()" matTooltip="Buscar"
-                    *ngIf="!isLoading && !cliente"><mat-icon>search</mat-icon></button>
+    <app-buscar-cliente-reparto (actClienteHijo)="actCliente($event)"></app-buscar-cliente-reparto>
 
-                <button class="icon" mat-icon-button (click)="cliente = undefined; documento.setValue('')" matTooltip="Limpiar"
-                    *ngIf="cliente"><mat-icon>close</mat-icon></button>
-
-                <input placeholder="Ingrese documentos o nombres" type="text" [formControl]="documento"
-                    class="input-with-icon" />
-            </div>
-            <button mat-button (click)="openDialogCliente()" class="btn__agregar" *ngIf="!cliente">
-                <mat-icon>person_add</mat-icon>
-                <span>Agregar Cliente</span>
-            </button>
-            <button mat-button (click)="openDialogCliente()" class="btn__agregar" *ngIf="cliente">
-                <mat-icon>edit</mat-icon>
-                <span>Editar Cliente</span>
-            </button>
-        </div>
-        <!-- Lista de sugerencias -->
-        <div class="sugerencias">
-            <ul class="auto__completar" *ngIf="showSugerencias">
-                <li *ngFor="let item of data$" (click)="selectCliente(item)">
-                    {{item.nombres}}
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="container__completado">
-        <div class="completado" *ngIf="cliente">
-            <div class="span__completado">
-                <mat-icon>description</mat-icon><span class="title">Documento</span>
-                <span class="sub__title"> {{cliente.doc}} </span>
-            </div>
-
-            <div class="span__completado">
-                <mat-icon>phone_in_talk</mat-icon><span class="title">Celular</span>
-                <span class="sub__title"> {{cliente.celular}}</span>
-            </div>
-
-            <div class="span__completado">
-                <mat-icon>location_on</mat-icon><span class="title">Distrito</span>
-                <span class="sub__title"> {{cliente.distrito}}</span>
-            </div>
-
-            <div class="span__completado">
-                <mat-icon>person_pin_circle</mat-icon><span class="title">Direccion</span>
-                <span class="sub__title"> {{cliente.direc}}</span>
-            </div>
-
-            <div class="span__completado">
-                <mat-icon>person</mat-icon><span  class="title">Referencia</span>
-                <span class="sub__title"> {{cliente.ref}}</span>
-            </div>
-        </div>
-    </div>
-
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>N° Guia</th>
-                <th>Tipo</th>
-                <th>Descripcion</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>
-                    <button style="margin-left: 17px;" class="btn__item centered-button"
-                        (click)="openDialogAddItemReparto()" matTooltip="Agregar Item">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of listItemRepartos">
-                <td>{{ item.nGuia }}</td>
-                <td>{{ item.cat }}</td>
-                <td>{{ item.descrip }}</td>
-                <td>{{ item.cant }}</td>
-                <td>S/{{ item.precio }}</td>
-                <td class="btn__crud">
-                    <button matTooltip="Editar" (click)="editItemReparto(item)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button matTooltip="Eliminar" (click)="deleteItemReparto(item)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <app-tabla-items-reparto></app-tabla-items-reparto>
 
     <div class="container__total">
         <div class="container__clave">
             <span>Clave</span>
-            <input placeholder="XXXX" type="text" maxlength="4" [formControl] = "clave">
+            <input placeholder="****" type="text" maxlength="4" [formControl]="clave">
         </div>
 
         <div class="container__costo">

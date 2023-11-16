@@ -30,8 +30,10 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { DialogDetalleRepartoComponent } from './shared/components/dialog-detalle-reparto/dialog-detalle-reparto.component';
 import { DialogGenerarComprobanteComponent } from './shared/components/dialog-generar-comprobante/dialog-generar-comprobante.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BuscarClienteRepartoComponent } from './components/agregar-reparto/components/buscar-cliente-reparto/buscar-cliente-reparto.component';
+import { TablaItemsRepartoComponent } from './components/agregar-reparto/components/tabla-items-reparto/tabla-items-reparto.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     UsuariosComponent,
     DialogDetalleRepartoComponent,
-    DialogGenerarComprobanteComponent
+    DialogGenerarComprobanteComponent,
+    BuscarClienteRepartoComponent,
+    TablaItemsRepartoComponent
   ],
   imports: [
     AppRoutingModule,
@@ -61,8 +65,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MaterialModule,
     HttpClientModule,
     BrowserModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

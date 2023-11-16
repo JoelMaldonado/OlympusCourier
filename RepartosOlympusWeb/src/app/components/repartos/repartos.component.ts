@@ -17,7 +17,14 @@ export class RepartosComponent {
 
   listRepartos: Reparto[] = [];
   loaderRepartos = false;
-
+  columnas: string[] = [
+    'id',
+    'cliente',
+    'fecha',
+    'flete',
+    'estado',
+    'act',
+  ];
   constructor(
     private router: Router,
     private repartoService: RepartoService
@@ -25,14 +32,50 @@ export class RepartosComponent {
     this.listarRepartos()
   }
 
+  getColor(estado: string): string {
+    switch (estado) {
+      case 'P':
+        return 'gray';
+      case 'E':
+        return 'green';
+      case 'A':
+        return 'red';
+      default:
+        return 'black';
+    }
+  }
+
+  getEstado(estado:string): string{
+    switch (estado) {
+      case 'P':
+        return 'Pendiente';
+      case 'E':
+        return 'Entregado';
+      case 'A':
+        return 'Anulado';
+      default:
+        return 'Sin Valor';
+    }
+  }
+
   async listarRepartos() {
     this.loaderRepartos = true
-    this.listRepartos = await this.repartoService.listarRepartos();
+    this.repartoService.listarRepartos().subscribe({
+      next: data => {
+        this.listRepartos = data
+      },
+      error: error => console.log(error)
+    });
     this.loaderRepartos = false;
   }
 
   agregar() {
     this.router.navigateByUrl('/menu/agregar-reparto')
+  }
+
+  formatoId(id: number): string {
+    const idStr = id.toString().slice(0, 6).padStart(6, '0');
+    return `#${idStr}`;
   }
 
 
@@ -56,11 +99,16 @@ export class RepartosComponent {
     })
   }
 
-  formatFecha(fecha: Timestamp | undefined, pattern: string): string {
+  formatFecha(fecha: string | undefined, pattern: string): string {
     if (fecha === undefined) {
       return "Sin fecha";
     } else {
-      const date = fecha.toDate();
+      const date = new Date(fecha);
+
+      if (isNaN(date.getTime())) {
+        return "Fecha no válida";
+      }
+
       if (pattern === "dd/MM/yyyy") {
         const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');

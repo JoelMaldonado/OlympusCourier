@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Firestore, addDoc, Timestamp, collection, getDocs } from '@angular/fire/firestore';
 import { Reparto } from 'src/app/models/reparto';
 import { ClienteService } from './cliente.service';
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,14 @@ export class RepartoService {
 
   }
 
-  async listarRepartos(): Promise<Reparto[]> {
+  http = inject(HttpClient);
+
+  listarRepartos(): Observable<Reparto[]> {
+    const url = `${environment.baseUrl}/api/repartos`;
+    return this.http.get<any>(url);
+  }
+
+  /*async listarRepartos(): Promise<Reparto[]> {
     try {
       const col = collection(this.fb, 'Reparto')
       const allRepartos = await getDocs(col);
@@ -44,7 +54,7 @@ export class RepartoService {
       })
       return []
     }
-  }
+  }*/
 
   async insert(item: Reparto): Promise<boolean> {
     try {
