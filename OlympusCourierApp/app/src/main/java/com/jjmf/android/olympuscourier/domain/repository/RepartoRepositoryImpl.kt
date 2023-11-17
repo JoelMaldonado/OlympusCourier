@@ -33,18 +33,6 @@ class RepartoRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getAll(): Flow<List<RepartoDto>> = callbackFlow {
-        val listado = fb.addSnapshotListener { sna, _ ->
-            val lista = mutableListOf<RepartoDto>()
-            sna?.forEach {
-                val product = it.toObject(RepartoDto::class.java)
-                lista.add(product)
-            }
-            trySend(lista).isSuccess
-        }
-        awaitClose { listado.remove() }
-    }
-
     override suspend fun get(idReparto: Int): Reparto? {
         return api.listarRepartos().body()?.find { it.id == idReparto }?.toDomain()
     }

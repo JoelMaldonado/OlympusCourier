@@ -12,6 +12,8 @@ data class UsuarioDto(
     @SerializedName("telefono") val telefono: String?,
     @SerializedName("correo") val correo: String?,
     @SerializedName("rol") val rol: String?,
+    @SerializedName("fecha_nacimiento") val fecha_nacimiento:String?,
+    @SerializedName("fecha_creacion") val fecha_creacion:String?,
 ) {
     fun toDomain(): Usuario {
         return Usuario(
@@ -22,6 +24,13 @@ data class UsuarioDto(
             telefono = telefono ?: "Sin Valor",
             correo = correo ?: "Sin Valor",
             rol = rol ?: "Sin Valor",
+            fecha_nacimiento = fecha_nacimiento ?: "1999-01-01T00:00:00.000Z",
+        fecha_creacion = fecha_creacion ?: "1999-01-01T00:00:00.000Z",
         )
     }
 }
+
+data class LoginRequest(
+    val documento:String,
+    val clave:String
+)

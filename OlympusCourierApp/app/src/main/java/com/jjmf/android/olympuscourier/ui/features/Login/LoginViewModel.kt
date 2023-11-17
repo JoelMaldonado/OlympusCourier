@@ -6,7 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jjmf.android.olympuscourier.app.BaseApp.Companion.prefs
-import com.jjmf.android.olympuscourier.domain.usecases.LoginUseCase
+import com.jjmf.android.olympuscourier.core.EstadosResult
+import com.jjmf.android.olympuscourier.data.repository.UsuarioRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase,
+    private val repository: UsuarioRepository
 ) : ViewModel() {
 
     var documento by mutableStateOf(prefs.getDoc() ?: "")
@@ -30,13 +31,19 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 loader = true
-                if (loginUseCase(doc = documento, clave = clave)) {
-                    if (check) prefs.saveDoc(documento)
-                    else prefs.removeDoc()
-                    prefs.saveRecordar(check)
-                    toMenu = true
-                }else{
-                    error = "Sin acceso"
+                when(val res = repository.login(documento, clave)){
+                    is EstadosResult.Correcto -> {
+                        if (res.datos!=null){
+                            if (check) prefs.saveDoc(documento)
+                            else prefs.removeDoc()
+                            prefs.saveRecordar(check)
+                            prefs.saveUserId(res.datos)
+                            toMenu = true
+                        }
+                    }
+                    is EstadosResult.Error -> {
+                        error = res.mensajeError
+                    }
                 }
             } catch (e: Exception) {
                 error = e.message

@@ -39,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -59,6 +60,7 @@ import com.jjmf.android.olympuscourier.ui.components.CajaTextoLogin
 import com.jjmf.android.olympuscourier.ui.theme.ColorFondo
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
 import com.jjmf.android.olympuscourier.ui.theme.ColorTextoLabel
+import com.jjmf.android.olympuscourier.util.show
 
 @Composable
 fun LoginScreen(
@@ -76,12 +78,20 @@ fun LoginScreen(
         }
     }
 
+    viewModel.error?.let {
+        LaunchedEffect(key1 = Unit) {
+            context.show(it)
+            viewModel.error = null
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(ColorFondo),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
+
         Image(
             painter = painterResource(id = R.drawable.fondo_login),
             contentDescription = null,
@@ -151,10 +161,7 @@ fun LoginScreen(
                 )
             } else {
                 Button(
-                    onClick = {
-                        toMenu()
-                        //viewModel.login()
-                    },
+                    onClick = viewModel::login,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = ColorP1,
                         contentColor = Color.White,

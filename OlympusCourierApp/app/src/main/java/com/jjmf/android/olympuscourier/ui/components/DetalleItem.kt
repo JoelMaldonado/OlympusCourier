@@ -14,8 +14,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.jjmf.android.olympuscourier.ui.theme.ColorBox
 import com.jjmf.android.olympuscourier.ui.theme.ColorT
+import com.jjmf.android.olympuscourier.ui.theme.ColorT1
 import com.jjmf.android.olympuscourier.ui.theme.ColorT2
 
 @Composable
@@ -28,17 +30,18 @@ fun DetalleItem(titulo: String, descrip: String, color: Color = ColorT) {
             text = titulo,
             modifier = Modifier.weight(1f),
             fontWeight = FontWeight.Medium,
-            color = color
+            color = color,
+            fontSize = 14.sp
         )
         Box(
             modifier = Modifier
-                .weight(2f)
+                .weight(3f)
                 .clip(RoundedCornerShape(10.dp))
                 .background(ColorBox)
                 .padding(10.dp),
             contentAlignment = Alignment.CenterStart
         ) {
-            Text(text = descrip, color = ColorT2)
+            Text(text = descrip, color = ColorT1, fontSize = 14.sp)
         }
     }
 }

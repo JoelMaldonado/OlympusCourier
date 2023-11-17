@@ -1,7 +1,6 @@
 package com.jjmf.android.olympuscourier.ui.features.Menu
 
 import android.content.Context
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -17,14 +16,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ManageAccounts
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -33,6 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -40,17 +36,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.jjmf.android.olympuscourier.ui.components.CajaBuscar
 import com.jjmf.android.olympuscourier.ui.components.CardConformidad
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
-import com.jjmf.android.olympuscourier.ui.theme.ColorP3
 import com.jjmf.android.olympuscourier.ui.theme.ColorS1
 import com.jjmf.android.olympuscourier.ui.theme.ColorTextoLabel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuScreen(
-    toPerfil:()->Unit,
-    toDetalle:(Int)->Unit,
+    toPerfil: () -> Unit,
+    toDetalle: (Int) -> Unit,
+    toDarConformidad: (Int) -> Unit,
+    logout: () -> Unit,
     viewModel: MenuViewModel = hiltViewModel(),
 ) {
 
@@ -67,6 +65,7 @@ fun MenuScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .shadow(10.dp, RoundedCornerShape(bottomStart = 25.dp, bottomEnd = 25.dp))
                 .clip(RoundedCornerShape(bottomStart = 25.dp, bottomEnd = 25.dp))
                 .background(ColorP1)
         ) {
@@ -98,7 +97,7 @@ fun MenuScreen(
                 }
             }
 
-            SearchBar(
+            /*SearchBar(
                 query = viewModel.buscar,
                 onQueryChange = {
                     viewModel.buscar = it
@@ -150,7 +149,27 @@ fun MenuScreen(
                 )
             ) {
 
-            }
+            }*/
+
+            CajaBuscar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp)
+                    .padding(bottom = 15.dp),
+                valor = viewModel.buscar,
+                newValor = { new ->
+                    viewModel.buscar = new
+                    if (new.isEmpty()) {
+                        viewModel.listRepartosFiltro = viewModel.listRepartos
+                    } else {
+                        viewModel.listRepartosFiltro = viewModel.listRepartos.filter {
+                            it.id == new.toIntOrNull() ||
+                                    it.cliente?.nombres?.uppercase()
+                                        ?.contains(new.uppercase()) == true
+                        }
+                    }
+                }
+            )
         }
         Column(
             modifier = Modifier
@@ -163,7 +182,7 @@ fun MenuScreen(
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 Text(
-                    text = "Total: 12",
+                    text = "Total: ${viewModel.listRepartos.size}",
                     color = ColorP1,
                     fontWeight = FontWeight.Medium
                 )
@@ -175,9 +194,14 @@ fun MenuScreen(
                     fontSize = 14.sp
                 )
                 Switch(
-                    checked = viewModel.soloPendientes,
-                    onCheckedChange = {
-                        viewModel.soloPendientes = it
+                    checked = viewModel.switchTodos,
+                    onCheckedChange = {bool->
+                        viewModel.switchTodos = bool
+                        if (!bool){
+                            viewModel.listRepartosFiltro = viewModel.listRepartos.filter { it.estado == "P" }
+                        }else{
+                            viewModel.listRepartosFiltro = viewModel.listRepartos
+                        }
                     },
                     colors = SwitchDefaults.colors(
                         uncheckedThumbColor = ColorTextoLabel,
@@ -193,11 +217,17 @@ fun MenuScreen(
             }
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
-            ){
-                items(viewModel.listRepartos){
-                    CardConformidad(reparto = it) {
-                        toDetalle(it.id)
-                    }
+            ) {
+                items(viewModel.listRepartosFiltro) {
+                    CardConformidad(
+                        reparto = it,
+                        toDetalle = {
+                            toDetalle(it.id)
+                        },
+                        toDarConformidad = {
+                            toDarConformidad(it.id)
+                        }
+                    )
                 }
             }
         }
@@ -206,7 +236,7 @@ fun MenuScreen(
     BackHandler {
         alertaCerrarSesion(
             context = context,
-            click = {}
+            click = logout
         )
     }
 }

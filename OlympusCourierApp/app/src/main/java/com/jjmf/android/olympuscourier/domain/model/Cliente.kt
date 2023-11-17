@@ -10,4 +10,10 @@ data class Cliente(
     val distrito_id:Int,
     val direc:String,
     val referencia:String,
-)
+){
+
+
+    fun formatTelefono(): String {
+        return telefono.chunked(3).joinToString(" ")
+    }
+}
