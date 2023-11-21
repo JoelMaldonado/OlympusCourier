@@ -2,9 +2,11 @@ package com.jjmf.android.olympuscourier.ui.features.DetalleReparto
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,6 +42,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -54,6 +57,7 @@ import com.jjmf.android.olympuscourier.ui.components.FondoBlanco
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
 import com.jjmf.android.olympuscourier.ui.theme.ColorP2
 import com.jjmf.android.olympuscourier.ui.theme.ColorP3
+import com.jjmf.android.olympuscourier.ui.theme.ColorR1
 import com.jjmf.android.olympuscourier.ui.theme.ColorT
 import com.jjmf.android.olympuscourier.ui.theme.ColorT1
 import com.jjmf.android.olympuscourier.ui.theme.ColorWsp
@@ -95,30 +99,62 @@ fun DetailRepartoScreen(
         context.show(it)
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        FondoBlanco()
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 5.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconButton(onClick = back) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    tint = ColorP1
+                )
+            }
+            Text(
+                text = "Visualizar Reparto",
+                fontWeight = FontWeight.SemiBold,
+                color = ColorP1,
+                fontSize = 22.sp
+            )
+
+            val texto = when (reparto.estado) {
+                "P" -> "Pendiente"
+                "E" -> "Entregado"
+                "A" -> "Anulado"
+                else -> "Otros"
+            }
+
+            val color = when (reparto.estado) {
+                "P" -> ColorT1
+                "E" -> ColorP2
+                "A" -> ColorR1
+                else -> ColorT
+            }
+
+            Text(
+                text = texto,
+                color = color,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(5.dp))
+                    .background(color.copy(0.1f))
+                    .padding(horizontal = 5.dp, vertical = 3.dp)
+            )
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 20.dp)
-                .padding(top = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
+                .padding(top = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = back) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
-                }
-                Text(
-                    text = "Visualizar Reparto",
-                    fontWeight = FontWeight.SemiBold,
-                    color = ColorT,
-                    fontSize = 22.sp
-                )
-            }
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -157,7 +193,9 @@ fun DetailRepartoScreen(
             DetalleItem(titulo = "Teléfono", descrip = reparto.cliente.formatTelefono())
             DetalleItem(titulo = "Distrito", descrip = reparto.cliente.distrito_id.toString())
             DetalleItem(titulo = "Dirección", descrip = reparto.cliente.direc)
-            DetalleItem(titulo = "Referencia", descrip = reparto.cliente.referencia)
+            DetalleItem(
+                titulo = "Referencia",
+                descrip = reparto.cliente.referencia.ifEmpty { "Sin Referencia" })
             DetalleItem(titulo = "Fecha", descrip = reparto.formatFecha())
 
             Row(
@@ -169,10 +207,9 @@ fun DetailRepartoScreen(
                         try {
                             val mapIntent =
                                 Intent(Intent.ACTION_VIEW, Uri.parse(reparto.cliente.urlMaps))
-                            mapIntent.setPackage("com.google.android.apps.maps")
                             context.startActivity(mapIntent)
                         } catch (e: Exception) {
-
+                            Log.d("tagito", "${reparto.cliente.urlMaps}, Error: $e")
                         }
                     },
                     containerColor = ColorP2,
@@ -222,7 +259,7 @@ fun DetailRepartoScreen(
                 }
             }
 
-            reparto.items.forEachIndexed {i, itemReparto ->
+            reparto.items.forEachIndexed { i, itemReparto ->
                 CardItemReparto(
                     index = i,
                     itemReparto = itemReparto
@@ -234,10 +271,10 @@ fun DetailRepartoScreen(
 
 @Composable
 fun CardItemReparto(
-    index:Int,
+    index: Int,
     itemReparto: ItemReparto,
 ) {
-    val bool = remember { mutableStateOf(index==0) }
+    val bool = remember { mutableStateOf(index == 0) }
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -258,7 +295,7 @@ fun CardItemReparto(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Item ${index+1}",
+                    text = "Item ${index + 1}",
                     color = ColorP1,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.padding(start = 15.dp)
@@ -317,7 +354,10 @@ fun CardItemReparto(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        IconText(icon = R.drawable.ic_caja_2, text = itemReparto.id_tipo_paquete.toString())
+                        IconText(
+                            icon = R.drawable.ic_caja_2,
+                            text = itemReparto.id_tipo_paquete.toString()
+                        )
                         IconText(icon = R.drawable.ic_cantidad, text = itemReparto.cant.toString())
                         IconText(icon = R.drawable.ic_precio, text = "S/${itemReparto.precio}")
                     }

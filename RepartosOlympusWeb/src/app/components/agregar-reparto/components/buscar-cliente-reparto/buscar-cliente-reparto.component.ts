@@ -11,7 +11,7 @@ import { ClienteService } from 'src/app/shared/services/cliente.service';
   templateUrl: './buscar-cliente-reparto.component.html',
   styleUrls: ['./buscar-cliente-reparto.component.css']
 })
-export class BuscarClienteRepartoComponent {
+export class BuscarClienteRepartoComponent{
 
   @Output() clienteEmit = new EventEmitter<Cliente | undefined>();
   cliente: Cliente | undefined;

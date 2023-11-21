@@ -1,5 +1,9 @@
 package com.jjmf.android.olympuscourier.ui.features.DarConformidad
 
+import android.Manifest
+import android.graphics.Bitmap
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,12 +17,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -36,6 +43,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -43,18 +52,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.jjmf.android.olympuscourier.R
 import com.jjmf.android.olympuscourier.domain.model.Reparto
 import com.jjmf.android.olympuscourier.ui.components.CajaTexto
-import com.jjmf.android.olympuscourier.ui.components.CardReparto
 import com.jjmf.android.olympuscourier.ui.features.DetalleReparto.IconText
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
 import com.jjmf.android.olympuscourier.ui.theme.ColorP2
 import com.jjmf.android.olympuscourier.ui.theme.ColorP3
-import com.jjmf.android.olympuscourier.ui.theme.ColorS1
 import com.jjmf.android.olympuscourier.ui.theme.ColorT1
+import com.jjmf.android.olympuscourier.util.show
 
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun DarConformidadScreen(
     idReparto: Int,
@@ -62,9 +75,12 @@ fun DarConformidadScreen(
     viewModel: DarConformidadViewModel = hiltViewModel(),
 ) {
 
+    val permiso = rememberPermissionState(permission = Manifest.permission.CAMERA)
+
 
     LaunchedEffect(key1 = Unit) {
         viewModel.getReparto(idReparto)
+        permiso.launchPermissionRequest()
     }
 
     val context = LocalContext.current
@@ -78,6 +94,11 @@ fun DarConformidadScreen(
         }
     }
 
+    viewModel.error?.let {
+        context.show(it)
+        viewModel.error = null
+    }
+
     if (viewModel.reparto == null) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
@@ -87,8 +108,6 @@ fun DarConformidadScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
 
         Row(
@@ -103,54 +122,81 @@ fun DarConformidadScreen(
                     tint = ColorP1
                 )
             }
-            Text(text = "Conformidad de Entrega", color = ColorP1, fontWeight = FontWeight.SemiBold)
-        }
-
-        Row(
-            modifier = Modifier
-                .align(Alignment.End)
-                .clip(RoundedCornerShape(8.dp))
-                .background(ColorP1)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_caja),
-                contentDescription = null,
-                modifier = Modifier.size(25.dp)
-            )
             Text(
-                text = "Reparto N°${reparto.formatoID()}",
-                color = Color.White,
-                fontWeight = FontWeight.Medium
+                text = "Conformidad de Entrega",
+                color = ColorP1,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
             )
         }
 
-        CardConformidad(reparto = reparto)
-
-        CardConformidad2(reparto = reparto, viewModel = viewModel)
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        Button(
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {
-
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = ColorP2,
-                contentColor = Color.White
-            )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(15.dp)
         ) {
-            Text(text = "Confirmar Entrega")
+            Row(
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(ColorP1)
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_caja),
+                    contentDescription = null,
+                    modifier = Modifier.size(25.dp)
+                )
+                Text(
+                    text = "Reparto N°${reparto.formatoID()}",
+                    color = Color.White,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            CardConformidad(reparto = reparto)
+
+            CardConformidad2(reparto = reparto, viewModel = viewModel, permiso = permiso)
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    viewModel.confirmarEntrega(idReparto)
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = ColorP2,
+                    contentColor = Color.White
+                )
+            ) {
+                Text(text = "Confirmar Entrega")
+            }
         }
     }
 
 }
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun CardConformidad2(reparto: Reparto, viewModel: DarConformidadViewModel) {
+fun CardConformidad2(
+    reparto: Reparto,
+    viewModel: DarConformidadViewModel,
+    permiso: PermissionState,
+) {
+
+
+    val takePicture = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.TakePicturePreview(),
+        onResult = {
+            viewModel.foto = it
+        }
+    )
+
     val bool = remember { mutableStateOf(true) }
     ElevatedCard(
         modifier = Modifier.fillMaxWidth(),
@@ -193,19 +239,45 @@ fun CardConformidad2(reparto: Reparto, viewModel: DarConformidadViewModel) {
                         titulo = "Clave",
                         label = "Ingrese su clave"
                     )
-                    Button(
-                        onClick = {
-
+                    if (viewModel.foto != null) {
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .size(200.dp)
+                                .clip(RoundedCornerShape(8.dp)),
+                            contentAlignment = Alignment.TopEnd
+                        ) {
+                            Image(
+                                bitmap = viewModel.foto!!.asImageBitmap(),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Crop
+                            )
+                            IconButton(onClick = { viewModel.foto = null }) {
+                                Icon(
+                                    imageVector = Icons.Default.Remove,
+                                    contentDescription = null,
+                                    tint = Color.White
+                                )
+                            }
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.CameraAlt,
-                            contentDescription = null,
-                            tint = Color.White,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(10.dp))
-                        Text(text = "Adjuntar foto", color = Color.White)
+                    } else {
+                        Button(
+                            onClick = {
+                                if (permiso.status.isGranted) {
+                                    takePicture.launch(null)
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.CameraAlt,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Text(text = "Adjuntar foto", color = Color.White)
+                        }
                     }
                 }
             }

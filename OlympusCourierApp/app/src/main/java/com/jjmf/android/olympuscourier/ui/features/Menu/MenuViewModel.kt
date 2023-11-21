@@ -1,5 +1,6 @@
 package com.jjmf.android.olympuscourier.ui.features.Menu
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -33,6 +34,7 @@ class MenuViewModel @Inject constructor(
                     is EstadosResult.Correcto -> {
                         listRepartos = res.datos ?: emptyList()
                         listRepartosFiltro = listRepartos
+                        Log.d("tagito", listRepartosFiltro.map { it.cliente.urlMaps }.toString())
                     }
                     is EstadosResult.Error -> error = res.mensajeError
                 }

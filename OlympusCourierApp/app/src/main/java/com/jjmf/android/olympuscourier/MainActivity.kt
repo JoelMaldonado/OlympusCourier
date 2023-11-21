@@ -48,7 +48,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CamaraScreen() {
+
     val foto = remember { mutableStateOf<Bitmap?>(null) }
+
     val takePicture = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicturePreview(),
         onResult = {
