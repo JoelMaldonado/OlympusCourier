@@ -13,6 +13,7 @@ data class ClienteDto(
     @SerializedName("distrito_id") val distrito_id: Int?,
     @SerializedName("direc") val direc: String?,
     @SerializedName("referencia") val referencia: String?,
+    @SerializedName("url_maps") val url_maps: String?,
 ) {
     fun toDomain(): Cliente {
         return Cliente(
@@ -25,7 +26,7 @@ data class ClienteDto(
             distrito_id = distrito_id ?: 0,
             direc = direc ?: "Sin Valor",
             referencia = referencia ?: "Sin Valor",
-            urlMaps = ""
+            urlMaps = url_maps ?: "Sin Valor"
         )
     }
 }

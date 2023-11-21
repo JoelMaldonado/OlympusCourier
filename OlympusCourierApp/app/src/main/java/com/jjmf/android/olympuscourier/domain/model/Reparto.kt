@@ -1,6 +1,5 @@
 package com.jjmf.android.olympuscourier.domain.model
 
-import com.jjmf.android.olympuscourier.data.server.dto.ItemRepartoDto
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -33,8 +32,5 @@ data class Reparto(
         return items.sumOf { it.precio?.toDoubleOrNull() ?: 0.0 }
     }
 
-    fun formatoID(): String {
-        val idStr = id.toString().take(6).padStart(6, '0')
-        return "#$idStr"
-    }
+    fun formatoID() = id.toString().take(6).padStart(6, '0')
 }

@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.Flow
 interface RepartoRepository {
 
     suspend fun listarRepartos(): EstadosResult<List<Reparto>>
-    suspend fun get(idReparto:Int) : EstadosResult<Reparto>
-    suspend fun update(idReparto:String)
+    suspend fun get(idReparto: Int): EstadosResult<Reparto>
+    suspend fun update(idReparto: String)
+    suspend fun darConformidad(idReparto: Int, urlFoto: String): EstadosResult<String>
 
 }
