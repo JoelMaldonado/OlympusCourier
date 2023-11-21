@@ -35,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BuscarClienteRepartoComponent } from './components/agregar-reparto/components/buscar-cliente-reparto/buscar-cliente-reparto.component';
 import { TablaItemsRepartoComponent } from './components/agregar-reparto/components/tabla-items-reparto/tabla-items-reparto.component';
 import { TablaClientesComponent } from './components/clientes/tabla-clientes/tabla-clientes.component';
+import { MenuSelectComponent } from './shared/components/menu-select/menu-select.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { TablaClientesComponent } from './components/clientes/tabla-clientes/tab
     DialogGenerarComprobanteComponent,
     BuscarClienteRepartoComponent,
     TablaItemsRepartoComponent,
-    TablaClientesComponent
+    TablaClientesComponent,
+    MenuSelectComponent
   ],
   imports: [
     AppRoutingModule,

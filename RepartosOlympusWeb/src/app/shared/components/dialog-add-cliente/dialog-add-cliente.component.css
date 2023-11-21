@@ -99,50 +99,9 @@ input:focus {
 
 /* Resto de tus estilos */
 
-select {
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
-  width: 400px;
-  height: 53px;
-  background-color: #f4f4f5;
-  border-radius: 15px;
-  font-size: 1.1rem;
-  color: #808080;
-  font-family: 'Metropolis', sans-serif;
-  border: none;
-}
-select:focus{
-  outline: none;
-  border: 2px solid #047CC4;
-}
 
-option{
-  padding: 20px;
-}
 
 /* Estilo para el ícono de triángulo (puedes mantener este estilo) */
-.custom-select::after {
-  content: "\25BC";
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  font-size: 16px;
-}
-
-label {
-  width: 200px;
-  font-size: 1.15rem !important;
-  opacity: 1;
-  color: #808080;
-  line-height: 1.5rem !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 600 !important;
-  letter-spacing: -0.2px;
-}
-
-
 
 .btn__navbar {
   position: relative;
@@ -214,3 +173,6 @@ h2 {
   #E8E8E8;
   color: #808080;
 }
+
+
+

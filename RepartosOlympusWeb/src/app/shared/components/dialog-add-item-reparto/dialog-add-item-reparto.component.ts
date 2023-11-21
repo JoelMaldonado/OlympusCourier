@@ -10,6 +10,8 @@ import { ItemReparto } from 'src/app/components/agregar-reparto/agregar-reparto.
 })
 export class DialogAddItemRepartoComponent {
 
+  listPaquetes:any[]=['Sobre','Paqueteria','Paquete','Caja','Bulto','Otro'];
+
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddItemRepartoComponent>,

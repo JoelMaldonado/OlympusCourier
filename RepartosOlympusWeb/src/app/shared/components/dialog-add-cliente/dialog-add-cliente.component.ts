@@ -12,11 +12,11 @@ import { ClienteService } from '../../services/cliente.service';
   templateUrl: './dialog-add-cliente.component.html',
   styleUrls: ['./dialog-add-cliente.component.css']
 })
-export class DialogAddClienteComponent {
+export class DialogAddClienteComponent  {
 
   form: FormGroup
   clienteService = inject(ClienteService);
-
+  selectedDistrito: any; 
   listDistritos: Destino[] = [];
   constructor(
     public dialogRef: MatDialogRef<DialogAddClienteComponent>,

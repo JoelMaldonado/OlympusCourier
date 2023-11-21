@@ -17,15 +17,7 @@
       </div>
 
       <div class="campo__form">
-        <label for="">Tipo</label>
-        <select [formControl]="cat">
-          <option value="Sobre">Sobre</option>
-          <option value="Paqueteria">Paqueteria</option>
-          <option value="Paquete">Paquete</option>
-          <option value="Caja">Caja</option>
-          <option value="Bulto">Bulto</option>
-          <option value="Otro">Otro</option>
-        </select>
+          <app-menu-select titulo="Categoría" class="input__select" [listado]="listPaquetes"></app-menu-select>
       </div>
 
 
