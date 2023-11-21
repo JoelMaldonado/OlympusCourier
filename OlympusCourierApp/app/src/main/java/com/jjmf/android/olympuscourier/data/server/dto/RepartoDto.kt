@@ -39,6 +39,7 @@ data class RepartoDto(
                 distrito_id = 0,
                 direc = "Sin Data",
                 referencia = "Sin Data",
+                urlMaps = ""
             ),
             id_usuario = id_usuario ?: 0,
             usuario = usuario?.toDomain() ?: Usuario(
@@ -53,7 +54,7 @@ data class RepartoDto(
                 fecha_creacion = "Sin Valor",
             ),
             id_repartidor = id_repartidor ?: 0,
-            items = items ?: emptyList(),
+            items = items?.map { it.toDomain() } ?: emptyList(),
             total = total ?: 0.0,
         )
     }

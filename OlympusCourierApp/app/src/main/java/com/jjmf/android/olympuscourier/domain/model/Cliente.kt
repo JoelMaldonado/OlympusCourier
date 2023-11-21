@@ -10,6 +10,7 @@ data class Cliente(
     val distrito_id:Int,
     val direc:String,
     val referencia:String,
+    val urlMaps:String
 ){
 
 

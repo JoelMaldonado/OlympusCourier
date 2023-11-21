@@ -1,8 +1,5 @@
 package com.jjmf.android.olympuscourier.ui.components
 
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,26 +7,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Assignment
-import androidx.compose.material.icons.filled.Description
-import androidx.compose.material.icons.filled.Inventory
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,21 +25,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jjmf.android.olympuscourier.R
 import com.jjmf.android.olympuscourier.domain.model.Reparto
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
-import com.jjmf.android.olympuscourier.ui.theme.ColorT
 import com.jjmf.android.olympuscourier.ui.theme.ColorT1
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CardConformidad(
+fun CardReparto(
     reparto: Reparto,
     toDetalle: () -> Unit,
     toDarConformidad:()->Unit,
@@ -96,19 +81,19 @@ fun CardConformidad(
                         )
 
                         Text(
-                            text = reparto.formatoID(),
+                            text = "#${reparto.formatoID()}",
                             color = ColorP1,
                             fontWeight = FontWeight.SemiBold
                         )
                     }
                     Text(
                         fontSize = 14.sp,
-                        text = "${reparto.cliente?.nombres}",
+                        text = reparto.cliente.nombres,
                         color = ColorT1
                     )
                     Text(
                         fontSize = 14.sp,
-                        text = reparto.cliente?.direc ?: "Sin Dirección",
+                        text = reparto.cliente.direc,
                         color = ColorT1
                     )
                 }

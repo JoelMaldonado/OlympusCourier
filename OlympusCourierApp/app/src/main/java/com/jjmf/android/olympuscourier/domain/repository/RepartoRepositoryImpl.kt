@@ -33,8 +33,16 @@ class RepartoRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun get(idReparto: Int): Reparto? {
-        return api.listarRepartos().body()?.find { it.id == idReparto }?.toDomain()
+    override suspend fun get(idReparto: Int): EstadosResult<Reparto> {
+        return try {
+            val call = api.getReparto(idReparto)
+            if (call.isSuccessful){
+                if (call.body()!=null) EstadosResult.Correcto(call.body()?.toDomain())
+                else EstadosResult.Error("No se encontro")
+            }else EstadosResult.Error(call.message())
+        }catch (e:Exception){
+            EstadosResult.Error(e.message.toString())
+        }
     }
 
     override suspend fun update(idReparto: String) {

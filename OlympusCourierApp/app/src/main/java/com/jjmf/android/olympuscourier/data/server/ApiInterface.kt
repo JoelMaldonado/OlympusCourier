@@ -16,6 +16,9 @@ interface ApiInterface {
     @GET("api/repartos")
     suspend fun listarRepartos() : Response<List<RepartoDto>>
 
+    @GET("api/repartos/get/{id}")
+    suspend fun getReparto(@Path("id") id:Int) : Response<RepartoDto>
+
     @GET("api/usuarios/get/{id}")
     suspend fun getUsuario(@Path("id") id:Int) : Response<Wrapper<UsuarioDto>>
 

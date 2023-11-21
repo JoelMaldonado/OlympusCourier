@@ -16,7 +16,7 @@ data class Reparto(
     val id_usuario: Int,
     val usuario: Usuario,
     val id_repartidor: Int,
-    val items: List<ItemRepartoDto>,
+    val items: List<ItemReparto>,
     val total: Double,
 ){
 

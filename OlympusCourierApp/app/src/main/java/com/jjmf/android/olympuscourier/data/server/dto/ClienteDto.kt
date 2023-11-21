@@ -25,6 +25,7 @@ data class ClienteDto(
             distrito_id = distrito_id ?: 0,
             direc = direc ?: "Sin Valor",
             referencia = referencia ?: "Sin Valor",
+            urlMaps = ""
         )
     }
 }

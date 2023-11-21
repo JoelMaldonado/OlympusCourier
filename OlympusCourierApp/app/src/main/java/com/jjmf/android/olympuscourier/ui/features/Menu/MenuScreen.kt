@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ManageAccounts
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
@@ -37,12 +36,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.jjmf.android.olympuscourier.ui.components.CajaBuscar
-import com.jjmf.android.olympuscourier.ui.components.CardConformidad
+import com.jjmf.android.olympuscourier.ui.components.CardReparto
 import com.jjmf.android.olympuscourier.ui.theme.ColorP1
 import com.jjmf.android.olympuscourier.ui.theme.ColorS1
 import com.jjmf.android.olympuscourier.ui.theme.ColorTextoLabel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuScreen(
     toPerfil: () -> Unit,
@@ -97,60 +95,6 @@ fun MenuScreen(
                 }
             }
 
-            /*SearchBar(
-                query = viewModel.buscar,
-                onQueryChange = {
-                    viewModel.buscar = it
-                    viewModel.activo = true
-                },
-                onSearch = {
-                    Log.d("tagito", it)
-                },
-                active = viewModel.activo,
-                onActiveChange = {
-                    viewModel.activo = it
-                },
-                trailingIcon = {
-                    if (viewModel.activo) {
-                        IconButton(
-                            onClick = {
-                                viewModel.buscar = ""
-                                viewModel.activo = false
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Close,
-                                contentDescription = null,
-                                tint = Color.White
-                            )
-                        }
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = if (viewModel.activo) 0.dp else 15.dp)
-                    .padding(bottom = if (viewModel.activo) 0.dp else 15.dp),
-                placeholder = {
-                    Text(
-                        text = "Ingresa el codigo de reparto",
-                        color = Color.White
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = null,
-                        tint = Color.White
-                    )
-                },
-                colors = SearchBarDefaults.colors(
-                    containerColor = ColorP3,
-                    dividerColor = ColorP1
-                )
-            ) {
-
-            }*/
-
             CajaBuscar(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -163,9 +107,8 @@ fun MenuScreen(
                         viewModel.listRepartosFiltro = viewModel.listRepartos
                     } else {
                         viewModel.listRepartosFiltro = viewModel.listRepartos.filter {
-                            it.id == new.toIntOrNull() ||
-                                    it.cliente?.nombres?.uppercase()
-                                        ?.contains(new.uppercase()) == true
+                            it.id == new.toIntOrNull() || it.cliente.nombres.uppercase()
+                                .contains(new.uppercase())
                         }
                     }
                 }
@@ -219,7 +162,7 @@ fun MenuScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(viewModel.listRepartosFiltro) {
-                    CardConformidad(
+                    CardReparto(
                         reparto = it,
                         toDetalle = {
                             toDetalle(it.id)
